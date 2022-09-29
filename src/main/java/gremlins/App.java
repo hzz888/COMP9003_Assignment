@@ -84,7 +84,9 @@ public class App extends PApplet {
 
     @Override
     public void draw() {
-        
+        background(197,151,113);
+        textSize(40);
+
     }
 
     public static void main(String[] args) {
