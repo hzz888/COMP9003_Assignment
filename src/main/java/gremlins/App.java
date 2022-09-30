@@ -1,5 +1,6 @@
 package gremlins;
 
+import java.sql.Array;
 import java.util.Objects;
 
 import processing.core.PApplet;
@@ -34,7 +35,10 @@ public class App extends PApplet {
     public PImage slime;
     public PImage fireball;
 
+    AbstractTile[][] map = new AbstractTile[33][36];
+
     public App() {
+        //construct objects here
         this.configPath = "config.json";
     }
 
@@ -52,7 +56,7 @@ public class App extends PApplet {
      */
     @Override
     public void setup() {
-
+        //load images here
         frameRate(FPS);
         surface.setTitle("Gremlins-by hzz");
         surface.setResizable(false);
@@ -73,19 +77,19 @@ public class App extends PApplet {
 
         JSONObject conf = loadJSONObject(new File(this.configPath));
         int level = 0;
-        String layOutPath = "../../" + conf.getJSONArray("levels").getJSONObject(level).getString("layout");
-        File layOutFile = new File(Objects.requireNonNull(this.getClass().getResource(layOutPath)).getFile());
-        try {
-            Scanner layOutScanner = new Scanner(layOutFile);
-            while (layOutScanner.hasNextLine()){
-                char[] line = layOutScanner.nextLine().toCharArray();
-                for(char c : line){
-
-                }
-            }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+//        String layOutPath = "../../" + conf.getJSONArray("levels").getJSONObject(level).getString("layout");
+//        File layOutFile = new File(Objects.requireNonNull(this.getClass().getResource(layOutPath)).getFile());
+//        try {
+//            Scanner layOutScanner = new Scanner(layOutFile);
+//            while (layOutScanner.hasNextLine()){
+//                char[] line = layOutScanner.nextLine().toCharArray();
+//                for(char c : line){
+//
+//                }
+//            }
+//        } catch (FileNotFoundException e) {
+//            throw new RuntimeException(e);
+//        }
 
 
 
@@ -115,6 +119,7 @@ public class App extends PApplet {
 
     @Override
     public void draw() {
+        //Main loop here
         background(197, 151, 113);
         textSize(40);
 
