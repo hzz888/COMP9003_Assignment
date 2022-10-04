@@ -1,6 +1,5 @@
 package gremlins;
 
-import java.sql.Array;
 import java.util.Objects;
 
 import processing.core.PApplet;
@@ -21,15 +20,18 @@ public class App extends PApplet {
     public static final int WIDTH = 720;
     public static final int HEIGHT = 720;
     public static final int SPRITESIZE = 20;
-    public static final int BOTTOMBAR = 60;
+    public static final int BOTTOMBAR_HEIGHT = 60;
     public static final int FPS = 60;
     public static final Random RANDOM_GENERATOR = new Random();
 
-
+    public static int x = 0;
+    public static int y = 0;
     public String configPath;
-    public PImage brickwall;
-    public PImage stonewall;
+
     public PImage exit;
+    public PImage brickWall;
+    public PImage stoneWall;
+
     public PImage gremlin;
     public PImage wizard;
     public PImage slime;
@@ -57,24 +59,21 @@ public class App extends PApplet {
     @Override
     public void setup() {
         //load images here
+
         frameRate(FPS);
         surface.setTitle("Gremlins-by hzz");
         surface.setResizable(false);
 
         // Load images during setup
-        this.stonewall = loadImage(
-                Objects.requireNonNull(this.getClass().getResource("stonewall.png"))
-                        .getPath().replace("%20", " "));
-        this.brickwall = loadImage(
-                Objects.requireNonNull(this.getClass().getResource("brickwall.png"))
-                        .getPath().replace("%20", " "));
-        this.gremlin = loadImage(
-                Objects.requireNonNull(this.getClass().getResource("gremlin.png")).getPath()
-                        .replace("%20", " "));
-        this.slime = loadImage(Objects.requireNonNull(this.getClass().getResource("slime.png")).getPath().replace("%20", " "));
-        this.fireball = loadImage(
-                Objects.requireNonNull(this.getClass().getResource("fireball.png")).getPath().replace("%20", " "));
+        this.exit = loadImage(Objects.requireNonNull(this.getClass().getResource("/exit.png")).getPath());
+        this.brickWall = loadImage(Objects.requireNonNull(this.getClass().getResource("/brickwall.png")).getPath());
+        this.stoneWall = loadImage(Objects.requireNonNull(this.getClass().getResource("/stonewall.png")).getPath());
+        this.gremlin = loadImage(Objects.requireNonNull(this.getClass().getResource("/gremlin.png")).getPath());
+        this.wizard = loadImage(Objects.requireNonNull(this.getClass().getResource("/wizard.png")).getPath());
+        this.slime = loadImage(Objects.requireNonNull(this.getClass().getResource("/slime.png")).getPath());
+        this.fireball = loadImage(Objects.requireNonNull(this.getClass().getResource("/fireball.png")).getPath());
 
+        // Load map from config file
         JSONObject conf = loadJSONObject(new File(this.configPath));
         int level = 0;
 //        String layOutPath = "../../" + conf.getJSONArray("levels").getJSONObject(level).getString("layout");
@@ -90,7 +89,6 @@ public class App extends PApplet {
 //        } catch (FileNotFoundException e) {
 //            throw new RuntimeException(e);
 //        }
-
 
 
     }
