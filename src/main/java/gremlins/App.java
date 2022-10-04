@@ -89,11 +89,11 @@ public class App extends PApplet {
         //display bottom bar content
         text("Lives:", 10, 700);
         text("Level", 300, 700);
-        text(level, 360, 700);
-        text('/', 380, 700);
+        text(level, 350, 700);
+        text('/', 365, 700);
         //get and display total levels
         calcuTotalLevels();
-        text(totalLevels, 400, 700);
+        text(totalLevels, 380, 700);
         //get initial life and cooldown from config
         getLifeAndCoolDown();
         //display lifes
