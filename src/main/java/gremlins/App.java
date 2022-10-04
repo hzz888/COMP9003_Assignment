@@ -1,10 +1,7 @@
 package gremlins;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Objects;
 
-import gremlins.tileset.AbstractTile;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.data.JSONObject;
@@ -12,7 +9,6 @@ import processing.data.JSONObject;
 import java.util.Random;
 import java.io.*;
 import java.util.Scanner;
-import java.util.stream.Stream;
 
 
 /**
@@ -40,18 +36,22 @@ public class App extends PApplet {
     public PImage slime;
     public PImage fireball;
 
-    AbstractTile[][] map = new AbstractTile[33][36];
-
-    public int wizardCooldown;
-    public int enemyCooldown;
+    public double wizardCooldown;
+    public double enemyCooldown;
     public int wizardLife;
 
-    public static String rootPath = System.getProperty("user.dir");
+    public static final String ROOT_PATH = System.getProperty("user.dir");
+    public int level = 1;
+    public int totalLevels;
+    public JSONObject conf;
 
     public App() {
         //construct objects here
         this.configPath = "config.json";
+        this.conf = loadJSONObject(new File(this.configPath));
+
     }
+
 
     /**
      * Initialise the setting of the window size.
@@ -86,9 +86,18 @@ public class App extends PApplet {
 
         //Load map
         generateMap();
-        text("Lives:",10,700);
-        text("Level",200,700);
-
+        //display bottom bar content
+        text("Lives:", 10, 700);
+        text("Level", 300, 700);
+        text(level, 360, 700);
+        text('/', 380, 700);
+        //get and display total levels
+        calcuTotalLevels();
+        text(totalLevels, 400, 700);
+        //get initial life and cooldown from config
+        getLifeAndCoolDown();
+        //display lifes
+        displayLife();
 
 
     }
@@ -123,10 +132,10 @@ public class App extends PApplet {
 
     public void generateMap() {
         // Load map from config file
-        JSONObject conf = loadJSONObject(new File(this.configPath));
-        int level = 0;
-        String layOutName = conf.getJSONArray("levels").getJSONObject(level).getString("layout");
-        File layOutFile = new File(rootPath + "/" + layOutName);
+
+        String layOutName = this.conf.getJSONArray("levels").getJSONObject(level - 1).getString("layout");
+        File layOutFile = new File(ROOT_PATH + "/" + layOutName);
+
         try (Scanner layOutScanner = new Scanner(layOutFile)) {
 
             char[] line = new char[36];
@@ -165,6 +174,25 @@ public class App extends PApplet {
             throw new RuntimeException(e);
         }
     }
+
+    public void calcuTotalLevels() {
+        this.totalLevels = this.conf.getJSONArray("levels").size();
+    }
+
+    public void getLifeAndCoolDown() {
+        this.wizardLife = this.conf.getInt("lives");
+        this.wizardCooldown = this.conf.getJSONArray("levels").getJSONObject(level - 1).getDouble("wizard_cooldown");
+        this.enemyCooldown = this.conf.getJSONArray("levels").getJSONObject(level - 1).getDouble("enemy_cooldown");
+    }
+
+    public void displayLife() {
+        for (int i = 65, j = 0; j < this.wizardLife; i += 20, j++) {
+            image(this.wizard, i, 685);
+        }
+    }
+
+
+
 
     public static void main(String[] args) {
         PApplet.main("gremlins.App");
