@@ -1,4 +1,4 @@
-package gremlins;
+package gremlins.tileset;
 
 import processing.core.PImage;
 
@@ -11,5 +11,6 @@ abstract public class AbstractTile {
     protected PImage tileSprite;
     public int x;
     public int y;
+
 
 }

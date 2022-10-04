@@ -1,4 +1,6 @@
-package gremlins;
+package gremlins.tileset;
+
+import processing.core.PImage;
 
 /**
  * @author hzz
