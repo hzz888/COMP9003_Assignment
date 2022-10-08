@@ -7,6 +7,7 @@ import processing.core.PImage;
 import processing.data.JSONObject;
 
 import java.io.*;
+import processing.event.KeyEvent;
 
 
 /**
@@ -112,6 +113,11 @@ public class App extends PApplet {
         initLife();
 
     }
+
+    static final int LEFT = 37;
+    static final int RIGHT = 39;
+    static final int UP = 38;
+    static final int DOWN = 40;
 
     /**
      * Receive key pressed signal from the keyboard.

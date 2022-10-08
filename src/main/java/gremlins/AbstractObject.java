@@ -20,9 +20,7 @@ abstract public class AbstractObject {
         app.image(this.objectSprite, this.x, this.y);
     }
 
-    private void draw(App app) {
 
-    }
 
     public int getX() {
         return this.x;
