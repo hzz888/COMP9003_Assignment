@@ -45,6 +45,8 @@ public class App extends PApplet {
     public int totalLevels;
     public JSONObject conf;
 
+
+
     public App() {
         //construct objects here
         this.configPath = "config.json";
@@ -190,8 +192,6 @@ public class App extends PApplet {
             image(this.wizard, i, 685);
         }
     }
-
-
 
 
     public static void main(String[] args) {
