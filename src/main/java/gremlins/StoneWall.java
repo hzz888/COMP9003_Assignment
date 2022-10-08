@@ -1,10 +1,10 @@
 package gremlins;
 
-import gremlins.AbstractObject;
-
 /**
  * @author hzz
  */
 public class StoneWall extends AbstractObject {
-
+    public StoneWall(App app, int x, int y){
+        super(app, app.stoneWallImage, x, y);
+    }
 }
