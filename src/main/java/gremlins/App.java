@@ -103,7 +103,6 @@ public class App extends PApplet {
         //Load map
         generateMap();
 
-
         //display bottom bar content
         text("Lives:", 10, 700);
         text("Level", 300, 700);
@@ -112,6 +111,7 @@ public class App extends PApplet {
 
         //display total levels
         text(this.totalLevels, 380, 700);
+        //display initial lives
         initLife();
 
     }
@@ -154,7 +154,7 @@ public class App extends PApplet {
     public void generateMap() {
         // Load map from config file
 
-        File layOutFile = new File(ROOT_PATH + "/" + this.layOutName);
+        File layOutFile = new File(App.ROOT_PATH + "/" + this.layOutName);
 
         try (Scanner layOutScanner = new Scanner(layOutFile)) {
             int i = 0;
