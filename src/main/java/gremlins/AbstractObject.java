@@ -21,7 +21,6 @@ abstract public class AbstractObject {
     }
 
 
-
     public int getX() {
         return this.x;
     }

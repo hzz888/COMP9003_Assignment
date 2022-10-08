@@ -36,6 +36,7 @@ public class App extends PApplet {
     public PImage wizardImage;
     public PImage slimeImage;
     public PImage fireballImage;
+    public PImage powerupImage;
 
     public double wizardCooldown;
     public double enemyCooldown;
@@ -97,6 +98,7 @@ public class App extends PApplet {
         this.wizardImage = loadImage(Objects.requireNonNull(this.getClass().getResource("wizard1.png")).getPath());
         this.slimeImage = loadImage(Objects.requireNonNull(this.getClass().getResource("slime.png")).getPath());
         this.fireballImage = loadImage(Objects.requireNonNull(this.getClass().getResource("fireball.png")).getPath());
+        this.powerupImage = loadImage(Objects.requireNonNull(this.getClass().getResource("powerup.png")).getPath());
 
         //Load map
         generateMap();
