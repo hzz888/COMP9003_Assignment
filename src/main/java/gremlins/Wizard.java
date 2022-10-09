@@ -1,5 +1,7 @@
 package gremlins;
 
+import java.util.Objects;
+
 /**
  * @author hzz
  */
@@ -57,6 +59,20 @@ public class Wizard extends AbstractObject {
     }
     public void stop(){
         this.moveSpeed=0;
+        if (this.getX() % App.SPRITESIZE != 0) {
+            if (Objects.equals(this.getDirection(), "right")) {
+                this.setX(this.getX() + App.SPRITESIZE - this.getX() % App.SPRITESIZE);
+            }else if(Objects.equals(this.getDirection(), "left")){
+                this.setX(this.getX() - this.getX() % App.SPRITESIZE);
+            }
+        }
+        if (this.getY() % App.SPRITESIZE != 0){
+            if (Objects.equals(this.getDirection(), "down")) {
+                this.setY(this.getY() + App.SPRITESIZE - this.getY() % App.SPRITESIZE);
+            }else if (Objects.equals(this.getDirection(), "up")){
+                this.setY(this.getY() - this.getY() % App.SPRITESIZE);
+            }
+        }
     }
 
 }

@@ -102,8 +102,13 @@ public class App extends PApplet {
         this.fireballImage = loadImage(Objects.requireNonNull(this.getClass().getResource("fireball.png")).getPath());
         this.powerupImage = loadImage(Objects.requireNonNull(this.getClass().getResource("powerup.png")).getPath());
 
-        //Load map
-        initMap();
+        if(validMap()) {
+            //Load map
+            initMap();
+        }else {
+            stop();
+            text("Invalid map", 350, 350);
+        }
 
 
     }
@@ -146,9 +151,6 @@ public class App extends PApplet {
     @Override
     public void keyReleased() {
         this.player.stop();
-        if (this.player.getX() % SPRITESIZE != 0 || this.player.getY() % SPRITESIZE != 0) {
-
-        }
 
     }
 
@@ -199,7 +201,7 @@ public class App extends PApplet {
     }
 
 
-    public boolean validMap1() {
+    public boolean validMap() {
         // Load map from config file
         this.layOutName = this.conf.getJSONArray("levels").getJSONObject(this.level - 1).getString("layout");
         File layOutFile = new File(App.ROOT_PATH + "/" + this.layOutName);
@@ -215,23 +217,32 @@ public class App extends PApplet {
         boolean warpRequire = true;
         try (Scanner validScanner = new Scanner(layOutFile)) {
             char[] line;
+
             while (validScanner.hasNextLine()) {
+
                 line = validScanner.nextLine().toCharArray();
+                row++;
 
                 for (char c : line) {
+                    column++;
+                    if(column==1||column==36||row==1||row==33){
+                        if(c!='X'){
+                            warpRequire=false;
+                        }
+                    }
+
                     if (c != 'X' && c != 'B' && c != ' ' && c != 'G' && c != 'W' && c != 'E') {
                         legalRequire = false;
-                    } else {
-                        if (c == 'E') {
-                            exitNum++;
-                        } else if (c == 'G') {
-                            gremlinNum++;
-                        } else if (c == 'W') {
-                            startNum++;
-                        }
-
                     }
-                    column++;
+
+                    if (c == 'E') {
+                        exitNum++;
+                    } else if (c == 'G') {
+                        gremlinNum++;
+                    } else if (c == 'W') {
+                        startNum++;
+                    }
+
                 }
 
                 if (column != 36) {
@@ -239,7 +250,7 @@ public class App extends PApplet {
                 }
 
                 column = 0;
-                row++;
+
             }
 
             if (row != 33) {
@@ -247,7 +258,8 @@ public class App extends PApplet {
             }
 
             numberRequire = exitNum >= 1 && gremlinNum >= 1 && startNum == 1;
-            return legalRequire && numberRequire && columnRequire && rowRequire;
+
+            return legalRequire && numberRequire && columnRequire && rowRequire && warpRequire;
 
 
         } catch (IOException e) {
