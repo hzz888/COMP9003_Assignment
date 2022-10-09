@@ -8,5 +8,9 @@ public class LifeIndicator extends AbstractObject {
     public LifeIndicator(App app, int x, int y) {
         super(app, app.wizardImage, x, y);
     }
+    @Override
+    public void tick(){
+        return;
+    }
 }
 

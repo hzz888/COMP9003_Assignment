@@ -4,19 +4,52 @@ package gremlins;
  * @author hzz
  */
 public class Wizard extends AbstractObject{
-    private int direction;
-    /**
-     * direction: 0 = up, 1 = down, 2 = left, 3 = right
-     */
+    private String direction;
+    public int moveSpeed = 0;
+
     public Wizard(App app, int x, int y) {
         super(app, app.wizardImage, x, y);
     }
-    public int getDirection() {
+    public String getDirection() {
         return this.direction;
     }
 
-    public void setDirection(int direction) {
-        this.direction = direction;
+    public void setDirection(String direction) {
+        switch (direction) {
+            case "up":
+                this.direction = "up";
+                break;
+            case "down":
+                this.direction = "down";
+                break;
+            case "left":
+                this.direction = "left";
+                break;
+            case "right":
+                this.direction = "right";
+                break;
+            default:
+                break;
+        }
+    }
+    @Override
+    public void tick(){
+        switch (this.direction) {
+            case "up":
+                this.y -= moveSpeed;
+                break;
+            case "down":
+                this.y += moveSpeed;
+                break;
+            case "left":
+                this.x -= moveSpeed;
+                break;
+            case "right":
+                this.x += moveSpeed;
+                break;
+            default:
+                break;
+        }
     }
 
 

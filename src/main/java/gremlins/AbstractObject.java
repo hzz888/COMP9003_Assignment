@@ -28,5 +28,10 @@ abstract public class AbstractObject {
         return this.y;
     }
 
+    /**
+     * Defines objects behaviors.
+     */
+    abstract protected void tick();
+
 
 }

@@ -7,7 +7,6 @@ import processing.core.PImage;
 import processing.data.JSONObject;
 
 import java.io.*;
-import processing.event.KeyEvent;
 
 
 /**
@@ -19,6 +18,8 @@ public class App extends PApplet {
     public static final int HEIGHT = 720;
     public static final int SPRITESIZE = 20;
     // public static final int BOTTOMBAR_HEIGHT = 60;
+
+
 
     public static final int FPS = 60;
     public static final Random RANDOM_GENERATOR = new Random();
@@ -52,7 +53,7 @@ public class App extends PApplet {
     public Wizard player;
     public List<Gremlin> gremlins;
 
-    public List<LifeIndicator> lifeIndicators;
+
 
 
     public App() {
@@ -65,7 +66,7 @@ public class App extends PApplet {
         this.wizardLife = this.conf.getInt("lives");
         this.wizardCooldown = this.conf.getJSONArray("levels").getJSONObject(level - 1).getDouble("wizard_cooldown");
         this.enemyCooldown = this.conf.getJSONArray("levels").getJSONObject(level - 1).getDouble("enemy_cooldown");
-        this.lifeIndicators = new ArrayList<>(this.totalLevels);
+
     }
 
 
@@ -112,7 +113,7 @@ public class App extends PApplet {
         //display total levels
         text(this.totalLevels, 380, 700);
         //display initial lives
-        initLife();
+        displayLife();
 
     }
 
@@ -126,7 +127,23 @@ public class App extends PApplet {
      */
     @Override
     public void keyPressed() {
-
+        this.player.moveSpeed = 2;
+        switch (this.keyCode){
+            case App.LEFT:
+                this.player.setDirection("left");
+                break;
+            case App.UP:
+                this.player.setDirection("up");
+                break;
+            case App.RIGHT:
+                this.player.setDirection("right");
+                break;
+            case App.DOWN:
+                this.player.setDirection("down");
+                break;
+            default:
+                break;
+        }
     }
 
     /**
@@ -135,6 +152,7 @@ public class App extends PApplet {
 
     @Override
     public void keyReleased() {
+        this.player.moveSpeed=0;
 
     }
 
@@ -207,9 +225,9 @@ public class App extends PApplet {
     }
 
 
-    public void initLife() {
+    public void displayLife() {
         for (int i = 65, j = 0; j < this.wizardLife; i += App.SPRITESIZE, j++) {
-            this.lifeIndicators.add(new LifeIndicator(this, i, 685));
+            new LifeIndicator(this, i, 685);
         }
     }
 
