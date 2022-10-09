@@ -3,6 +3,7 @@ package gremlins;
 import processing.core.PImage;
 
 
+
 /**
  * @author hzz
  */
@@ -17,9 +18,11 @@ abstract public class AbstractObject {
         this.objectSprite = objectSprite;
         this.x=x;
         this.y=y;
+        this.draw(app);
+    }
+    public void draw(App app) {
         app.image(this.objectSprite, this.x, this.y);
     }
-
 
     public int getX() {
         return this.x;
@@ -27,11 +30,18 @@ abstract public class AbstractObject {
     public int getY(){
         return this.y;
     }
+    public void setX(int x){
+        this.x=x;
+    }
+    public void setY(int y){
+        this.y=y;
+    }
 
     /**
      * Defines objects behaviors.
      */
     abstract protected void tick();
+
 
 
 }

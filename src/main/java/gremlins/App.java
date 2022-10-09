@@ -20,14 +20,13 @@ public class App extends PApplet {
     // public static final int BOTTOMBAR_HEIGHT = 60;
 
 
-
     public static final int FPS = 60;
     public static final Random RANDOM_GENERATOR = new Random();
 
     public static int x = 0;
     public static int y = 0;
     public String configPath;
-    public String layOutName;
+    public String layOutName = "";
 
     public PImage exitImage;
     public PImage brickWallImage;
@@ -48,12 +47,12 @@ public class App extends PApplet {
     public int totalLevels;
     public JSONObject conf;
 
-    protected AbstractObject[][] map = new AbstractObject[33][36];
+    private final int MAP_WIDTH_TILES = 33;
+    private final int MAP_HEIGHT_TILES = 36;
+    protected AbstractObject[][] map = new AbstractObject[this.MAP_WIDTH_TILES][this.MAP_HEIGHT_TILES];
 
     public Wizard player;
     public List<Gremlin> gremlins;
-
-
 
 
     public App() {
@@ -61,12 +60,13 @@ public class App extends PApplet {
         this.configPath = "config.json";
         this.conf = loadJSONObject(new File(this.configPath));
         this.level = 1;
-        this.layOutName = this.conf.getJSONArray("levels").getJSONObject(this.level - 1).getString("layout");
+
         this.totalLevels = this.conf.getJSONArray("levels").size();
         this.wizardLife = this.conf.getInt("lives");
         this.wizardCooldown = this.conf.getJSONArray("levels").getJSONObject(level - 1).getDouble("wizard_cooldown");
         this.enemyCooldown = this.conf.getJSONArray("levels").getJSONObject(level - 1).getDouble("enemy_cooldown");
-
+        this.player = null;
+        this.gremlins = new ArrayList<>();
     }
 
 
@@ -85,9 +85,10 @@ public class App extends PApplet {
     @Override
     public void setup() {
 
-        background(197, 151, 113);
+
         textSize(18);
         frameRate(FPS);
+        smooth();
         surface.setTitle("Gremlins");
         surface.setResizable(false);
 
@@ -102,18 +103,8 @@ public class App extends PApplet {
         this.powerupImage = loadImage(Objects.requireNonNull(this.getClass().getResource("powerup.png")).getPath());
 
         //Load map
-        generateMap();
+        initMap();
 
-        //display bottom bar content
-        text("Lives:", 10, 700);
-        text("Level", 300, 700);
-        text(this.level, 350, 700);
-        text('/', 365, 700);
-
-        //display total levels
-        text(this.totalLevels, 380, 700);
-        //display initial lives
-        displayLife();
 
     }
 
@@ -127,8 +118,10 @@ public class App extends PApplet {
      */
     @Override
     public void keyPressed() {
+
         this.player.moveSpeed = 2;
-        switch (this.keyCode){
+
+        switch (this.keyCode) {
             case App.LEFT:
                 this.player.setDirection("left");
                 break;
@@ -152,7 +145,10 @@ public class App extends PApplet {
 
     @Override
     public void keyReleased() {
-        this.player.moveSpeed=0;
+        this.player.stop();
+        if (this.player.getX() % SPRITESIZE != 0 || this.player.getY() % SPRITESIZE != 0) {
+
+        }
 
     }
 
@@ -165,13 +161,106 @@ public class App extends PApplet {
     public void draw() {
         //Main loop here
 
-        //display lifes
+        background(197, 151, 113);
+
+        displayMap();
+
+        //Display lives
+        text("Lives:", 10, 700);
+        displayLife();
+
+        //Display level information
+        text("Level", 300, 700);
+        text(this.level, 350, 700);
+        text('/', 365, 700);
+        text(this.totalLevels, 380, 700);
+
+        // Display wizard each frame
+        this.player.tick();
+        this.player.draw(this);
+
+        //Display gremlins each frame
+        for (Gremlin gremlin : this.gremlins) {
+            gremlin.tick();
+            gremlin.draw(this);
+        }
 
     }
 
-    public void generateMap() {
-        // Load map from config file
 
+    private void displayMap() {
+        for (int i = 0; i < this.MAP_WIDTH_TILES; i++) {
+            for (int j = 0; j < this.MAP_HEIGHT_TILES; j++) {
+                if (this.map[i][j] != null) {
+                    this.map[i][j].draw(this);
+                }
+            }
+        }
+    }
+
+
+    public boolean validMap1() {
+        // Load map from config file
+        this.layOutName = this.conf.getJSONArray("levels").getJSONObject(this.level - 1).getString("layout");
+        File layOutFile = new File(App.ROOT_PATH + "/" + this.layOutName);
+        int exitNum = 0;
+        int gremlinNum = 0;
+        int startNum = 0;
+        int column = 0;
+        int row = 0;
+        boolean numberRequire = true;
+        boolean columnRequire = true;
+        boolean rowRequire = true;
+        boolean legalRequire = true;
+        boolean warpRequire = true;
+        try (Scanner validScanner = new Scanner(layOutFile)) {
+            char[] line;
+            while (validScanner.hasNextLine()) {
+                line = validScanner.nextLine().toCharArray();
+
+                for (char c : line) {
+                    if (c != 'X' && c != 'B' && c != ' ' && c != 'G' && c != 'W' && c != 'E') {
+                        legalRequire = false;
+                    } else {
+                        if (c == 'E') {
+                            exitNum++;
+                        } else if (c == 'G') {
+                            gremlinNum++;
+                        } else if (c == 'W') {
+                            startNum++;
+                        }
+
+                    }
+                    column++;
+                }
+
+                if (column != 36) {
+                    columnRequire = false;
+                }
+
+                column = 0;
+                row++;
+            }
+
+            if (row != 33) {
+                rowRequire = false;
+            }
+
+            numberRequire = exitNum >= 1 && gremlinNum >= 1 && startNum == 1;
+            return legalRequire && numberRequire && columnRequire && rowRequire;
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+
+    public void initMap() {
+        // Load map from config file
+        this.layOutName = this.conf.getJSONArray("levels").getJSONObject(this.level - 1).getString("layout");
         File layOutFile = new File(App.ROOT_PATH + "/" + this.layOutName);
 
         try (Scanner layOutScanner = new Scanner(layOutFile)) {
@@ -199,6 +288,11 @@ public class App extends PApplet {
                         case 'E':
                             tmp = new Exit(this, x, y);
                             map[i][j] = tmp;
+                            break;
+                        case 'G':
+                            tmp = new Gremlin(this, x, y);
+                            this.gremlins.add((Gremlin) tmp);
+                            map[i][j] = null;
                             break;
                         case ' ':
                         default:
