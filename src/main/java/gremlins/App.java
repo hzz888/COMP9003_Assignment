@@ -190,17 +190,6 @@ public class App extends PApplet {
     }
 
 
-    private void displayMap() {
-        for (int i = 0; i < this.MAP_WIDTH_TILES; i++) {
-            for (int j = 0; j < this.MAP_HEIGHT_TILES; j++) {
-                if (this.map[i][j] != null) {
-                    this.map[i][j].draw(this);
-                }
-            }
-        }
-    }
-
-
     public boolean validMap() {
         // Load map from config file
         this.layOutName = this.conf.getJSONArray("levels").getJSONObject(this.level - 1).getString("layout");
@@ -269,7 +258,6 @@ public class App extends PApplet {
     }
 
 
-
     public void initMap() {
         // Load map from config file
         this.layOutName = this.conf.getJSONArray("levels").getJSONObject(this.level - 1).getString("layout");
@@ -327,6 +315,16 @@ public class App extends PApplet {
         } catch (IOException e) {
             System.out.println("Config file not found");
             throw new RuntimeException(e);
+        }
+    }
+
+    private void displayMap() {
+        for (int i = 0; i < this.MAP_WIDTH_TILES; i++) {
+            for (int j = 0; j < this.MAP_HEIGHT_TILES; j++) {
+                if (this.map[i][j] != null) {
+                    this.map[i][j].draw(this);
+                }
+            }
         }
     }
 
