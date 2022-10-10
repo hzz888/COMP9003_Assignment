@@ -56,6 +56,7 @@ public class App extends PApplet {
 
     public Wizard player;
     public List<Gremlin> gremlins;
+    public List<Fireball> fireballs;
 
 
     public App() {
@@ -183,13 +184,11 @@ public class App extends PApplet {
         text(this.totalLevels, 380, 700);
 
         // Display wizard each frame
-        this.player.tick(this);
+        displayPlayer();
 
 
         //Display gremlins each frame
-        for (Gremlin gremlin : this.gremlins) {
-            gremlin.tick(this);
-        }
+        displayGremlins();
 
     }
 
@@ -341,6 +340,21 @@ public class App extends PApplet {
         }
     }
 
+    public void displayFireBalls(){
+        for (Fireball fireBall : this.fireballs) {
+            fireBall.tick(this);
+        }
+    }
+
+    public void displayGremlins(){
+        for (Gremlin gremlin : this.gremlins) {
+            gremlin.tick(this);
+        }
+    }
+
+    public void displayPlayer(){
+        this.player.tick(this);
+    }
 
     public static void main(String[] args) {
         PApplet.main("gremlins.App");
