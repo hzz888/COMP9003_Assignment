@@ -9,7 +9,8 @@ public class Gremlin extends AbstractObject {
         super(app, app.gremlinImage, x, y);
     }
     @Override
-    public void tick(){
+    public void tick(App app){
+        this.draw(app);
         return;
     }
 }

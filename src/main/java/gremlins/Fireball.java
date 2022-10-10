@@ -8,7 +8,7 @@ public class Fireball extends AbstractObject {
         super(app, app.fireballImage, x, y);
     }
     @Override
-    public void tick(){
+    public void tick(App app){
         return;
     }
 }

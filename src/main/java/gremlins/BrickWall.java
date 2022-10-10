@@ -9,7 +9,7 @@ public class BrickWall extends AbstractObject {
         super(app, app.brickWallImage, x, y);
     }
     @Override
-    public void tick(){
+    public void tick(App app){
         return;
     }
 

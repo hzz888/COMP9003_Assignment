@@ -8,7 +8,7 @@ public class StoneWall extends AbstractObject {
         super(app, app.stoneWallImage, x, y);
     }
     @Override
-    public void tick(){
+    public void tick(App app){
         return;
     }
 }

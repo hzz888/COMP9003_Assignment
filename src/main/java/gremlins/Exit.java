@@ -8,7 +8,7 @@ public class Exit extends AbstractObject {
         super(app, app.exitImage, x, y);
     }
     @Override
-    public void tick(){
+    public void tick(App app){
         return;
     }
 }

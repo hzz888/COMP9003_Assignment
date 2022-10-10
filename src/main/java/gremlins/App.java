@@ -183,13 +183,12 @@ public class App extends PApplet {
         text(this.totalLevels, 380, 700);
 
         // Display wizard each frame
-        this.player.tick();
-        this.player.draw(this);
+        this.player.tick(this);
+
 
         //Display gremlins each frame
         for (Gremlin gremlin : this.gremlins) {
-            gremlin.tick();
-            gremlin.draw(this);
+            gremlin.tick(this);
         }
 
     }

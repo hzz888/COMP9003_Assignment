@@ -9,7 +9,7 @@ public class Slime extends AbstractObject {
         super(app, app.slimeImage, x, y);
     }
     @Override
-    public void tick(){
+    public void tick(App app){
         return;
     }
 }

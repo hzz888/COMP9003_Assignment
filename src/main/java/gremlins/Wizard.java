@@ -1,5 +1,7 @@
 package gremlins;
 
+import sun.nio.cs.ext.MacHebrew;
+
 import java.util.Objects;
 
 /**
@@ -43,7 +45,7 @@ public class Wizard extends AbstractObject {
     }
 
     @Override
-    public void tick() {
+    public void tick(App app) {
         switch (this.direction) {
             case "up":
                 this.y -= this.moveSpeed;
@@ -60,9 +62,13 @@ public class Wizard extends AbstractObject {
             default:
                 break;
         }
+        this.wallCollision(app);
+        this.draw(app);
+
     }
     public void stop(){
         this.moveSpeed=0;
+
         if (this.getX() % App.SPRITESIZE != 0) {
             if (Objects.equals(this.getDirection(), "right")) {
                 this.setX(this.getX() + App.SPRITESIZE - this.getX() % App.SPRITESIZE);
@@ -78,5 +84,47 @@ public class Wizard extends AbstractObject {
             }
         }
     }
+
+
+    public void wallObstruct(App app, AbstractObject tile) {
+        AbstractObject obstruction = this.collide(tile);
+        if (tile instanceof StoneWall || tile instanceof BrickWall) {
+            if (obstruction != null) {
+                int overlap;
+                switch (this.getDirection()){
+                    case "right":
+                        overlap = this.getX() + App.SPRITESIZE - obstruction.getX();
+                        this.setX(this.getX() - overlap);
+                        break;
+                    case "left":
+                        overlap = obstruction.getX()+App.SPRITESIZE-this.getX();
+                        this.setX(this.getX()+overlap);
+                        break;
+                    case "up":
+                        overlap = obstruction.getY()+App.SPRITESIZE-this.getY();
+                        this.setY(this.getY()+overlap);
+                        break;
+                    case "down":
+                        overlap = this.getY()+App.SPRITESIZE-obstruction.getY();
+                        this.setY(this.getY()-overlap);
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+        }
+    }
+
+    public void wallCollision(App app){
+        for (AbstractObject[] tiles : app.map){
+            for (AbstractObject tile : tiles){
+                if (tile != null){
+                    this.wallObstruct(app, tile);
+                }
+            }
+        }
+    }
+
 
 }

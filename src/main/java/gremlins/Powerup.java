@@ -8,7 +8,7 @@ public class Powerup extends AbstractObject {
         super(app, app.powerupImage, x, y);
     }
     @Override
-    public void tick(){
+    public void tick(App app){
         return;
     }
 }
