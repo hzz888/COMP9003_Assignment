@@ -42,6 +42,14 @@ abstract public class AbstractObject {
      */
     abstract protected void tick();
 
+    public AbstractObject collision(AbstractObject object){
+        boolean collide = (this.getX()+App.SPRITESIZE<object.getX()&&this.getY()==object.getY())||(this.getX()==object.getX()&& this.getY()+App.SPRITESIZE==object.getY());
+        if(collide){
+            return object;
+        }else {
+            return null;
+        }
+    }
 
 
 }

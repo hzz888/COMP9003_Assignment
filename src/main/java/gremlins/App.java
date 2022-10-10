@@ -157,7 +157,6 @@ public class App extends PApplet {
     @Override
     public void keyReleased() {
         this.player.stop();
-
     }
 
 
@@ -324,6 +323,7 @@ public class App extends PApplet {
             throw new RuntimeException(e);
         }
     }
+
 
     private void displayMap() {
         for (int i = 0; i < this.MAP_WIDTH_TILES; i++) {
