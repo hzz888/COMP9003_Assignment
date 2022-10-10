@@ -127,6 +127,8 @@ public class Wizard extends AbstractObject {
     public void attack(App app){
         Fireball fireball = new Fireball(app, this.getX(), this.getY(), this.getDirection());
         app.fireballs.add(fireball);
+        app.attackTimer = app.millis();
+        app.wizardCooling = true;
     }
 
 }

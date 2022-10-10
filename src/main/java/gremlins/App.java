@@ -60,6 +60,9 @@ public class App extends PApplet {
     public CopyOnWriteArrayList<Gremlin> gremlins;
     public CopyOnWriteArrayList<Fireball> fireballs;
 
+    public int attackTimer;
+    public int currentTimer;
+    public boolean wizardCooling;
 
     public App() {
         //construct objects here
@@ -134,8 +137,6 @@ public class App extends PApplet {
     @Override
     public void keyPressed(KeyEvent e) {
 
-
-
         int keyCode = e.getKeyCode();
         switch (keyCode) {
             case App.LEFT:
@@ -185,14 +186,11 @@ public class App extends PApplet {
         displayMap();
 
         //Display lives
-        text("Lives:", 10, 700);
         displayLife();
 
         //Display level information
-        text("Level", 300, 700);
-        text(this.level, 350, 700);
-        text('/', 365, 700);
-        text(this.totalLevels, 380, 700);
+        displayLevels();
+
 
         // Display wizard each frame
         displayPlayer();
@@ -201,6 +199,10 @@ public class App extends PApplet {
 
         //Display gremlins each frame
         displayGremlins();
+
+        if (this.wizardCooling) {
+            displayCooldown();
+        }
 
     }
 
@@ -347,6 +349,7 @@ public class App extends PApplet {
 
 
     public void displayLife() {
+        text("Lives:", 10, 700);
         for (int i = 65, j = 0; j < this.wizardLife; i += App.SPRITESIZE, j++) {
             new LifeIndicator(this, i, 685);
         }
@@ -359,7 +362,6 @@ public class App extends PApplet {
         }
     }
 
-
     public void displayGremlins() {
         for (Gremlin gremlin : this.gremlins) {
             gremlin.tick(this);
@@ -368,6 +370,26 @@ public class App extends PApplet {
 
     public void displayPlayer() {
         this.player.tick(this);
+    }
+
+    public void displayLevels(){
+        text("Level", 300, 700);
+        text(this.level, 350, 700);
+        text('/', 365, 700);
+        text(this.totalLevels, 380, 700);
+    }
+
+    public void displayCooldown(){
+        this.currentTimer= millis();
+        if (this.currentTimer - this.attackTimer <= this.wizardCooldown*1000){
+            this.stroke(0);
+            this.strokeWeight(2);
+            this.fill(255);
+            this.rect(550,685,100,10);
+        } else {
+            this.wizardCooling = false;
+            this.attackTimer = 0;
+        }
     }
 
     public static void main(String[] args) {
