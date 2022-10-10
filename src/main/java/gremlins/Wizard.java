@@ -1,7 +1,5 @@
 package gremlins;
 
-import sun.nio.cs.ext.MacHebrew;
-
 import java.util.Objects;
 
 /**
@@ -126,10 +124,9 @@ public class Wizard extends AbstractObject {
         }
     }
 
-    public Fireball attack(App app){
+    public void attack(App app){
         Fireball fireball = new Fireball(app, this.getX(), this.getY(), this.getDirection());
         app.fireballs.add(fireball);
-        return fireball;
     }
 
 }

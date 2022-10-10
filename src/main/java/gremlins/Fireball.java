@@ -48,6 +48,5 @@ public class Fireball extends AbstractObject {
 
     private void disapper(App app) {
         app.fireballs.remove(this);
-
     }
 }

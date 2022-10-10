@@ -5,8 +5,10 @@ import java.util.*;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.data.JSONObject;
+import processing.event.KeyEvent;
 
 import java.io.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 
 /**
@@ -55,8 +57,8 @@ public class App extends PApplet {
     protected AbstractObject[][] map = new AbstractObject[this.MAP_WIDTH_TILES][this.MAP_HEIGHT_TILES];
 
     public Wizard player;
-    public List<Gremlin> gremlins;
-    public List<Fireball> fireballs;
+    public CopyOnWriteArrayList<Gremlin> gremlins;
+    public CopyOnWriteArrayList<Fireball> fireballs;
 
 
     public App() {
@@ -64,13 +66,13 @@ public class App extends PApplet {
         this.configPath = "config.json";
         this.conf = loadJSONObject(new File(this.configPath));
         this.level = 1;
-
         this.totalLevels = this.conf.getJSONArray("levels").size();
         this.wizardLife = this.conf.getInt("lives");
         this.wizardCooldown = this.conf.getJSONArray("levels").getJSONObject(level - 1).getDouble("wizard_cooldown");
         this.enemyCooldown = this.conf.getJSONArray("levels").getJSONObject(level - 1).getDouble("enemy_cooldown");
         this.player = null;
-        this.gremlins = new ArrayList<>();
+        this.gremlins = new CopyOnWriteArrayList<>();
+        this.fireballs = new CopyOnWriteArrayList<>();
     }
 
 
@@ -124,27 +126,36 @@ public class App extends PApplet {
     static final int RIGHT = 39;
     static final int UP = 38;
     static final int DOWN = 40;
+    static final int SPACE = 32;
 
     /**
      * Receive key pressed signal from the keyboard.
      */
     @Override
-    public void keyPressed() {
+    public void keyPressed(KeyEvent e) {
 
-        this.player.moveSpeed = 2;
 
-        switch (this.keyCode) {
+
+        int keyCode = e.getKeyCode();
+        switch (keyCode) {
             case App.LEFT:
                 this.player.setDirection(this, "left");
+                this.player.moveSpeed = 2;
                 break;
             case App.UP:
                 this.player.setDirection(this, "up");
+                this.player.moveSpeed = 2;
                 break;
             case App.RIGHT:
                 this.player.setDirection(this, "right");
+                this.player.moveSpeed = 2;
                 break;
             case App.DOWN:
                 this.player.setDirection(this, "down");
+                this.player.moveSpeed = 2;
+                break;
+            case App.SPACE:
+                this.player.attack(this);
                 break;
             default:
                 break;
@@ -186,6 +197,7 @@ public class App extends PApplet {
         // Display wizard each frame
         displayPlayer();
 
+        displayFireBalls();
 
         //Display gremlins each frame
         displayGremlins();
@@ -340,19 +352,21 @@ public class App extends PApplet {
         }
     }
 
-    public void displayFireBalls(){
+    public void displayFireBalls() {
+
         for (Fireball fireBall : this.fireballs) {
             fireBall.tick(this);
         }
     }
 
-    public void displayGremlins(){
+
+    public void displayGremlins() {
         for (Gremlin gremlin : this.gremlins) {
             gremlin.tick(this);
         }
     }
 
-    public void displayPlayer(){
+    public void displayPlayer() {
         this.player.tick(this);
     }
 
