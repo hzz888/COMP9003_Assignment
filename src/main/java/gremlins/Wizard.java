@@ -10,7 +10,7 @@ public class Wizard extends AbstractObject {
     public int moveSpeed;
 
     public Wizard(App app, int x, int y) {
-        super(app, app.wizardImage, x, y);
+        super(app, app.wizardRightImage, x, y);
         this.moveSpeed = 0;
         this.direction = "right";
     }
@@ -19,19 +19,23 @@ public class Wizard extends AbstractObject {
         return this.direction;
     }
 
-    public void setDirection(String direction) {
+    public void setDirection(App app, String direction) {
         switch (direction) {
             case "up":
                 this.direction = "up";
+                this.objectSprite = app.wizardUpImage;
                 break;
             case "down":
                 this.direction = "down";
+                this.objectSprite= app.wizardDownImage;
                 break;
             case "left":
                 this.direction = "left";
+                this.objectSprite=app.wizardLeftImage;
                 break;
             case "right":
                 this.direction = "right";
+                this.objectSprite=app.wizardRightImage;
                 break;
             default:
                 break;

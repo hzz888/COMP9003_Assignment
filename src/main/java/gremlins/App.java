@@ -33,7 +33,10 @@ public class App extends PApplet {
     public PImage stoneWallImage;
 
     public PImage gremlinImage;
-    public PImage wizardImage;
+    public PImage wizardLeftImage;
+    public PImage wizardRightImage;
+    public PImage wizardUpImage;
+    public PImage wizardDownImage;
     public PImage slimeImage;
     public PImage fireballImage;
     public PImage powerupImage;
@@ -97,15 +100,18 @@ public class App extends PApplet {
         this.brickWallImage = loadImage(Objects.requireNonNull(this.getClass().getResource("brickwall.png")).getPath());
         this.stoneWallImage = loadImage(Objects.requireNonNull(this.getClass().getResource("stonewall.png")).getPath());
         this.gremlinImage = loadImage(Objects.requireNonNull(this.getClass().getResource("gremlin.png")).getPath());
-        this.wizardImage = loadImage(Objects.requireNonNull(this.getClass().getResource("wizard1.png")).getPath());
+        this.wizardLeftImage = loadImage(Objects.requireNonNull(this.getClass().getResource("wizard0.png")).getPath());
+        this.wizardRightImage = loadImage(Objects.requireNonNull(this.getClass().getResource("wizard1.png")).getPath());
+        this.wizardUpImage = loadImage(Objects.requireNonNull(this.getClass().getResource("wizard2.png")).getPath());
+        this.wizardDownImage = loadImage(Objects.requireNonNull(this.getClass().getResource("wizard3.png")).getPath());
         this.slimeImage = loadImage(Objects.requireNonNull(this.getClass().getResource("slime.png")).getPath());
         this.fireballImage = loadImage(Objects.requireNonNull(this.getClass().getResource("fireball.png")).getPath());
         this.powerupImage = loadImage(Objects.requireNonNull(this.getClass().getResource("powerup.png")).getPath());
 
-        if(validMap()) {
+        if (validMap()) {
             //Load map
             initMap();
-        }else {
+        } else {
             stop();
             text("Invalid map", 350, 350);
         }
@@ -128,16 +134,16 @@ public class App extends PApplet {
 
         switch (this.keyCode) {
             case App.LEFT:
-                this.player.setDirection("left");
+                this.player.setDirection(this, "left");
                 break;
             case App.UP:
-                this.player.setDirection("up");
+                this.player.setDirection(this, "up");
                 break;
             case App.RIGHT:
-                this.player.setDirection("right");
+                this.player.setDirection(this, "right");
                 break;
             case App.DOWN:
-                this.player.setDirection("down");
+                this.player.setDirection(this, "down");
                 break;
             default:
                 break;
@@ -214,9 +220,10 @@ public class App extends PApplet {
 
                 for (char c : line) {
                     column++;
-                    if(column==1||column==36||row==1||row==33){
-                        if(c!='X'){
-                            warpRequire=false;
+
+                    if (column == 1 || column == 36 || row == 1 || row == 33) {
+                        if (c != 'X') {
+                            warpRequire = false;
                         }
                     }
 
