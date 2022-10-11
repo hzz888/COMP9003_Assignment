@@ -43,8 +43,8 @@ public class App extends PApplet {
     public PImage fireballImage;
     public PImage powerupImage;
 
-    public double wizardCooldown;
-    public double enemyCooldown;
+    public float wizardCooldown;
+    public float enemyCooldown;
     public int wizardLife;
 
     public static final String ROOT_PATH = System.getProperty("user.dir");
@@ -71,8 +71,8 @@ public class App extends PApplet {
         this.level = 1;
         this.totalLevels = this.conf.getJSONArray("levels").size();
         this.wizardLife = this.conf.getInt("lives");
-        this.wizardCooldown = this.conf.getJSONArray("levels").getJSONObject(level - 1).getDouble("wizard_cooldown");
-        this.enemyCooldown = this.conf.getJSONArray("levels").getJSONObject(level - 1).getDouble("enemy_cooldown");
+        this.wizardCooldown = this.conf.getJSONArray("levels").getJSONObject(level - 1).getFloat("wizard_cooldown");
+        this.enemyCooldown = this.conf.getJSONArray("levels").getJSONObject(level - 1).getFloat("enemy_cooldown");
         this.player = null;
         this.gremlins = new CopyOnWriteArrayList<>();
         this.fireballs = new CopyOnWriteArrayList<>();
@@ -119,6 +119,7 @@ public class App extends PApplet {
             initMap();
         } else {
             stop();
+            fill(255,255,255);
             text("Invalid map", 350, 350);
         }
 
@@ -183,25 +184,25 @@ public class App extends PApplet {
 
         background(197, 151, 113);
 
-        displayMap();
+        this.displayMap();
 
         //Display lives
-        displayLife();
+        this.displayLife();
 
         //Display level information
-        displayLevels();
+        this.displayLevels();
 
 
         // Display wizard each frame
-        displayPlayer();
+        this.displayPlayer();
 
-        displayFireBalls();
+        this.displayFireBalls();
 
         //Display gremlins each frame
-        displayGremlins();
+        this.displayGremlins();
 
         if (this.wizardCooling) {
-            displayCooldown();
+            this.wizardCoolDown();
         }
 
     }
@@ -211,16 +212,19 @@ public class App extends PApplet {
         // Load map from config file
         this.layOutName = this.conf.getJSONArray("levels").getJSONObject(this.level - 1).getString("layout");
         File layOutFile = new File(App.ROOT_PATH + "/" + this.layOutName);
+
         int exitNum = 0;
         int gremlinNum = 0;
         int startNum = 0;
         int column = 0;
         int row = 0;
+
         boolean numberRequire = true;
         boolean columnRequire = true;
         boolean rowRequire = true;
         boolean legalRequire = true;
         boolean warpRequire = true;
+
         try (Scanner validScanner = new Scanner(layOutFile)) {
             char[] line;
 
@@ -349,6 +353,7 @@ public class App extends PApplet {
 
 
     public void displayLife() {
+        fill(255,255,255);
         text("Lives:", 10, 700);
         for (int i = 65, j = 0; j < this.wizardLife; i += App.SPRITESIZE, j++) {
             new LifeIndicator(this, i, 685);
@@ -373,19 +378,23 @@ public class App extends PApplet {
     }
 
     public void displayLevels(){
+        fill(255,255,255);
         text("Level", 300, 700);
         text(this.level, 350, 700);
         text('/', 365, 700);
         text(this.totalLevels, 380, 700);
     }
 
-    public void displayCooldown(){
+    public void wizardCoolDown(){
         this.currentTimer= millis();
         if (this.currentTimer - this.attackTimer <= this.wizardCooldown*1000){
-            this.stroke(0);
-            this.strokeWeight(2);
-            this.fill(255);
-            this.rect(550,685,100,10);
+            stroke(0);
+            strokeWeight(2);
+            fill(255,255,255);
+            rect(550,685,100,10);
+            fill(0,0,0);
+            float coolDownBarWidth = (float) ((this.currentTimer - this.attackTimer)/1000.0/this.wizardCooldown*100);
+            rect(551,686,coolDownBarWidth,8);
         } else {
             this.wizardCooling = false;
             this.attackTimer = 0;
