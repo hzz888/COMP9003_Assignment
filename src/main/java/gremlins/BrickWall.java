@@ -13,4 +13,9 @@ public class BrickWall extends AbstractObject {
         return;
     }
 
+    public void destroyed(App app){
+         app.map[app.getMapX(this)][app.getMapY(this)] = null;
+
+    }
+
 }

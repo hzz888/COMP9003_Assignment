@@ -205,6 +205,7 @@ public class App extends PApplet {
             this.wizardCoolDown();
         }
 
+
     }
 
 
@@ -399,6 +400,14 @@ public class App extends PApplet {
             this.wizardCooling = false;
             this.attackTimer = 0;
         }
+    }
+
+    public int getMapX(AbstractObject object){
+        return object.getY()/App.SPRITESIZE;
+    }
+
+    public int getMapY(AbstractObject object){
+        return object.getX()/App.SPRITESIZE;
     }
 
     public static void main(String[] args) {

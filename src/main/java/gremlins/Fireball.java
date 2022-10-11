@@ -1,5 +1,7 @@
 package gremlins;
 
+import javax.swing.text.AbstractDocument;
+
 /**
  * @author hzz
  */
@@ -31,6 +33,7 @@ public class Fireball extends AbstractObject {
                 break;
         }
         this.wallCollision(app);
+
         this.draw(app);
     }
 
@@ -40,11 +43,16 @@ public class Fireball extends AbstractObject {
                 if(tile != null){
                     if (this.collide(tile)!=null){
                         this.disapper(app);
+                        if (this.collide(tile) instanceof BrickWall){
+                            ((BrickWall) this.collide(tile)).destroyed(app);
+                        }
                     }
                 }
             }
         }
     }
+
+
 
     private void disapper(App app) {
         app.fireballs.remove(this);
