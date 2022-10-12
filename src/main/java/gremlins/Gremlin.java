@@ -5,6 +5,8 @@ package gremlins;
  */
 public class Gremlin extends AbstractObject {
 
+    public int gremlinMoveSpeed;
+
     public Gremlin(App app, int x, int y) {
         super(app, app.gremlinImage, x, y);
     }

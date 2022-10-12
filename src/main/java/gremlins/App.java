@@ -195,7 +195,7 @@ public class App extends PApplet {
 
     @Override
     public void draw() {
-        //Main loop here
+        //Main loop here, execute per frame.
 
         background(197, 151, 113);
 
@@ -206,7 +206,6 @@ public class App extends PApplet {
 
         //Display level information
         this.displayLevels();
-
 
         // Display wizard each frame
         this.displayPlayer();
@@ -381,7 +380,6 @@ public class App extends PApplet {
     }
 
     public void displayFireBalls() {
-
         for (Fireball fireBall : this.fireballs) {
             fireBall.tick(this);
         }
@@ -413,7 +411,7 @@ public class App extends PApplet {
         this.currentTimer = millis();
         if (this.currentTimer - this.attackTimer <= this.wizardCooldown * 1000) {
             stroke(0);
-            strokeWeight(2);
+            strokeWeight(1.5f);
             fill(255, 255, 255);
             rect(550, 685, 100, 10);
             fill(0, 0, 0);
@@ -446,7 +444,6 @@ public class App extends PApplet {
     public int getImageY(int x) {
         return x * App.SPRITESIZE;
     }
-
 
     public static void main(String[] args) {
         PApplet.main("gremlins.App");
