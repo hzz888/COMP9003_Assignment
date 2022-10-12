@@ -42,6 +42,7 @@ public class App extends PApplet {
     public PImage slimeImage;
     public PImage fireballImage;
     public PImage powerupImage;
+    public PImage[] brickWallDestroyImages;
 
     public float wizardCooldown;
     public float enemyCooldown;
@@ -76,6 +77,7 @@ public class App extends PApplet {
         this.player = null;
         this.gremlins = new CopyOnWriteArrayList<>();
         this.fireballs = new CopyOnWriteArrayList<>();
+        this.brickWallDestroyImages = new PImage[4];
     }
 
 
@@ -113,13 +115,18 @@ public class App extends PApplet {
         this.slimeImage = loadImage(Objects.requireNonNull(this.getClass().getResource("slime.png")).getPath());
         this.fireballImage = loadImage(Objects.requireNonNull(this.getClass().getResource("fireball.png")).getPath());
         this.powerupImage = loadImage(Objects.requireNonNull(this.getClass().getResource("powerup.png")).getPath());
+        this.brickWallDestroyImages[0] = loadImage(Objects.requireNonNull(this.getClass().getResource("brickwall_destroyed0.png")).getPath());
+        this.brickWallDestroyImages[1] = loadImage(Objects.requireNonNull(this.getClass().getResource("brickwall_destroyed1.png")).getPath());
+        this.brickWallDestroyImages[2] = loadImage(Objects.requireNonNull(this.getClass().getResource("brickwall_destroyed2.png")).getPath());
+        this.brickWallDestroyImages[3] = loadImage(Objects.requireNonNull(this.getClass().getResource("brickwall_destroyed3.png")).getPath());
+
 
         if (validMap()) {
             //Load map
             initMap();
         } else {
             stop();
-            fill(255,255,255);
+            fill(255, 255, 255);
             text("Invalid map", 350, 350);
         }
 
@@ -346,7 +353,7 @@ public class App extends PApplet {
         for (int i = 0; i < this.MAP_WIDTH_TILES; i++) {
             for (int j = 0; j < this.MAP_HEIGHT_TILES; j++) {
                 if (this.map[i][j] != null) {
-                    this.map[i][j].draw(this);
+                    this.map[i][j].tick(this);
                 }
             }
         }
@@ -354,10 +361,10 @@ public class App extends PApplet {
 
 
     public void displayLife() {
-        fill(255,255,255);
+        fill(255, 255, 255);
         text("Lives:", 10, 700);
         for (int i = 65, j = 0; j < this.wizardLife; i += App.SPRITESIZE, j++) {
-            new LifeIndicator(this, i, 685);
+            image(this.wizardRightImage,i,685);
         }
     }
 
@@ -378,36 +385,36 @@ public class App extends PApplet {
         this.player.tick(this);
     }
 
-    public void displayLevels(){
-        fill(255,255,255);
+    public void displayLevels() {
+        fill(255, 255, 255);
         text("Level", 300, 700);
         text(this.level, 350, 700);
         text('/', 365, 700);
         text(this.totalLevels, 380, 700);
     }
 
-    public void wizardCoolDown(){
-        this.currentTimer= millis();
-        if (this.currentTimer - this.attackTimer <= this.wizardCooldown*1000){
+    public void wizardCoolDown() {
+        this.currentTimer = millis();
+        if (this.currentTimer - this.attackTimer <= this.wizardCooldown * 1000) {
             stroke(0);
             strokeWeight(2);
-            fill(255,255,255);
-            rect(550,685,100,10);
-            fill(0,0,0);
-            float coolDownBarWidth = (float) ((this.currentTimer - this.attackTimer)/1000.0/this.wizardCooldown*100);
-            rect(551,686,coolDownBarWidth,8);
+            fill(255, 255, 255);
+            rect(550, 685, 100, 10);
+            fill(0, 0, 0);
+            float coolDownBarWidth = (float) ((this.currentTimer - this.attackTimer) / 1000.0 / this.wizardCooldown * 100);
+            rect(551, 686, coolDownBarWidth, 8);
         } else {
             this.wizardCooling = false;
             this.attackTimer = 0;
         }
     }
 
-    public int getMapX(AbstractObject object){
-        return object.getY()/App.SPRITESIZE;
+    public int getMapX(AbstractObject object) {
+        return object.getY() / App.SPRITESIZE;
     }
 
-    public int getMapY(AbstractObject object){
-        return object.getX()/App.SPRITESIZE;
+    public int getMapY(AbstractObject object) {
+        return object.getX() / App.SPRITESIZE;
     }
 
     public static void main(String[] args) {

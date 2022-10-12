@@ -44,7 +44,7 @@ abstract public class AbstractObject {
     /**
      * Defines objects behaviors.
      */
-    abstract protected void tick(App app);
+    protected abstract void tick(App app);
 
     /**
      * Detect whether this object collides with another object.
