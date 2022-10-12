@@ -19,6 +19,7 @@ public class App extends PApplet {
     public static final int WIDTH = 720;
     public static final int HEIGHT = 720;
     public static final int SPRITESIZE = 20;
+
     // public static final int BOTTOMBAR_HEIGHT = 60;
 
 
@@ -64,6 +65,7 @@ public class App extends PApplet {
     public int attackTimer;
     public int currentTimer;
     public boolean wizardCooling;
+    public Exit exit;
 
     public App() {
         //construct objects here
@@ -96,9 +98,8 @@ public class App extends PApplet {
     @Override
     public void setup() {
 
-
         textSize(18);
-        frameRate(FPS);
+        frameRate(App.FPS);
         smooth();
         surface.setTitle("Gremlins");
         surface.setResizable(false);
@@ -208,6 +209,8 @@ public class App extends PApplet {
             this.wizardCoolDown();
         }
 
+        displayExit();
+
 
     }
 
@@ -312,8 +315,8 @@ public class App extends PApplet {
                             map[i][j] = tmp;
                             break;
                         case 'E':
-                            tmp = new Exit(this, x, y);
-                            map[i][j] = tmp;
+                            this.exit = new Exit(this, x, y);
+                            map[i][j] = null;
                             break;
                         case 'G':
                             tmp = new Gremlin(this, x, y);
@@ -379,6 +382,10 @@ public class App extends PApplet {
 
     public void displayPlayer() {
         this.player.tick(this);
+    }
+
+    public void displayExit(){
+        this.exit.tick(this);
     }
 
     public void displayLevels() {

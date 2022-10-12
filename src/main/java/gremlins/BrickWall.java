@@ -2,12 +2,15 @@ package gremlins;
 
 import processing.core.PImage;
 
-import java.util.List;
 
 /**
  * @author hzz
  */
 public class BrickWall extends AbstractObject {
+
+
+    public int destroyPicIndex = 0;
+
 
     public BrickWall(App app, int x, int y) {
         super(app, app.brickWallImage, x, y);
@@ -21,15 +24,17 @@ public class BrickWall extends AbstractObject {
     public void destroyed(App app) {
 
         // Display destruction animation
-        int destroyPicIndex = 0;
-        app.frameCount = 0;
-        while (destroyPicIndex < app.brickWallDestroyImages.length) {
+        // error :动画帧数不对
+
+        app.frameCount=0;
+        while (this.destroyPicIndex < app.brickWallDestroyImages.length) {
+            PImage destroyPic = app.brickWallDestroyImages[this.destroyPicIndex];
+            app.image(destroyPic, this.getX(), this.getY());
             if (app.frameCount % 4 == 0) {
-                PImage destroyPic = app.brickWallDestroyImages[destroyPicIndex];
-                app.image(destroyPic, this.getX(), this.getY());
-                destroyPicIndex++;
+                this.destroyPicIndex++;
             }
         }
+
         app.map[app.getMapX(this)][app.getMapY(this)] = null;
     }
 

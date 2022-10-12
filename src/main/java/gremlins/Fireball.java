@@ -1,7 +1,5 @@
 package gremlins;
 
-import javax.swing.text.AbstractDocument;
-
 /**
  * @author hzz
  */
@@ -14,8 +12,9 @@ public class Fireball extends AbstractObject {
         this.direction = direction;
         this.fireBallSpeed = 4;
     }
+
     @Override
-    public void tick(App app){
+    public void tick(App app) {
         switch (this.direction) {
             case "up":
                 this.y -= this.fireBallSpeed;
@@ -38,14 +37,13 @@ public class Fireball extends AbstractObject {
     }
 
     private void wallCollision(App app) {
-        for (AbstractObject[] line : app.map){
-            for(AbstractObject tile : line){
-                if(tile != null){
-                    if (this.collide(tile)!=null){
-                        this.disapper(app);
-                        if (this.collide(tile) instanceof BrickWall){
-                            ((BrickWall) this.collide(tile)).destroyed(app);
-                        }
+        for (AbstractObject[] line : app.map) {
+            for (AbstractObject tile : line) {
+                if (tile != null && this.collide(tile) != null) {
+                    this.absorbed(app);
+                    if (this.collide(tile) instanceof BrickWall) {
+                        BrickWall brickWall = (BrickWall) this.collide(tile);
+                        brickWall.destroyed(app);
                     }
                 }
             }
@@ -53,8 +51,7 @@ public class Fireball extends AbstractObject {
     }
 
 
-
-    private void disapper(App app) {
+    private void absorbed(App app) {
         app.fireballs.remove(this);
     }
 }

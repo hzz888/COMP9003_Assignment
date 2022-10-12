@@ -9,6 +9,6 @@ public class Exit extends AbstractObject {
     }
     @Override
     public void tick(App app){
-        return;
+        this.draw(app);
     }
 }
