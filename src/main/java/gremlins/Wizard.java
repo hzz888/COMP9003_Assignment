@@ -64,6 +64,12 @@ public class Wizard extends AbstractObject {
         this.draw(app);
 
     }
+
+    public void move(App app, String direction){
+        this.setDirection(app,direction);
+        this.moveSpeed = 2;
+    }
+
     public void stop(){
         this.moveSpeed=0;
 
@@ -132,6 +138,8 @@ public class Wizard extends AbstractObject {
             app.wizardCooling = true;
         }
     }
+
+
 
 
 }

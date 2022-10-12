@@ -86,7 +86,7 @@ public class App extends PApplet {
      */
     @Override
     public void settings() {
-        size(WIDTH, HEIGHT);
+        size(App.WIDTH, App.HEIGHT);
     }
 
     /**
@@ -148,20 +148,16 @@ public class App extends PApplet {
         int keyCode = e.getKeyCode();
         switch (keyCode) {
             case App.LEFT:
-                this.player.setDirection(this, "left");
-                this.player.moveSpeed = 2;
+                this.player.move(this,"left");
                 break;
             case App.UP:
-                this.player.setDirection(this, "up");
-                this.player.moveSpeed = 2;
+                this.player.move(this,"up");
                 break;
             case App.RIGHT:
-                this.player.setDirection(this, "right");
-                this.player.moveSpeed = 2;
+                this.player.move(this,"right");
                 break;
             case App.DOWN:
-                this.player.setDirection(this, "down");
-                this.player.moveSpeed = 2;
+                this.player.move(this,"down");
                 break;
             case App.SPACE:
                 this.player.attack(this);
@@ -364,7 +360,7 @@ public class App extends PApplet {
         fill(255, 255, 255);
         text("Lives:", 10, 700);
         for (int i = 65, j = 0; j < this.wizardLife; i += App.SPRITESIZE, j++) {
-            image(this.wizardRightImage,i,685);
+            image(this.wizardRightImage, i, 685);
         }
     }
 
@@ -415,6 +411,14 @@ public class App extends PApplet {
 
     public int getMapY(AbstractObject object) {
         return object.getX() / App.SPRITESIZE;
+    }
+
+    public int getImageX(int y) {
+        return y * App.SPRITESIZE;
+    }
+
+    public int getImageY(int x) {
+        return x * App.SPRITESIZE;
     }
 
     public static void main(String[] args) {
