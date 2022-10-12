@@ -24,6 +24,8 @@ public class App extends PApplet {
 
 
     public static final int FPS = 60;
+
+    public static final double MILLISECONDS_PER_FRAME = 1000/(double)App.FPS;
     public static final Random RANDOM_GENERATOR = new Random();
 
     public static int x = 0;
@@ -56,7 +58,7 @@ public class App extends PApplet {
 
     private final int MAP_WIDTH_TILES = 33;
     private final int MAP_HEIGHT_TILES = 36;
-    protected AbstractObject[][] map = new AbstractObject[this.MAP_WIDTH_TILES][this.MAP_HEIGHT_TILES];
+    protected AbstractObject[][] map;
 
     public Wizard player;
     public CopyOnWriteArrayList<Gremlin> gremlins;
@@ -66,6 +68,10 @@ public class App extends PApplet {
     public int currentTimer;
     public boolean wizardCooling;
     public Exit exit;
+    public List<Powerup> powerups;
+
+    public List<Slime> slimes;
+    public List<BrickWallDestruction> brickWallDestructions;
 
     public App() {
         //construct objects here
@@ -73,13 +79,18 @@ public class App extends PApplet {
         this.conf = loadJSONObject(new File(this.configPath));
         this.level = 1;
         this.totalLevels = this.conf.getJSONArray("levels").size();
+        this.map = new AbstractObject[this.MAP_WIDTH_TILES][this.MAP_HEIGHT_TILES];
         this.wizardLife = this.conf.getInt("lives");
         this.wizardCooldown = this.conf.getJSONArray("levels").getJSONObject(level - 1).getFloat("wizard_cooldown");
         this.enemyCooldown = this.conf.getJSONArray("levels").getJSONObject(level - 1).getFloat("enemy_cooldown");
         this.player = null;
+        this.exit = null;
         this.gremlins = new CopyOnWriteArrayList<>();
         this.fireballs = new CopyOnWriteArrayList<>();
         this.brickWallDestroyImages = new PImage[4];
+        this.powerups = new CopyOnWriteArrayList<>();
+        this.brickWallDestructions = new CopyOnWriteArrayList<>();
+        this.slimes = new CopyOnWriteArrayList<>();
     }
 
 
@@ -149,16 +160,16 @@ public class App extends PApplet {
         int keyCode = e.getKeyCode();
         switch (keyCode) {
             case App.LEFT:
-                this.player.move(this,"left");
+                this.player.move(this, "left");
                 break;
             case App.UP:
-                this.player.move(this,"up");
+                this.player.move(this, "up");
                 break;
             case App.RIGHT:
-                this.player.move(this,"right");
+                this.player.move(this, "right");
                 break;
             case App.DOWN:
-                this.player.move(this,"down");
+                this.player.move(this, "down");
                 break;
             case App.SPACE:
                 this.player.attack(this);
@@ -210,6 +221,8 @@ public class App extends PApplet {
         }
 
         displayExit();
+
+        displayDestructions();
 
 
     }
@@ -384,7 +397,7 @@ public class App extends PApplet {
         this.player.tick(this);
     }
 
-    public void displayExit(){
+    public void displayExit() {
         this.exit.tick(this);
     }
 
@@ -412,6 +425,12 @@ public class App extends PApplet {
         }
     }
 
+    public void displayDestructions() {
+        for (BrickWallDestruction destruction : this.brickWallDestructions) {
+            destruction.tick(this);
+        }
+    }
+
     public int getMapX(AbstractObject object) {
         return object.getY() / App.SPRITESIZE;
     }
@@ -427,6 +446,7 @@ public class App extends PApplet {
     public int getImageY(int x) {
         return x * App.SPRITESIZE;
     }
+
 
     public static void main(String[] args) {
         PApplet.main("gremlins.App");

@@ -1,7 +1,5 @@
 package gremlins;
 
-import processing.core.PImage;
-
 
 /**
  * @author hzz
@@ -22,19 +20,7 @@ public class BrickWall extends AbstractObject {
     }
 
     public void destroyed(App app) {
-
-        // Display destruction animation
-        // error :动画帧数不对
-
-        app.frameCount=0;
-        while (this.destroyPicIndex < app.brickWallDestroyImages.length) {
-            PImage destroyPic = app.brickWallDestroyImages[this.destroyPicIndex];
-            app.image(destroyPic, this.getX(), this.getY());
-            if (app.frameCount % 4 == 0) {
-                this.destroyPicIndex++;
-            }
-        }
-
+        app.brickWallDestructions.add(new BrickWallDestruction(app, this.getX(), this.getY()));
         app.map[app.getMapX(this)][app.getMapY(this)] = null;
     }
 
