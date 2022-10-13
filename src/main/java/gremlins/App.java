@@ -397,8 +397,8 @@ public class App extends PApplet {
         }
     }
 
-    public void displaySlimes(){
-        for (Slime slime : this.slimes){
+    public void displaySlimes() {
+        for (Slime slime : this.slimes) {
             slime.tick(this);
         }
     }
@@ -458,7 +458,8 @@ public class App extends PApplet {
         return x * App.SPRITESIZE;
     }
 
-    public void updateEmptyTiles(){
+    public void updateEmptyTiles() {
+        this.emptyTiles.clear();
         for (int i = 0; i < App.MAP_WIDTH_TILES; i++) {
             for (int j = 0; j < App.MAP_HEIGHT_TILES; j++) {
                 if (this.map[i][j] == null) {

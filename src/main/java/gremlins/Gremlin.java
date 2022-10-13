@@ -22,24 +22,23 @@ public class Gremlin extends AbstractObject {
         this.gremlinDirection = this.gremlinDirections[App.RANDOM_GENERATOR.nextInt(this.gremlinDirections.length)];
         this.gremlinCooling = false;
         this.gremlinCoolDown = app.enemyCooldown;
-        this.gremlinAttackTimer= 0;
+        this.gremlinAttackTimer = 0;
     }
 
 
-
     @Override
-    public void tick(App app){
-        switch (this.gremlinDirection){
-            case "left" :
+    public void tick(App app) {
+        switch (this.gremlinDirection) {
+            case "left":
                 this.x -= this.gremlinMoveSpeed;
                 break;
-            case "right" :
+            case "right":
                 this.x += this.gremlinMoveSpeed;
                 break;
-            case "up" :
+            case "up":
                 this.y -= this.gremlinMoveSpeed;
                 break;
-            case "down" :
+            case "down":
                 this.y += this.gremlinMoveSpeed;
                 break;
             default:
@@ -51,9 +50,9 @@ public class Gremlin extends AbstractObject {
     }
 
     private void gremlinWallCollision(App app) {
-        for(AbstractObject[] line : app.map){
-            for (AbstractObject object: line){
-                if(object!=null && this.collide(object)!=null){
+        for (AbstractObject[] line : app.map) {
+            for (AbstractObject object : line) {
+                if (object != null && this.collide(object) != null) {
                     AbstractObject obstacle = this.collide(object);
                     this.gremlinWallObstruct(app, obstacle);
                 }
@@ -62,8 +61,8 @@ public class Gremlin extends AbstractObject {
     }
 
 
-    public void gremlinWallObstruct(App app, AbstractObject obstacle){
-        this.gremlinMoveSpeed=0;
+    public void gremlinWallObstruct(App app, AbstractObject obstacle) {
+        this.gremlinMoveSpeed = 0;
         int overlap;
         if (obstacle instanceof BrickWall || obstacle instanceof StoneWall) {
             switch (this.gremlinDirection) {
@@ -75,12 +74,12 @@ public class Gremlin extends AbstractObject {
                     overlap = this.x + App.SPRITESIZE - obstacle.x;
                     this.x -= overlap;
                     break;
-                case "up" :
-                    overlap = obstacle.y+App.SPRITESIZE-this.y;
+                case "up":
+                    overlap = obstacle.y + App.SPRITESIZE - this.y;
                     this.y += overlap;
                     break;
                 case "down":
-                    overlap = this.y+App.SPRITESIZE-obstacle.y;
+                    overlap = this.y + App.SPRITESIZE - obstacle.y;
                     this.y -= overlap;
                     break;
                 default:
@@ -90,32 +89,46 @@ public class Gremlin extends AbstractObject {
         }
     }
 
-    public void gremlinChangeDirection(){
+    public void gremlinChangeDirection() {
         String newDirection = this.gremlinDirection;
-        while(newDirection.equals(this.gremlinDirection)){
+        while (newDirection.equals(this.gremlinDirection)) {
             newDirection = this.gremlinDirections[App.RANDOM_GENERATOR.nextInt(this.gremlinDirections.length)];
         }
         this.gremlinDirection = newDirection;
         this.gremlinMoveSpeed = 1;
     }
 
-    public void gremlinAttack(App app){
-        if (!this.gremlinCooling){
-            Slime newSlime = new Slime(app,this.x,this.y,this.gremlinDirection);
+    public void gremlinAttack(App app) {
+        if (!this.gremlinCooling) {
+            Slime newSlime = new Slime(app, this.x, this.y, this.gremlinDirection);
             app.slimes.add(newSlime);
-            this.gremlinCooling=true;
-            this.gremlinAttackTimer= app.millis();
-        }else {
-            if(app.millis()-this.gremlinAttackTimer>this.gremlinCoolDown*1000){
-                this.gremlinCooling=false;
+            this.gremlinCooling = true;
+            this.gremlinAttackTimer = app.millis();
+        } else {
+            if (app.millis() - this.gremlinAttackTimer > this.gremlinCoolDown * 1000) {
+                this.gremlinCooling = false;
+                this.gremlinAttackTimer = 0;
             }
         }
     }
 
-    public void gremlinRespawn(App app){
+    public void gremlinRespawn(App app) {
         app.gremlins.remove(this);
-        //todo: add enemy respawn feature
-    }
 
+        int index = App.RANDOM_GENERATOR.nextInt(app.emptyTiles.size());
+        int[] coordinates = app.emptyTiles.get(index);
+        int newX = coordinates[0];
+        int newY = coordinates[1];
+        double radiusDistance = Math.sqrt(Math.pow(newX - app.player.getX(), 2) + Math.pow(newY - app.player.getY(), 2));
+        while (radiusDistance < 10 * App.SPRITESIZE) {
+            index = App.RANDOM_GENERATOR.nextInt(app.emptyTiles.size());
+            coordinates = app.emptyTiles.get(index);
+            newX = coordinates[0];
+            newY = coordinates[1];
+            radiusDistance = Math.sqrt(Math.pow(newX - app.player.getX(), 2) + Math.pow(newY - app.player.getY(), 2));
+        }
+        Gremlin newGremlin = new Gremlin(app, newX, newY);
+        app.gremlins.add(newGremlin);
+    }
 }
 

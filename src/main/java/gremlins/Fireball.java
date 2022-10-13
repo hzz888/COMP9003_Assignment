@@ -33,7 +33,7 @@ public class Fireball extends AbstractObject {
         }
         this.fireballWallCollision(app);
         this.fireballCollideSlime(app);
-        // todo: add enemy collision
+        this.fireballAttackGremlin(app);
         this.drawObject(app);
     }
 
@@ -52,13 +52,22 @@ public class Fireball extends AbstractObject {
     }
 
 
-    public void fireballCollideSlime(App app){
-        for (Fireball fireball:app.fireballs){
-            for (Slime slime:app.slimes){
-                if (fireball.collide(slime)!=null){
+    public void fireballCollideSlime(App app) {
+        for (Fireball fireball : app.fireballs) {
+            for (Slime slime : app.slimes) {
+                if (fireball.collide(slime) != null) {
                     fireball.fireballAbsorbed(app);
                     slime.slimeVaporized(app);
                 }
+            }
+        }
+    }
+
+    public void fireballAttackGremlin(App app) {
+        for (Gremlin gremlin : app.gremlins) {
+            if (this.collide(gremlin) != null) {
+                this.fireballAbsorbed(app);
+                gremlin.gremlinRespawn(app);
             }
         }
     }
