@@ -43,6 +43,7 @@ abstract public class AbstractObject {
 
     /**
      * Defines objects behaviors.
+     * @param app The main app.
      */
     protected abstract void tick(App app);
 
