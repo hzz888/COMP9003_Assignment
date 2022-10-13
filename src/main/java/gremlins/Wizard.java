@@ -28,15 +28,15 @@ public class Wizard extends AbstractObject {
                 break;
             case "down":
                 this.wizardDirection = "down";
-                this.objectSprite= app.wizardDownImage;
+                this.objectSprite = app.wizardDownImage;
                 break;
             case "left":
                 this.wizardDirection = "left";
-                this.objectSprite=app.wizardLeftImage;
+                this.objectSprite = app.wizardLeftImage;
                 break;
             case "right":
                 this.wizardDirection = "right";
-                this.objectSprite=app.wizardRightImage;
+                this.objectSprite = app.wizardRightImage;
                 break;
             default:
                 break;
@@ -63,28 +63,27 @@ public class Wizard extends AbstractObject {
         }
         this.wizardWallCollision(app);
         this.drawObject(app);
-
     }
 
-    public void wizardMove(App app, String direction){
-        this.setWizardDirection(app,direction);
+    public void wizardMove(App app, String direction) {
+        this.setWizardDirection(app, direction);
         this.wizardMoveSpeed = 2;
     }
 
-    public void wizardStop(){
-        this.wizardMoveSpeed =0;
+    public void wizardStop() {
+        this.wizardMoveSpeed = 0;
 
         if (this.getX() % App.SPRITESIZE != 0) {
             if (Objects.equals(this.getWizardDirection(), "right")) {
                 this.setX(this.getX() + App.SPRITESIZE - this.getX() % App.SPRITESIZE);
-            }else if(Objects.equals(this.getWizardDirection(), "left")){
+            } else if (Objects.equals(this.getWizardDirection(), "left")) {
                 this.setX(this.getX() - this.getX() % App.SPRITESIZE);
             }
         }
-        if (this.getY() % App.SPRITESIZE != 0){
+        if (this.getY() % App.SPRITESIZE != 0) {
             if (Objects.equals(this.getWizardDirection(), "down")) {
                 this.setY(this.getY() + App.SPRITESIZE - this.getY() % App.SPRITESIZE);
-            }else if (Objects.equals(this.getWizardDirection(), "up")){
+            } else if (Objects.equals(this.getWizardDirection(), "up")) {
                 this.setY(this.getY() - this.getY() % App.SPRITESIZE);
             }
         }
@@ -96,22 +95,22 @@ public class Wizard extends AbstractObject {
         if (tile instanceof StoneWall || tile instanceof BrickWall) {
             if (obstruction != null) {
                 int overlap;
-                switch (this.getWizardDirection()){
+                switch (this.getWizardDirection()) {
                     case "right":
                         overlap = this.getX() + App.SPRITESIZE - obstruction.getX();
                         this.setX(this.getX() - overlap);
                         break;
                     case "left":
-                        overlap = obstruction.getX()+App.SPRITESIZE-this.getX();
-                        this.setX(this.getX()+overlap);
+                        overlap = obstruction.getX() + App.SPRITESIZE - this.getX();
+                        this.setX(this.getX() + overlap);
                         break;
                     case "up":
-                        overlap = obstruction.getY()+App.SPRITESIZE-this.getY();
-                        this.setY(this.getY()+overlap);
+                        overlap = obstruction.getY() + App.SPRITESIZE - this.getY();
+                        this.setY(this.getY() + overlap);
                         break;
                     case "down":
-                        overlap = this.getY()+App.SPRITESIZE-obstruction.getY();
-                        this.setY(this.getY()-overlap);
+                        overlap = this.getY() + App.SPRITESIZE - obstruction.getY();
+                        this.setY(this.getY() - overlap);
                         break;
                     default:
                         break;
@@ -121,10 +120,10 @@ public class Wizard extends AbstractObject {
         }
     }
 
-    public void wizardWallCollision(App app){
-        for (AbstractObject[] tiles : app.map){
-            for (AbstractObject tile : tiles){
-                if (tile != null){
+    public void wizardWallCollision(App app) {
+        for (AbstractObject[] tiles : app.map) {
+            for (AbstractObject tile : tiles) {
+                if (tile != null) {
                     this.wizardWallObstruct(app, tile);
                 }
             }

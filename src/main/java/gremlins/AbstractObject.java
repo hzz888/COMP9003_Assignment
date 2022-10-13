@@ -50,7 +50,7 @@ abstract public class AbstractObject {
     /**
      * Detect whether this object collides with another object.
      *
-     * @return object if it collides with the instance
+     * @return object if it collides with this instance
      */
     public AbstractObject collide(AbstractObject object) {
         boolean collision = (this.getX() < object.getX() + App.SPRITESIZE && this.getX() + App.SPRITESIZE > object.getX() && this.getY() < object.getY() + App.SPRITESIZE && this.getY() + App.SPRITESIZE > object.getY());
