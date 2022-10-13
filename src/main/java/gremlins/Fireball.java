@@ -31,16 +31,16 @@ public class Fireball extends AbstractObject {
             default:
                 break;
         }
-        this.wallCollision(app);
+        this.fireballWallCollision(app);
         // todo: add enemy collision
         this.drawObject(app);
     }
 
-    private void wallCollision(App app) {
+    private void fireballWallCollision(App app) {
         for (AbstractObject[] line : app.map) {
             for (AbstractObject tile : line) {
                 if (tile != null && this.collide(tile) != null) {
-                    this.absorbed(app);
+                    this.fireballAbsorbed(app);
                     if (this.collide(tile) instanceof BrickWall) {
                         BrickWall brickWall = (BrickWall) this.collide(tile);
                         brickWall.destroyed(app);
@@ -51,7 +51,7 @@ public class Fireball extends AbstractObject {
     }
 
 
-    private void absorbed(App app) {
+    private void fireballAbsorbed(App app) {
         app.fireballs.remove(this);
     }
 }

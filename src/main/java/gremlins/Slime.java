@@ -40,13 +40,13 @@ public class Slime extends AbstractObject {
         for(AbstractObject[] line : app.map){
             for (AbstractObject tile : line){
                 if(tile != null && this.collide(tile) != null){
-                    this.absorbed(app);
+                    this.slimeAbsorbed(app);
                 }
             }
         }
     }
 
-    private void absorbed(App app) {
+    private void slimeAbsorbed(App app) {
         app.slimes.remove(this);
     }
 }

@@ -55,8 +55,8 @@ public class App extends PApplet {
     public int totalLevels;
     public JSONObject conf;
 
-    private final int MAP_WIDTH_TILES = 33;
-    private final int MAP_HEIGHT_TILES = 36;
+    public static final int MAP_WIDTH_TILES = 33;
+    public static final int MAP_HEIGHT_TILES = 36;
     protected AbstractObject[][] map;
 
     public Wizard player;
@@ -80,18 +80,18 @@ public class App extends PApplet {
         this.conf = loadJSONObject(new File(this.configPath));
         this.level = 1;
         this.totalLevels = this.conf.getJSONArray("levels").size();
-        this.map = new AbstractObject[this.MAP_WIDTH_TILES][this.MAP_HEIGHT_TILES];
+        this.map = new AbstractObject[App.MAP_WIDTH_TILES][App.MAP_HEIGHT_TILES];
         this.wizardLife = this.conf.getInt("lives");
         this.wizardCooldown = this.conf.getJSONArray("levels").getJSONObject(level - 1).getFloat("wizard_cooldown");
         this.enemyCooldown = this.conf.getJSONArray("levels").getJSONObject(level - 1).getFloat("enemy_cooldown");
         this.player = null;
         this.exit = null;
         this.gremlins = new CopyOnWriteArrayList<>();
+        this.slimes = new CopyOnWriteArrayList<>();
         this.fireballs = new CopyOnWriteArrayList<>();
         this.brickWallDestroyImages = new PImage[4];
         this.powerups = new CopyOnWriteArrayList<>();
         this.brickWallDestructions = new CopyOnWriteArrayList<>();
-        this.slimes = new CopyOnWriteArrayList<>();
     }
 
 
@@ -363,8 +363,8 @@ public class App extends PApplet {
 
 
     private void displayMap() {
-        for (int i = 0; i < this.MAP_WIDTH_TILES; i++) {
-            for (int j = 0; j < this.MAP_HEIGHT_TILES; j++) {
+        for (int i = 0; i < App.MAP_WIDTH_TILES; i++) {
+            for (int j = 0; j < App.MAP_HEIGHT_TILES; j++) {
                 if (this.map[i][j] != null) {
                     this.map[i][j].tick(this);
                 }

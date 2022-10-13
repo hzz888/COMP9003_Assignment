@@ -92,38 +92,37 @@ public class Wizard extends AbstractObject {
 
     public void wizardWallObstruct(App app, AbstractObject tile) {
         AbstractObject obstruction = this.collide(tile);
-        if (tile instanceof StoneWall || tile instanceof BrickWall) {
-            if (obstruction != null) {
-                int overlap;
-                switch (this.getWizardDirection()) {
-                    case "right":
-                        overlap = this.getX() + App.SPRITESIZE - obstruction.getX();
-                        this.setX(this.getX() - overlap);
-                        break;
-                    case "left":
-                        overlap = obstruction.getX() + App.SPRITESIZE - this.getX();
-                        this.setX(this.getX() + overlap);
-                        break;
-                    case "up":
-                        overlap = obstruction.getY() + App.SPRITESIZE - this.getY();
-                        this.setY(this.getY() + overlap);
-                        break;
-                    case "down":
-                        overlap = this.getY() + App.SPRITESIZE - obstruction.getY();
-                        this.setY(this.getY() - overlap);
-                        break;
-                    default:
-                        break;
-                }
-
+        if (obstruction instanceof StoneWall || obstruction instanceof BrickWall) {
+            int overlap;
+            switch (this.getWizardDirection()) {
+                case "right":
+                    overlap = this.getX() + App.SPRITESIZE - obstruction.getX();
+                    this.setX(this.getX() - overlap);
+                    break;
+                case "left":
+                    overlap = obstruction.getX() + App.SPRITESIZE - this.getX();
+                    this.setX(this.getX() + overlap);
+                    break;
+                case "up":
+                    overlap = obstruction.getY() + App.SPRITESIZE - this.getY();
+                    this.setY(this.getY() + overlap);
+                    break;
+                case "down":
+                    overlap = this.getY() + App.SPRITESIZE - obstruction.getY();
+                    this.setY(this.getY() - overlap);
+                    break;
+                default:
+                    break;
             }
+
         }
     }
+
 
     public void wizardWallCollision(App app) {
         for (AbstractObject[] tiles : app.map) {
             for (AbstractObject tile : tiles) {
-                if (tile != null) {
+                if (tile != null && this.collide(tile) != null) {
                     this.wizardWallObstruct(app, tile);
                 }
             }
