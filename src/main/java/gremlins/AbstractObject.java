@@ -11,8 +11,8 @@ abstract public class AbstractObject {
     public final int WIDTH = 20;
     public final int HEIGHT = 20;
     protected PImage objectSprite;
-    protected int x;
-    protected int y;
+    public int x;
+    public int y;
 
     public AbstractObject(App app, PImage objectSprite, int x, int y) {
         this.objectSprite = objectSprite;

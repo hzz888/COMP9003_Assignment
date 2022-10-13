@@ -25,11 +25,10 @@ public class App extends PApplet {
 
     public static final int FPS = 60;
 
-    public static final double MILLISECONDS_PER_FRAME = 1000 / (double) App.FPS;
     public static final Random RANDOM_GENERATOR = new Random();
 
-    public static int x = 0;
-    public static int y = 0;
+    public int x = 0;
+    public int y = 0;
     public String configPath;
     public String layOutName = "";
 
@@ -75,6 +74,8 @@ public class App extends PApplet {
 
     public App() {
         //construct objects here
+        this.x = 0;
+        this.y = 0;
         this.configPath = "config.json";
         this.conf = loadJSONObject(new File(this.configPath));
         this.level = 1;
@@ -317,23 +318,23 @@ public class App extends PApplet {
                     AbstractObject tmp;
                     switch (c) {
                         case 'X':
-                            tmp = new StoneWall(this, x, y);
+                            tmp = new StoneWall(this, this.x, this.y);
                             map[i][j] = tmp;
                             break;
                         case 'W':
-                            this.player = new Wizard(this, x, y);
+                            this.player = new Wizard(this, this.x, this.y);
                             map[i][j] = null;
                             break;
                         case 'B':
-                            tmp = new BrickWall(this, x, y);
+                            tmp = new BrickWall(this, this.x, this.y);
                             map[i][j] = tmp;
                             break;
                         case 'E':
-                            this.exit = new Exit(this, x, y);
+                            this.exit = new Exit(this, this.x, this.y);
                             map[i][j] = null;
                             break;
                         case 'G':
-                            this.gremlins.add(new Gremlin(this, x, y));
+                            this.gremlins.add(new Gremlin(this, this.x, this.y));
                             map[i][j] = null;
                             break;
                         case ' ':
@@ -342,18 +343,18 @@ public class App extends PApplet {
                             break;
                     }
 
-                    x += SPRITESIZE;
+                    this.x += SPRITESIZE;
                     j++;
                 }
                 // reset x to 0 after each line
-                x = 0;
-                y += SPRITESIZE;
+                this.x = 0;
+                this.y += SPRITESIZE;
                 j = 0;
                 i++;
             }
             //reset x and y after map generation
-            x = 0;
-            y = 0;
+            this.x = 0;
+            this.y = 0;
         } catch (IOException e) {
             System.out.println("Config file not found");
             throw new RuntimeException(e);
