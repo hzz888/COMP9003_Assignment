@@ -222,9 +222,9 @@ public class App extends PApplet {
             this.wizardCoolDown();
         }
 
-        displayExit();
+        this.displayExit();
 
-        displayDestructions();
+        this.displayDestructions();
 
 
     }
@@ -436,6 +436,7 @@ public class App extends PApplet {
             destruction.tick(this);
         }
     }
+
 
     public int getMapX(AbstractObject object) {
         return object.getY() / App.SPRITESIZE;

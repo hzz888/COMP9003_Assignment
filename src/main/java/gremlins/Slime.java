@@ -46,7 +46,7 @@ public class Slime extends AbstractObject {
         }
     }
 
-    private void slimeAbsorbed(App app) {
+    public void slimeAbsorbed(App app) {
         app.slimes.remove(this);
     }
 }

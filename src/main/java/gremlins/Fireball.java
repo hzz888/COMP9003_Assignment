@@ -32,11 +32,12 @@ public class Fireball extends AbstractObject {
                 break;
         }
         this.fireballWallCollision(app);
+        this.fireballCollideSlime(app);
         // todo: add enemy collision
         this.drawObject(app);
     }
 
-    private void fireballWallCollision(App app) {
+    public void fireballWallCollision(App app) {
         for (AbstractObject[] line : app.map) {
             for (AbstractObject tile : line) {
                 if (tile != null && this.collide(tile) != null) {
@@ -51,7 +52,19 @@ public class Fireball extends AbstractObject {
     }
 
 
-    private void fireballAbsorbed(App app) {
+    public void fireballCollideSlime(App app){
+        for (Fireball fireball:app.fireballs){
+            for (Slime slime:app.slimes){
+                if (fireball.collide(slime)!=null){
+                    fireball.fireballAbsorbed(app);
+                    slime.slimeAbsorbed(app);
+                }
+            }
+        }
+    }
+
+    public void fireballAbsorbed(App app) {
         app.fireballs.remove(this);
     }
+
 }
