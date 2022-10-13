@@ -71,6 +71,7 @@ public class App extends PApplet {
 
     public List<Slime> slimes;
     public List<BrickWallDestruction> brickWallDestructions;
+    public List<int[]> emptyTiles;
 
     public App() {
         //construct objects here
@@ -92,6 +93,7 @@ public class App extends PApplet {
         this.brickWallDestroyImages = new PImage[4];
         this.powerups = new CopyOnWriteArrayList<>();
         this.brickWallDestructions = new CopyOnWriteArrayList<>();
+        this.emptyTiles = new CopyOnWriteArrayList<>();
     }
 
 
@@ -201,6 +203,8 @@ public class App extends PApplet {
         background(197, 151, 113);
 
         this.displayMap();
+
+        this.updateEmptyTiles();
 
         //Display lives
         this.displayLife();
@@ -452,6 +456,16 @@ public class App extends PApplet {
 
     public int getImageY(int x) {
         return x * App.SPRITESIZE;
+    }
+
+    public void updateEmptyTiles(){
+        for (int i = 0; i < App.MAP_WIDTH_TILES; i++) {
+            for (int j = 0; j < App.MAP_HEIGHT_TILES; j++) {
+                if (this.map[i][j] == null) {
+                    this.emptyTiles.add(new int[]{this.getImageX(j), this.getImageY(i)});
+                }
+            }
+        }
     }
 
     public static void main(String[] args) {
