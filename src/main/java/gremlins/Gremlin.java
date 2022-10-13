@@ -1,7 +1,5 @@
 package gremlins;
 
-import java.util.Objects;
-
 
 /**
  * @author hzz
@@ -12,11 +10,19 @@ public class Gremlin extends AbstractObject {
     public String gremlinDirection;
     protected String[] gremlinDirections;
 
+    public boolean gremlinCooling;
+    public float gremlinCoolDown;
+
+    public int gremlinAttackTimer;
+
     public Gremlin(App app, int x, int y) {
         super(app, app.gremlinImage, x, y);
         this.gremlinMoveSpeed = 1;
         this.gremlinDirections = new String[]{"up", "down", "left", "right"};
         this.gremlinDirection = this.gremlinDirections[App.RANDOM_GENERATOR.nextInt(this.gremlinDirections.length)];
+        this.gremlinCooling = false;
+        this.gremlinCoolDown = app.enemyCooldown;
+        this.gremlinAttackTimer= 0;
     }
 
 
@@ -40,7 +46,8 @@ public class Gremlin extends AbstractObject {
                 break;
         }
         this.gremlinWallCollision(app);
-        this.draw(app);
+        this.gremlinAttack(app);
+        this.drawObject(app);
     }
 
     private void gremlinWallCollision(App app) {
@@ -90,6 +97,19 @@ public class Gremlin extends AbstractObject {
         }
         this.gremlinDirection = newDirection;
         this.gremlinMoveSpeed = 1;
+    }
+
+    public void gremlinAttack(App app){
+        if (!this.gremlinCooling){
+            Slime newSlime = new Slime(app,this.x,this.y,this.gremlinDirection);
+            app.slimes.add(newSlime);
+            this.gremlinCooling=true;
+            this.gremlinAttackTimer= app.millis();
+        }else {
+            if(app.millis()-this.gremlinAttackTimer>this.gremlinCoolDown*1000){
+                this.gremlinCooling=false;
+            }
+        }
     }
 }
 

@@ -20,7 +20,7 @@ public class BrickWallDestruction extends AbstractObject {
         if (this.frames<=16) {
             if (this.destroyPicIndex < app.brickWallDestroyImages.length) {
                 this.objectSprite = app.brickWallDestroyImages[this.destroyPicIndex];
-                this.draw(app);
+                this.drawObject(app);
                 this.frames++;
                 if (this.frames %4 ==0) {
                     this.destroyPicIndex++;

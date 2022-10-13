@@ -9,6 +9,6 @@ public class StoneWall extends AbstractObject {
     }
     @Override
     public void tick(App app){
-       this.draw(app);
+       this.drawObject(app);
     }
 }

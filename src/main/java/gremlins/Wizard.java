@@ -9,6 +9,7 @@ public class Wizard extends AbstractObject {
     private String wizardDirection;
     public int wizardMoveSpeed;
 
+
     public Wizard(App app, int x, int y) {
         super(app, app.wizardRightImage, x, y);
         this.wizardMoveSpeed = 0;
@@ -61,7 +62,7 @@ public class Wizard extends AbstractObject {
                 break;
         }
         this.wizardWallCollision(app);
-        this.draw(app);
+        this.drawObject(app);
 
     }
 

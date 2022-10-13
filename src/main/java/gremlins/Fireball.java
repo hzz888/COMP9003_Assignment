@@ -33,7 +33,7 @@ public class Fireball extends AbstractObject {
         }
         this.wallCollision(app);
         // todo: add enemy collision
-        this.draw(app);
+        this.drawObject(app);
     }
 
     private void wallCollision(App app) {

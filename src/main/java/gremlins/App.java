@@ -215,6 +215,8 @@ public class App extends PApplet {
         //Display gremlins each frame
         this.displayGremlins();
 
+        this.displaySlimes();
+
         if (this.wizardCooling) {
             this.wizardCoolDown();
         }
@@ -391,6 +393,12 @@ public class App extends PApplet {
         }
     }
 
+    public void displaySlimes(){
+        for (Slime slime : this.slimes){
+            slime.tick(this);
+        }
+    }
+
     public void displayPlayer() {
         this.player.tick(this);
     }
@@ -401,10 +409,10 @@ public class App extends PApplet {
 
     public void displayLevels() {
         fill(255, 255, 255);
-        text("Level", 300, 700);
-        text(this.level, 350, 700);
-        text('/', 365, 700);
-        text(this.totalLevels, 380, 700);
+        text("Level", 200, 700);
+        text(this.level, 250, 700);
+        text('/', 265, 700);
+        text(this.totalLevels, 280, 700);
     }
 
     public void wizardCoolDown() {
