@@ -32,7 +32,22 @@ public class Slime extends AbstractObject {
             default:
                 break;
         }
+        this.slimeWallCollision(app);
         this.drawObject(app);
+    }
+
+    public void slimeWallCollision(App app){
+        for(AbstractObject[] line : app.map){
+            for (AbstractObject tile : line){
+                if(tile != null && this.collide(tile) != null){
+                    this.absorbed(app);
+                }
+            }
+        }
+    }
+
+    private void absorbed(App app) {
+        app.slimes.remove(this);
     }
 }
 
