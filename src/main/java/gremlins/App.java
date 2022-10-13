@@ -333,8 +333,7 @@ public class App extends PApplet {
                             map[i][j] = null;
                             break;
                         case 'G':
-                            tmp = new Gremlin(this, x, y);
-                            this.gremlins.add((Gremlin) tmp);
+                            this.gremlins.add(new Gremlin(this, x, y));
                             map[i][j] = null;
                             break;
                         case ' ':
