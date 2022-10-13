@@ -57,7 +57,7 @@ public class Fireball extends AbstractObject {
             for (Slime slime:app.slimes){
                 if (fireball.collide(slime)!=null){
                     fireball.fireballAbsorbed(app);
-                    slime.slimeAbsorbed(app);
+                    slime.slimeVaporized(app);
                 }
             }
         }

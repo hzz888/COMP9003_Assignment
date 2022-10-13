@@ -111,5 +111,11 @@ public class Gremlin extends AbstractObject {
             }
         }
     }
+
+    public void gremlinRespawn(App app){
+        app.gremlins.remove(this);
+        //todo: add enemy respawn feature
+    }
+
 }
 
