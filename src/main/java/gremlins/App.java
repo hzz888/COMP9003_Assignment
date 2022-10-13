@@ -25,7 +25,7 @@ public class App extends PApplet {
 
     public static final int FPS = 60;
 
-    public static final double MILLISECONDS_PER_FRAME = 1000/(double)App.FPS;
+    public static final double MILLISECONDS_PER_FRAME = 1000 / (double) App.FPS;
     public static final Random RANDOM_GENERATOR = new Random();
 
     public static int x = 0;
@@ -64,7 +64,7 @@ public class App extends PApplet {
     public CopyOnWriteArrayList<Gremlin> gremlins;
     public CopyOnWriteArrayList<Fireball> fireballs;
 
-    public int attackTimer;
+    public int wizardAttackTimer;
     public int currentTimer;
     public boolean wizardCooling;
     public Exit exit;
@@ -160,19 +160,19 @@ public class App extends PApplet {
         int keyCode = e.getKeyCode();
         switch (keyCode) {
             case App.LEFT:
-                this.player.move(this, "left");
+                this.player.wizardMove(this, "left");
                 break;
             case App.UP:
-                this.player.move(this, "up");
+                this.player.wizardMove(this, "up");
                 break;
             case App.RIGHT:
-                this.player.move(this, "right");
+                this.player.wizardMove(this, "right");
                 break;
             case App.DOWN:
-                this.player.move(this, "down");
+                this.player.wizardMove(this, "down");
                 break;
             case App.SPACE:
-                this.player.attack(this);
+                this.player.wizardAttack(this);
                 break;
             default:
                 break;
@@ -185,7 +185,7 @@ public class App extends PApplet {
 
     @Override
     public void keyReleased() {
-        this.player.stop();
+        this.player.wizardStop();
     }
 
 
@@ -409,17 +409,17 @@ public class App extends PApplet {
 
     public void wizardCoolDown() {
         this.currentTimer = millis();
-        if (this.currentTimer - this.attackTimer <= this.wizardCooldown * 1000) {
+        if (this.currentTimer - this.wizardAttackTimer <= this.wizardCooldown * 1000) {
             stroke(0);
             strokeWeight(1.5f);
             fill(255, 255, 255);
             rect(550, 685, 100, 10);
             fill(0, 0, 0);
-            float coolDownBarWidth = (float) ((this.currentTimer - this.attackTimer) / 1000.0 / this.wizardCooldown * 100);
+            float coolDownBarWidth = (float) ((this.currentTimer - this.wizardAttackTimer) / 1000.0 / this.wizardCooldown * 100);
             rect(551, 686, coolDownBarWidth, 8);
         } else {
             this.wizardCooling = false;
-            this.attackTimer = 0;
+            this.wizardAttackTimer = 0;
         }
     }
 
