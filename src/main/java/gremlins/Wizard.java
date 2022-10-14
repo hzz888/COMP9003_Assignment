@@ -155,14 +155,18 @@ public class Wizard extends AbstractObject {
         }
     }
 
-    public void wizardGetPowerups(App app) {
+    public void wizardPoweredUp(App app) {
         if (app.millis() - app.levelInitTimer >= app.powerUpSpawnTime * 1000) {
             for (Powerup powerup : app.powerups) {
                 if (this.collide(powerup) != null) {
                     if (!this.poweredUp) {
                         powerup.powerUpRespawn(app);
+
                         this.wizardMoveSpeed += Powerup.SPEED_UP;
                         this.poweredUp = true;
+                        break;
+                    }else {
+                        powerup.powerUpRespawn(app);
                         break;
                     }
                 }
