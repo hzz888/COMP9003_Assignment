@@ -138,4 +138,20 @@ public class Wizard extends AbstractObject {
         }
     }
 
+    public void wizardAttacked(App app){
+        for (Gremlin gremlin:app.gremlins){
+            if (this.collide(gremlin)!=null){
+                app.wizardLife -=1;
+                app.resetLevel();
+            }
+        }
+        
+        for (Slime slime:app.slimes){
+            if (this.collide(slime)!=null){
+                app.wizardLife -=1;
+                app.resetLevel();
+            }
+        }
+    }
+
 }

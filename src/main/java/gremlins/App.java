@@ -83,8 +83,8 @@ public class App extends PApplet {
         this.totalLevels = this.conf.getJSONArray("levels").size();
         this.map = new AbstractObject[App.MAP_WIDTH_TILES][App.MAP_HEIGHT_TILES];
         this.wizardLife = this.conf.getInt("lives");
-        this.wizardCooldown = this.conf.getJSONArray("levels").getJSONObject(level - 1).getFloat("wizard_cooldown");
-        this.enemyCooldown = this.conf.getJSONArray("levels").getJSONObject(level - 1).getFloat("enemy_cooldown");
+        this.wizardCooldown = this.conf.getJSONArray("levels").getJSONObject(this.level - 1).getFloat("wizard_cooldown");
+        this.enemyCooldown = this.conf.getJSONArray("levels").getJSONObject(this.level - 1).getFloat("enemy_cooldown");
         this.player = null;
         this.exit = null;
         this.gremlins = new CopyOnWriteArrayList<>();
@@ -229,7 +229,7 @@ public class App extends PApplet {
         this.displayExit();
 
         this.displayDestructions();
-
+        this.detectGameLose();
 
     }
 
@@ -471,5 +471,20 @@ public class App extends PApplet {
 
     public static void main(String[] args) {
         PApplet.main("gremlins.App");
+    }
+
+    public void resetLevel() {
+    }
+
+    public void detectGameLose(){
+        if (this.wizardLife <= 0) {
+            stop();
+            text("Game Over", 300, 300);
+        }
+    }
+
+    public void gameWin(){
+        stop();
+        text("You Win", 300, 300);
     }
 }
