@@ -8,6 +8,7 @@ import java.util.Objects;
 public class Wizard extends AbstractObject {
     private String wizardDirection;
     public int wizardMoveSpeed;
+    public boolean poweredUp;
 
 
     public Wizard(App app, int x, int y) {
@@ -138,20 +139,36 @@ public class Wizard extends AbstractObject {
         }
     }
 
-    public void wizardAttacked(App app){
-        for (Gremlin gremlin:app.gremlins){
-            if (this.collide(gremlin)!=null){
-                app.wizardLife -=1;
+    public void wizardAttacked(App app) {
+        for (Gremlin gremlin : app.gremlins) {
+            if (this.collide(gremlin) != null) {
+                app.wizardLife -= 1;
                 app.resetLevel();
             }
         }
-        
-        for (Slime slime:app.slimes){
-            if (this.collide(slime)!=null){
-                app.wizardLife -=1;
+
+        for (Slime slime : app.slimes) {
+            if (this.collide(slime) != null) {
+                app.wizardLife -= 1;
                 app.resetLevel();
             }
         }
+    }
+
+    public void wizardGetPowerups(App app) {
+        if (app.millis() - app.levelInitTimer >= app.powerUpSpawnTime * 1000) {
+            for (Powerup powerup : app.powerups) {
+                if (this.collide(powerup) != null) {
+                    if (!this.poweredUp) {
+                        powerup.powerUpRespawn(app);
+                        this.wizardMoveSpeed += Powerup.SPEED_UP;
+                        this.poweredUp = true;
+                        break;
+                    }
+                }
+            }
+        }
+
     }
 
 }

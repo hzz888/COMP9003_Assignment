@@ -6,6 +6,7 @@ package gremlins;
 public class Fireball extends AbstractObject {
     public String direction;
     public int fireBallSpeed;
+    public int speedEffect;
 
     public Fireball(App app, int x, int y, String direction) {
         super(app, app.fireballImage, x, y);

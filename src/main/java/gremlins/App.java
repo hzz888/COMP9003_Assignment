@@ -64,6 +64,7 @@ public class App extends PApplet {
     public CopyOnWriteArrayList<Fireball> fireballs;
 
     public int wizardAttackTimer;
+    public int levelInitTimer;
     public int currentTimer;
     public boolean wizardCooling;
     public Exit exit;
@@ -72,6 +73,8 @@ public class App extends PApplet {
     public List<Slime> slimes;
     public List<BrickWallDestruction> brickWallDestructions;
     public List<int[]> emptyTiles;
+    public int powerUpSpawnTime;
+
 
     public App() {
         //construct objects here
@@ -94,6 +97,7 @@ public class App extends PApplet {
         this.powerups = new CopyOnWriteArrayList<>();
         this.brickWallDestructions = new CopyOnWriteArrayList<>();
         this.emptyTiles = new CopyOnWriteArrayList<>();
+        this.powerUpSpawnTime = 8;
     }
 
 
@@ -229,6 +233,9 @@ public class App extends PApplet {
         this.displayExit();
 
         this.displayDestructions();
+
+        this.displayPowerups();
+
         this.detectGameLose();
 
     }
@@ -268,7 +275,7 @@ public class App extends PApplet {
                         }
                     }
 
-                    if (c != 'X' && c != 'B' && c != ' ' && c != 'G' && c != 'W' && c != 'E') {
+                    if (c != 'X' && c != 'B' && c != ' ' && c != 'G' && c != 'W' && c != 'E' && c != 'P') {
                         legalRequire = false;
                     }
 
@@ -341,6 +348,10 @@ public class App extends PApplet {
                             this.gremlins.add(new Gremlin(this, this.x, this.y));
                             map[i][j] = null;
                             break;
+                        case 'P':
+                            this.powerups.add(new Powerup(this, this.x, this.y));
+                            map[i][j] = null;
+                            break;
                         case ' ':
                         default:
                             map[i][j] = null;
@@ -359,6 +370,7 @@ public class App extends PApplet {
             //reset x and y after map generation
             this.x = 0;
             this.y = 0;
+            this.levelInitTimer = 0;
         } catch (IOException e) {
             System.out.println("Config file not found");
             throw new RuntimeException(e);
@@ -469,22 +481,37 @@ public class App extends PApplet {
         }
     }
 
-    public static void main(String[] args) {
-        PApplet.main("gremlins.App");
+
+    public void displayPowerups() {
+        if (millis() - this.levelInitTimer >= this.powerUpSpawnTime * 1000) {
+            for (Powerup powerup : this.powerups) {
+                powerup.tick(this);
+            }
+        }
     }
 
     public void resetLevel() {
+        this.gremlins.clear();
+        this.slimes.clear();
+        this.fireballs.clear();
+        this.brickWallDestructions.clear();
+        this.initMap();
     }
 
-    public void detectGameLose(){
+    public void detectGameLose() {
         if (this.wizardLife <= 0) {
             stop();
             text("Game Over", 300, 300);
         }
     }
 
-    public void gameWin(){
+    public void gameWin() {
         stop();
         text("You Win", 300, 300);
+    }
+
+
+    public static void main(String[] args) {
+        PApplet.main("gremlins.App");
     }
 }
