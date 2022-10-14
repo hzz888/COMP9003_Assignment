@@ -155,7 +155,7 @@ public class Wizard extends AbstractObject {
         }
     }
 
-    public void wizardPoweredUp(App app) {
+    public void wizardGetPowerUp(App app) {
         if (app.millis() - app.levelInitTimer >= app.powerUpSpawnTime * 1000) {
             for (Powerup powerup : app.powerups) {
                 if (this.collide(powerup) != null) {
