@@ -235,6 +235,7 @@ public class App extends PApplet {
         this.displayDestructions();
 
         this.displayPowerups();
+        this.respawnPowerUps();
 
         this.detectGameLose();
 
@@ -370,7 +371,7 @@ public class App extends PApplet {
             //reset x and y after map generation
             this.x = 0;
             this.y = 0;
-            this.levelInitTimer = 0;
+            this.levelInitTimer = millis();
         } catch (IOException e) {
             System.out.println("Config file not found");
             throw new RuntimeException(e);
@@ -485,7 +486,18 @@ public class App extends PApplet {
     public void displayPowerups() {
         if (millis() - this.levelInitTimer >= this.powerUpSpawnTime * 1000) {
             for (Powerup powerup : this.powerups) {
-                powerup.tick(this);
+                if (!powerup.powerUpCooling) {
+                    powerup.tick(this);
+                }
+            }
+        }
+    }
+
+    public void respawnPowerUps(){
+        for (Powerup powerup:this.powerups){
+            if (powerup.powerUpCooling && millis() - powerup.powerUpCoolingStartTimer >= powerup.powerUpCoolingTime * 1000){
+                powerup.powerUpCooling = false;
+                powerup.powerUpCoolingStartTimer = 0;
             }
         }
     }
