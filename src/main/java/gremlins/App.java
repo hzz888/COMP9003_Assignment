@@ -536,11 +536,13 @@ public class App extends PApplet {
         public void displayWinOrLose() {
             if (this.gameOver) {
                 text("Game Over", 300, 300);
+                text("Press any key to restart",300,400);
                 stop();
             }
 
             if (this.gameWon) {
                 text("You Win", 300, 300);
+                text("Press any key to restart",300,400);
                 stop();
             }
         }
