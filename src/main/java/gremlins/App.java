@@ -77,7 +77,7 @@ public class App extends PApplet {
     public List<BrickWallDestruction> brickWallDestructions;
     public List<int[]> emptyTiles;
     public int powerUpSpawnTime;
-
+    public int gameStopTimer;
 
     public App() {
         //construct objects here
@@ -142,9 +142,7 @@ public class App extends PApplet {
         this.brickWallDestroyImages[2] = loadImage(Objects.requireNonNull(this.getClass().getResource("brickwall_destroyed2.png")).getPath());
         this.brickWallDestroyImages[3] = loadImage(Objects.requireNonNull(this.getClass().getResource("brickwall_destroyed3.png")).getPath());
 
-
         this.loadMap();
-
 
     }
 
@@ -182,7 +180,7 @@ public class App extends PApplet {
                     break;
             }
         } else {
-            if (keyCode >= 0) {
+            if (keyCode >= 0 && millis() - this.gameStopTimer >= 2000) {
                 this.restart();
             }
         }
@@ -542,15 +540,25 @@ public class App extends PApplet {
 
     public void displayWinOrLose() {
         if (this.gameOver) {
+            this.gameStopTimer = millis();
+            this.gremlins.clear();
+            this.fireballs.clear();
+            this.slimes.clear();
+            this.powerups.clear();
+            background(197, 151, 113);
             text("Game Over", 300, 300);
-            text("Press any key to replay", 300, 400);
-            stop();
+            text("Press any key to replay", 250, 400);
         }
 
         if (this.gameWon) {
-            text("You Win", 300, 300);
-            text("Press any key to replay", 300, 400);
-            stop();
+            this.gameStopTimer = millis();
+            this.gremlins.clear();
+            this.fireballs.clear();
+            this.slimes.clear();
+            this.powerups.clear();
+            background(197, 151, 113);
+            text("You Win!", 300, 300);
+            text("Press any key to replay", 250, 400);
         }
     }
 
