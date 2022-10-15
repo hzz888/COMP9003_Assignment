@@ -66,17 +66,17 @@ public class Wizard extends AbstractObject {
         this.wizardWallCollision(app);
         this.wizardGetPowerUp(app);
         this.wizardPoweredUp(app);
+        this.wizardAttacked(app);
         this.drawObject(app);
     }
 
     public void wizardMove(App app, String direction) {
         this.setWizardDirection(app, direction);
-        if (this.poweredUp){
+        if (this.poweredUp) {
             this.wizardMoveSpeed = 2 + Powerup.SPEED_UP;
-        }else {
+        } else {
             this.wizardMoveSpeed = 2;
         }
-
     }
 
     public void wizardStop() {
@@ -150,15 +150,23 @@ public class Wizard extends AbstractObject {
     public void wizardAttacked(App app) {
         for (Gremlin gremlin : app.gremlins) {
             if (this.collide(gremlin) != null) {
-                app.wizardLife -= 1;
-                app.resetLevel();
+                app.wizardLife--;
+                if (app.wizardLife >= 1) {
+                    app.resetLevel();
+                } else {
+                    app.gameOver = true;
+                }
             }
         }
 
         for (Slime slime : app.slimes) {
             if (this.collide(slime) != null) {
-                app.wizardLife -= 1;
-                app.resetLevel();
+                app.wizardLife--;
+                if (app.wizardLife >= 1) {
+                    app.resetLevel();
+                } else {
+                    app.gameOver = true;
+                }
             }
         }
     }
@@ -177,12 +185,12 @@ public class Wizard extends AbstractObject {
         }
     }
 
-    public void wizardPoweredUp(App app){
-        if(this.poweredUp){
-            if(app.millis() - this.powerUpStartTimer >= Powerup.POWERUP_PERIOD * 1000){
+    public void wizardPoweredUp(App app) {
+        if (this.poweredUp) {
+            if (app.millis() - this.powerUpStartTimer >= Powerup.POWERUP_PERIOD * 1000) {
                 this.poweredUp = false;
-            }else {
-                app.text("SPEED UP!,", 350,690);
+            } else {
+                app.text("SPEED UP!,", 350, 690);
                 app.text("Time Left: " + (Powerup.POWERUP_PERIOD - (app.millis() - this.powerUpStartTimer) / 1000) + " s", 350, 710);
             }
         }

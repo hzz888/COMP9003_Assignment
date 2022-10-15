@@ -1,5 +1,5 @@
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-X W               X    P            X
+X W               X    P           X
 X                 X                X
 X     X  X   X         XXXXXXG     X
 X                           XG     X
@@ -9,12 +9,12 @@ X X X X                   X       XX
 X X              XXXXXXXX X       XX
 X X   X     X    X        X       XX
 X X   X    XXX   X                XX
-X X   XXX XX     X          P      XX
+X X   XXX XX     X          P     XX
 X     X                          XXX
 X     X           X              XXX
 X     X                          XXX
 X     X                          XXX
-X     X     P                     XXX
+X     X     P                    XXX
 X                                XXX
 X                                 XX
 X     X                     X     XX

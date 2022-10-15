@@ -57,6 +57,9 @@ public class App extends PApplet {
 
     public static final int MAP_WIDTH_TILES = 33;
     public static final int MAP_HEIGHT_TILES = 36;
+    public boolean gameOver;
+    public boolean gameWon;
+
     protected AbstractObject[][] map;
 
     public Wizard player;
@@ -86,8 +89,6 @@ public class App extends PApplet {
         this.totalLevels = this.conf.getJSONArray("levels").size();
         this.map = new AbstractObject[App.MAP_WIDTH_TILES][App.MAP_HEIGHT_TILES];
         this.wizardLife = this.conf.getInt("lives");
-        this.wizardCooldown = this.conf.getJSONArray("levels").getJSONObject(this.level - 1).getFloat("wizard_cooldown");
-        this.enemyCooldown = this.conf.getJSONArray("levels").getJSONObject(this.level - 1).getFloat("enemy_cooldown");
         this.player = null;
         this.exit = null;
         this.gremlins = new CopyOnWriteArrayList<>();
@@ -98,6 +99,8 @@ public class App extends PApplet {
         this.brickWallDestructions = new CopyOnWriteArrayList<>();
         this.emptyTiles = new CopyOnWriteArrayList<>();
         this.powerUpSpawnTime = 8;
+        this.gameOver = false;
+        this.gameWon = false;
     }
 
 
@@ -140,14 +143,7 @@ public class App extends PApplet {
         this.brickWallDestroyImages[3] = loadImage(Objects.requireNonNull(this.getClass().getResource("brickwall_destroyed3.png")).getPath());
 
 
-        if (validMap()) {
-            //Load map
-            initMap();
-        } else {
-            stop();
-            fill(255, 255, 255);
-            text("Invalid map", 350, 350);
-        }
+        this.loadMap();
 
 
     }
@@ -237,7 +233,8 @@ public class App extends PApplet {
         this.displayPowerups();
         this.respawnPowerUps();
 
-        this.detectGameLose();
+        this.getExit();
+        this.displayWinOrLose();
 
     }
 
@@ -316,6 +313,8 @@ public class App extends PApplet {
 
     public void initMap() {
         // Load map from config file
+        this.wizardCooldown = this.conf.getJSONArray("levels").getJSONObject(this.level - 1).getFloat("wizard_cooldown");
+        this.enemyCooldown = this.conf.getJSONArray("levels").getJSONObject(this.level - 1).getFloat("enemy_cooldown");
         this.layOutName = this.conf.getJSONArray("levels").getJSONObject(this.level - 1).getString("layout");
         File layOutFile = new File(App.ROOT_PATH + "/" + this.layOutName);
 
@@ -378,6 +377,17 @@ public class App extends PApplet {
         }
     }
 
+
+    public void loadMap(){
+        if (validMap()) {
+            //Load map
+            initMap();
+        } else {
+            stop();
+            fill(255, 255, 255);
+            text("Invalid map", 350, 350);
+        }
+    }
 
     private void displayMap() {
         for (int i = 0; i < App.MAP_WIDTH_TILES; i++) {
@@ -493,9 +503,9 @@ public class App extends PApplet {
         }
     }
 
-    public void respawnPowerUps(){
-        for (Powerup powerup:this.powerups){
-            if (powerup.powerUpCooling && millis() - powerup.powerUpCoolingStartTimer >= powerup.powerUpCoolingTime * 1000){
+    public void respawnPowerUps() {
+        for (Powerup powerup : this.powerups) {
+            if (powerup.powerUpCooling && millis() - powerup.powerUpCoolingStartTimer >= powerup.powerUpCoolingTime * 1000) {
                 powerup.powerUpCooling = false;
                 powerup.powerUpCoolingStartTimer = 0;
             }
@@ -507,23 +517,36 @@ public class App extends PApplet {
         this.slimes.clear();
         this.fireballs.clear();
         this.brickWallDestructions.clear();
-        this.initMap();
+        this.powerups.clear();
+        this.loadMap();
     }
 
-    public void detectGameLose() {
-        if (this.wizardLife <= 0) {
-            stop();
-            text("Game Over", 300, 300);
+
+    public void getExit() {
+        if (this.player.collide(this.exit) != null) {
+            if (this.level < this.totalLevels) {
+                this.level++;
+                this.resetLevel();
+            } else {
+                this.gameWon = true;
+            }
         }
     }
 
-    public void gameWin() {
-        stop();
-        text("You Win", 300, 300);
-    }
+        public void displayWinOrLose() {
+            if (this.gameOver) {
+                text("Game Over", 300, 300);
+                stop();
+            }
+
+            if (this.gameWon) {
+                text("You Win", 300, 300);
+                stop();
+            }
+        }
 
 
-    public static void main(String[] args) {
-        PApplet.main("gremlins.App");
+        public static void main (String[]args){
+            PApplet.main("gremlins.App");
+        }
     }
-}
