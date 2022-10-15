@@ -6,9 +6,7 @@ package gremlins;
  */
 public class BrickWall extends AbstractObject {
 
-
     public int destroyPicIndex = 0;
-
 
     public BrickWall(App app, int x, int y) {
         super(app, app.brickWallImage, x, y);

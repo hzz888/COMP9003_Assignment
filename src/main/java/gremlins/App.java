@@ -216,7 +216,6 @@ public class App extends PApplet {
     @Override
     public void draw() {
         //Main loop here, execute per frame.
-
         background(197, 151, 113);
 
         this.displayMap();
@@ -244,17 +243,20 @@ public class App extends PApplet {
         }
 
         this.displayExit();
+
         this.displayTransportDoors();
 
         this.displayDestructions();
 
         this.displayPowerups();
+
         this.respawnPowerUps();
 
         this.getTransportDoor();
-        this.getExit();
-        this.displayWinOrLose();
 
+        this.getExit();
+
+        this.displayWinOrLose();
     }
 
 
@@ -410,9 +412,9 @@ public class App extends PApplet {
             //Load map
             initMap();
         } else {
-            stop();
             fill(255, 255, 255);
             text("Invalid map", 350, 350);
+            stop();
         }
     }
 
@@ -491,8 +493,8 @@ public class App extends PApplet {
         }
     }
 
-    public void displayTransportDoors(){
-        for (TransportDoor transportDoor:this.transportDoors){
+    public void displayTransportDoors() {
+        for (TransportDoor transportDoor : this.transportDoors) {
             transportDoor.tick(this);
         }
     }
@@ -538,6 +540,7 @@ public class App extends PApplet {
 
     public void respawnPowerUps() {
         for (Powerup powerup : this.powerups) {
+            powerup.powerUpCoolingTime = App.RANDOM_GENERATOR.nextInt(20);
             if (powerup.powerUpCooling && millis() - powerup.powerUpCoolingStartTimer >= powerup.powerUpCoolingTime * 1000) {
                 powerup.powerUpCooling = false;
                 powerup.powerUpCoolingStartTimer = 0;
@@ -562,7 +565,8 @@ public class App extends PApplet {
                 this.level++;
                 this.resetLevel();
             } else {
-                this.playerWin();
+                this.player.wizardWin(this);
+                this.exit = new Exit(this, 40, 20);
             }
         }
     }
@@ -614,33 +618,30 @@ public class App extends PApplet {
         }
     }
 
-    public void playerWin() {
-        this.gameWon = true;
-        this.gremlins.clear();
-        this.fireballs.clear();
-        this.slimes.clear();
-        this.powerups.clear();
-        this.gameStopTimer = millis();
-    }
 
     public void displayWinOrLose() {
         if (this.gameOver) {
-
             background(197, 151, 113);
             text("Game Over", 300, 300);
-            text("Press any key to replay", 250, 400);
+            text("Press any key to restart", 250, 400);
         }
 
         if (this.gameWon) {
             background(197, 151, 113);
             text("You Win!", 300, 300);
-            text("Press any key to replay", 250, 400);
+            text("Press any key to restart", 250, 400);
         }
     }
 
     private void restart() {
         this.level = 1;
         this.wizardLife = this.conf.getInt("lives");
+        this.gremlins.clear();
+        this.slimes.clear();
+        this.fireballs.clear();
+        this.brickWallDestructions.clear();
+        this.powerups.clear();
+        this.transportDoors.clear();
         this.loadMap();
         this.gameOver = false;
         this.gameWon = false;

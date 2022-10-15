@@ -7,7 +7,6 @@ public class BrickWallDestruction extends AbstractObject {
     public int destroyPicIndex;
     public int frames;
 
-
     public BrickWallDestruction(App app, int x, int y) {
         super(app, app.brickWallDestroyImages[0], x, y);
         this.destroyPicIndex = 0;

@@ -14,5 +14,4 @@ public class TransportDoor extends AbstractObject {
         this.drawObject(app);
     }
 
-
 }

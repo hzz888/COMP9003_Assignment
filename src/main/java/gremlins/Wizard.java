@@ -202,6 +202,19 @@ public class Wizard extends AbstractObject {
         app.fireballs.clear();
         app.slimes.clear();
         app.powerups.clear();
+        app.transportDoors.clear();
+        app.brickWallDestructions.clear();
+        app.gameStopTimer = app.millis();
+    }
+
+    public void wizardWin(App app){
+        app.gameWon = true;
+        app.gremlins.clear();
+        app.fireballs.clear();
+        app.slimes.clear();
+        app.powerups.clear();
+        app.transportDoors.clear();
+        app.brickWallDestructions.clear();
         app.gameStopTimer = app.millis();
     }
 
