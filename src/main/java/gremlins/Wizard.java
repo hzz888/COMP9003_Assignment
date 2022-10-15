@@ -202,7 +202,7 @@ public class Wizard extends AbstractObject {
         app.fireballs.clear();
         app.slimes.clear();
         app.powerups.clear();
-        app.gameStopTimer=app.millis();
+        app.gameStopTimer = app.millis();
     }
 
 }

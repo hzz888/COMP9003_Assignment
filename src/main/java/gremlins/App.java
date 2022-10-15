@@ -185,10 +185,9 @@ public class App extends PApplet {
                 this.restartTimer = this.millis();
                 if (this.restartTimer - this.gameStopTimer >= 2000) {
                     this.restart();
-                }else {
-                    text("Please wait 2 seconds.",250,600);
+                } else {
+                    text("Please wait 2 seconds.", 250, 600);
                 }
-
             }
         }
     }
@@ -545,13 +544,13 @@ public class App extends PApplet {
         }
     }
 
-    public void playerWin(){
+    public void playerWin() {
         this.gameWon = true;
         this.gremlins.clear();
         this.fireballs.clear();
         this.slimes.clear();
         this.powerups.clear();
-        this.gameStopTimer=millis();
+        this.gameStopTimer = millis();
     }
 
     public void displayWinOrLose() {
