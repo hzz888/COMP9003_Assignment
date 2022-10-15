@@ -44,6 +44,8 @@ public class App extends PApplet {
     public PImage slimeImage;
     public PImage fireballImage;
     public PImage powerupImage;
+    public PImage eliteEnemyImage;
+    public PImage transportDoorImage;
     public PImage[] brickWallDestroyImages;
 
     public float wizardCooldown;
@@ -75,6 +77,7 @@ public class App extends PApplet {
 
     public List<Slime> slimes;
     public List<BrickWallDestruction> brickWallDestructions;
+    public List<TransportDoor> transportDoors;
     public List<int[]> emptyTiles;
     public int powerUpSpawnTime;
     public int gameStopTimer;
@@ -98,6 +101,7 @@ public class App extends PApplet {
         this.brickWallDestroyImages = new PImage[4];
         this.powerups = new CopyOnWriteArrayList<>();
         this.brickWallDestructions = new CopyOnWriteArrayList<>();
+        this.transportDoors = new CopyOnWriteArrayList<>();
         this.emptyTiles = new CopyOnWriteArrayList<>();
         this.powerUpSpawnTime = 8;
         this.gameOver = false;
@@ -142,6 +146,8 @@ public class App extends PApplet {
         this.brickWallDestroyImages[1] = loadImage(Objects.requireNonNull(this.getClass().getResource("brickwall_destroyed1.png")).getPath());
         this.brickWallDestroyImages[2] = loadImage(Objects.requireNonNull(this.getClass().getResource("brickwall_destroyed2.png")).getPath());
         this.brickWallDestroyImages[3] = loadImage(Objects.requireNonNull(this.getClass().getResource("brickwall_destroyed3.png")).getPath());
+        this.eliteEnemyImage = loadImage(Objects.requireNonNull(this.getClass().getResource("eliteEnemy.png")).getPath());
+        this.transportDoorImage = loadImage(Objects.requireNonNull(this.getClass().getResource("transportDoor.png")).getPath());
 
         this.loadMap();
 
@@ -238,12 +244,14 @@ public class App extends PApplet {
         }
 
         this.displayExit();
+        this.displayTransportDoors();
 
         this.displayDestructions();
 
         this.displayPowerups();
         this.respawnPowerUps();
 
+        this.getTransportDoor();
         this.getExit();
         this.displayWinOrLose();
 
@@ -284,7 +292,7 @@ public class App extends PApplet {
                         }
                     }
 
-                    if (c != 'X' && c != 'B' && c != ' ' && c != 'G' && c != 'W' && c != 'E' && c != 'P') {
+                    if (c != 'X' && c != 'B' && c != ' ' && c != 'G' && c != 'W' && c != 'E' && c != 'P' && c != 'S' && c != 'T') {
                         legalRequire = false;
                     }
 
@@ -361,6 +369,14 @@ public class App extends PApplet {
                             break;
                         case 'P':
                             this.powerups.add(new Powerup(this, this.x, this.y));
+                            map[i][j] = null;
+                            break;
+                        case 'S':
+                            this.gremlins.add(new EliteEnemy(this, this.x, this.y));
+                            map[i][j] = null;
+                            break;
+                        case 'T':
+                            this.transportDoors.add(new TransportDoor(this, this.x, this.y));
                             map[i][j] = null;
                             break;
                         case ' ':
@@ -475,6 +491,12 @@ public class App extends PApplet {
         }
     }
 
+    public void displayTransportDoors(){
+        for (TransportDoor transportDoor:this.transportDoors){
+            transportDoor.tick(this);
+        }
+    }
+
 
     public int getMapX(AbstractObject object) {
         return object.getY() / App.SPRITESIZE;
@@ -529,6 +551,7 @@ public class App extends PApplet {
         this.fireballs.clear();
         this.brickWallDestructions.clear();
         this.powerups.clear();
+        this.transportDoors.clear();
         this.loadMap();
     }
 
@@ -540,6 +563,53 @@ public class App extends PApplet {
                 this.resetLevel();
             } else {
                 this.playerWin();
+            }
+        }
+    }
+
+    public void getTransportDoor() {
+        for (TransportDoor transportDoor : this.transportDoors) {
+
+            if (this.player.collide(transportDoor) != null) {
+                int randomIndex = App.RANDOM_GENERATOR.nextInt(this.emptyTiles.size());
+                int[] randomTile = this.emptyTiles.get(randomIndex);
+                int newX = randomTile[0];
+                int newY = randomTile[1];
+                this.player.setX(newX);
+                this.player.setY(newY);
+            }
+
+            for (Fireball fireball : this.fireballs) {
+                if (fireball.collide(transportDoor) != null) {
+                    int randomIndex = App.RANDOM_GENERATOR.nextInt(this.emptyTiles.size());
+                    int[] randomTile = this.emptyTiles.get(randomIndex);
+                    int newX = randomTile[0];
+                    int newY = randomTile[1];
+                    fireball.setX(newX);
+                    fireball.setY(newY);
+                }
+            }
+
+            for (Gremlin gremlin : this.gremlins) {
+                if (gremlin.collide(transportDoor) != null) {
+                    int randomIndex = App.RANDOM_GENERATOR.nextInt(this.emptyTiles.size());
+                    int[] randomTile = this.emptyTiles.get(randomIndex);
+                    int newX = randomTile[0];
+                    int newY = randomTile[1];
+                    gremlin.setX(newX);
+                    gremlin.setY(newY);
+                }
+            }
+
+            for (Slime slime : this.slimes) {
+                if (slime.collide(transportDoor) != null) {
+                    int randomIndex = App.RANDOM_GENERATOR.nextInt(this.emptyTiles.size());
+                    int[] randomTile = this.emptyTiles.get(randomIndex);
+                    int newX = randomTile[0];
+                    int newY = randomTile[1];
+                    slime.setX(newX);
+                    slime.setY(newY);
+                }
             }
         }
     }

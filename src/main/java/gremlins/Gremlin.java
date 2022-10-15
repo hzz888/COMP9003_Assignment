@@ -130,5 +130,7 @@ public class Gremlin extends AbstractObject {
         Gremlin newGremlin = new Gremlin(app, newX, newY);
         app.gremlins.add(newGremlin);
     }
+
+
 }
 
