@@ -159,28 +159,35 @@ public class App extends PApplet {
      */
     @Override
     public void keyPressed(KeyEvent e) {
-
         int keyCode = e.getKeyCode();
-        switch (keyCode) {
-            case App.LEFT:
-                this.player.wizardMove(this, "left");
-                break;
-            case App.UP:
-                this.player.wizardMove(this, "up");
-                break;
-            case App.RIGHT:
-                this.player.wizardMove(this, "right");
-                break;
-            case App.DOWN:
-                this.player.wizardMove(this, "down");
-                break;
-            case App.SPACE:
-                this.player.wizardAttack(this);
-                break;
-            default:
-                break;
+
+        if (!this.gameWon && !this.gameOver) {
+            switch (keyCode) {
+                case App.LEFT:
+                    this.player.wizardMove(this, "left");
+                    break;
+                case App.UP:
+                    this.player.wizardMove(this, "up");
+                    break;
+                case App.RIGHT:
+                    this.player.wizardMove(this, "right");
+                    break;
+                case App.DOWN:
+                    this.player.wizardMove(this, "down");
+                    break;
+                case App.SPACE:
+                    this.player.wizardAttack(this);
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            if (keyCode >= 0) {
+                this.restart();
+            }
         }
     }
+
 
     /**
      * Receive key released signal from the keyboard.
@@ -378,7 +385,7 @@ public class App extends PApplet {
     }
 
 
-    public void loadMap(){
+    public void loadMap() {
         if (validMap()) {
             //Load map
             initMap();
@@ -533,22 +540,30 @@ public class App extends PApplet {
         }
     }
 
-        public void displayWinOrLose() {
-            if (this.gameOver) {
-                text("Game Over", 300, 300);
-                text("Press any key to restart",300,400);
-                stop();
-            }
-
-            if (this.gameWon) {
-                text("You Win", 300, 300);
-                text("Press any key to restart",300,400);
-                stop();
-            }
+    public void displayWinOrLose() {
+        if (this.gameOver) {
+            text("Game Over", 300, 300);
+            text("Press any key to replay", 300, 400);
+            stop();
         }
 
-
-        public static void main (String[]args){
-            PApplet.main("gremlins.App");
+        if (this.gameWon) {
+            text("You Win", 300, 300);
+            text("Press any key to replay", 300, 400);
+            stop();
         }
     }
+
+    private void restart() {
+        this.level = 1;
+        this.wizardLife = this.conf.getInt("lives");
+        this.loadMap();
+        this.gameOver = false;
+        this.gameWon = false;
+    }
+
+
+    public static void main(String[] args) {
+        PApplet.main("gremlins.App");
+    }
+}
