@@ -154,7 +154,7 @@ public class Wizard extends AbstractObject {
                 if (app.wizardLife >= 1) {
                     app.resetLevel();
                 } else {
-                    app.gameOver = true;
+                    this.wizardDie(app);
                 }
             }
         }
@@ -165,7 +165,7 @@ public class Wizard extends AbstractObject {
                 if (app.wizardLife >= 1) {
                     app.resetLevel();
                 } else {
-                    app.gameOver = true;
+                    this.wizardDie(app);
                 }
             }
         }
@@ -194,6 +194,15 @@ public class Wizard extends AbstractObject {
                 app.text("Time Left: " + (Powerup.POWERUP_PERIOD - (app.millis() - this.powerUpStartTimer) / 1000) + " s", 350, 710);
             }
         }
+    }
+
+    public void wizardDie(App app) {
+        app.gameOver = true;
+        app.gremlins.clear();
+        app.fireballs.clear();
+        app.slimes.clear();
+        app.powerups.clear();
+        app.gameStopTimer=app.millis();
     }
 
 }

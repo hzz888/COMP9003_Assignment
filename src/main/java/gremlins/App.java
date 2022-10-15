@@ -68,7 +68,7 @@ public class App extends PApplet {
 
     public int wizardAttackTimer;
     public int levelInitTimer;
-    public int currentTimer;
+    public int wizardCoolDownTimer;
     public boolean wizardCooling;
     public Exit exit;
     public List<Powerup> powerups;
@@ -78,6 +78,7 @@ public class App extends PApplet {
     public List<int[]> emptyTiles;
     public int powerUpSpawnTime;
     public int gameStopTimer;
+    public int restartTimer;
 
     public App() {
         //construct objects here
@@ -180,8 +181,14 @@ public class App extends PApplet {
                     break;
             }
         } else {
-            if (keyCode >= 0 && millis() - this.gameStopTimer >= 2000) {
-                this.restart();
+            if (keyCode >= 0) {
+                this.restartTimer = this.millis();
+                if (this.restartTimer - this.gameStopTimer >= 2000) {
+                    this.restart();
+                }else {
+                    text("Please wait 2 seconds.",250,600);
+                }
+
             }
         }
     }
@@ -448,14 +455,14 @@ public class App extends PApplet {
     }
 
     public void wizardCoolDown() {
-        this.currentTimer = millis();
-        if (this.currentTimer - this.wizardAttackTimer <= this.wizardCooldown * 1000) {
+        this.wizardCoolDownTimer = millis();
+        if (this.wizardCoolDownTimer - this.wizardAttackTimer <= this.wizardCooldown * 1000) {
             stroke(0);
             strokeWeight(1.5f);
             fill(255, 255, 255);
             rect(550, 685, 100, 10);
             fill(0, 0, 0);
-            float coolDownBarWidth = (float) ((this.currentTimer - this.wizardAttackTimer) / 1000.0 / this.wizardCooldown * 100);
+            float coolDownBarWidth = (float) ((this.wizardCoolDownTimer - this.wizardAttackTimer) / 1000.0 / this.wizardCooldown * 100);
             rect(551, 686, coolDownBarWidth, 8);
         } else {
             this.wizardCooling = false;
@@ -533,29 +540,29 @@ public class App extends PApplet {
                 this.level++;
                 this.resetLevel();
             } else {
-                this.gameWon = true;
+                this.playerWin();
             }
         }
     }
 
+    public void playerWin(){
+        this.gameWon = true;
+        this.gremlins.clear();
+        this.fireballs.clear();
+        this.slimes.clear();
+        this.powerups.clear();
+        this.gameStopTimer=millis();
+    }
+
     public void displayWinOrLose() {
         if (this.gameOver) {
-            this.gameStopTimer = millis();
-            this.gremlins.clear();
-            this.fireballs.clear();
-            this.slimes.clear();
-            this.powerups.clear();
+
             background(197, 151, 113);
             text("Game Over", 300, 300);
             text("Press any key to replay", 250, 400);
         }
 
         if (this.gameWon) {
-            this.gameStopTimer = millis();
-            this.gremlins.clear();
-            this.fireballs.clear();
-            this.slimes.clear();
-            this.powerups.clear();
             background(197, 151, 113);
             text("You Win!", 300, 300);
             text("Press any key to replay", 250, 400);
