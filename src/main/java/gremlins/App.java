@@ -190,10 +190,10 @@ public class App extends PApplet {
             } else {
                 if (keyCode >= 0) {
                     this.restartTimer = millis();
-                    if (this.restartTimer - this.gameStopTimer >= 2000) {
+                    if (this.restartTimer - this.gameStopTimer >= 1000) {
                         this.restart();
                     } else {
-                        text("Please wait 2 seconds.", 250, 600);
+                        text("Please wait 1 second.", 250, 600);
                     }
                 }
             }
