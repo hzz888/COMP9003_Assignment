@@ -7,6 +7,7 @@ import processing.core.PImage;
 import processing.data.JSONObject;
 import processing.event.KeyEvent;
 
+
 import java.io.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -59,6 +60,7 @@ public class App extends PApplet {
 
     public static final int MAP_WIDTH_TILES = 33;
     public static final int MAP_HEIGHT_TILES = 36;
+    public boolean gameStarted;
     public boolean gameOver;
     public boolean gameWon;
 
@@ -104,6 +106,7 @@ public class App extends PApplet {
         this.transportDoors = new CopyOnWriteArrayList<>();
         this.emptyTiles = new CopyOnWriteArrayList<>();
         this.powerUpSpawnTime = 8;
+        this.gameStarted = false;
         this.gameOver = false;
         this.gameWon = false;
     }
@@ -165,35 +168,41 @@ public class App extends PApplet {
     @Override
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
-
-        if (!this.gameWon && !this.gameOver) {
-            switch (keyCode) {
-                case App.LEFT:
-                    this.player.wizardMove(this, "left");
-                    break;
-                case App.UP:
-                    this.player.wizardMove(this, "up");
-                    break;
-                case App.RIGHT:
-                    this.player.wizardMove(this, "right");
-                    break;
-                case App.DOWN:
-                    this.player.wizardMove(this, "down");
-                    break;
-                case App.SPACE:
-                    this.player.wizardAttack(this);
-                    break;
-                default:
-                    break;
-            }
-        } else {
-            if (keyCode >= 0) {
-                this.restartTimer = this.millis();
-                if (this.restartTimer - this.gameStopTimer >= 2000) {
-                    this.restart();
-                } else {
-                    text("Please wait 2 seconds.", 250, 600);
+        if (this.gameStarted) {
+            if (!this.gameWon && !this.gameOver) {
+                switch (keyCode) {
+                    case App.LEFT:
+                        this.player.wizardMove(this, "left");
+                        break;
+                    case App.UP:
+                        this.player.wizardMove(this, "up");
+                        break;
+                    case App.RIGHT:
+                        this.player.wizardMove(this, "right");
+                        break;
+                    case App.DOWN:
+                        this.player.wizardMove(this, "down");
+                        break;
+                    case App.SPACE:
+                        this.player.wizardAttack(this);
+                        break;
+                    default:
+                        break;
                 }
+            } else {
+                if (keyCode >= 0) {
+                    this.restartTimer = this.millis();
+                    if (this.restartTimer - this.gameStopTimer >= 2000) {
+                        this.restart();
+                    } else {
+                        text("Please wait 2 seconds.", 250, 600);
+                    }
+                }
+            }
+        }else {
+            if (keyCode >= 0) {
+                this.gameStarted = true;
+                this.levelInitTimer=millis();
             }
         }
     }
@@ -217,36 +226,49 @@ public class App extends PApplet {
     public void draw() {
         //Main loop here, execute per frame.
         background(197, 151, 113);
+        if (!this.gameStarted) {
 
-        this.displayMap();
+            this.displayWelcome();
 
-        this.updateEmptyTiles();
+        } else {
 
-        //Display lives
-        this.displayLife();
+            this.displayMap();
 
-        //Display level information
-        this.displayLevels();
+            this.updateEmptyTiles();
 
-        // Display wizard each frame
-        this.displayPlayer();
+            //Display lives
+            this.displayLife();
 
-        this.displayFireBalls();
+            //Display level information
+            this.displayLevels();
 
-        //Display gremlins each frame
-        this.displayGremlins();
+            // Display wizard each frame
+            this.displayPlayer();
 
-        this.displaySlimes();
+            this.displayFireBalls();
 
-        this.displayExit();
+            //Display gremlins each frame
+            this.displayGremlins();
 
-        this.displayTransportDoors();
+            this.displaySlimes();
 
-        this.displayDestructions();
+            this.displayExit();
 
-        this.displayPowerups();
+            this.displayTransportDoors();
 
-        this.displayWinOrLose();
+            this.displayDestructions();
+
+            this.displayPowerups();
+
+            this.displayWinOrLose();
+        }
+    }
+
+    private void displayWelcome() {
+        fill(255);
+        text("Welcome!", 300, 300);
+        text("USYD COMP-9003 Project.", 230,350);
+        text("Press any key to start.", 250, 400);
     }
 
 

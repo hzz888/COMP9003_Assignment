@@ -18,7 +18,6 @@ abstract public class AbstractObject {
         this.objectSprite = objectSprite;
         this.x = x;
         this.y = y;
-        this.drawObject(app);
     }
 
     public void drawObject(App app) {
