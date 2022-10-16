@@ -189,7 +189,7 @@ public class App extends PApplet {
                 }
             } else {
                 if (keyCode >= 0) {
-                    this.restartTimer = this.millis();
+                    this.restartTimer = millis();
                     if (this.restartTimer - this.gameStopTimer >= 2000) {
                         this.restart();
                     } else {
@@ -197,10 +197,10 @@ public class App extends PApplet {
                     }
                 }
             }
-        }else {
+        } else {
             if (keyCode >= 0) {
                 this.gameStarted = true;
-                this.levelInitTimer=millis();
+                this.levelInitTimer = millis();
             }
         }
     }
@@ -224,6 +224,7 @@ public class App extends PApplet {
     public void draw() {
         //Main loop here, execute per frame.
         background(197, 151, 113);
+
         if (!this.gameStarted) {
 
             this.displayWelcome();
@@ -265,7 +266,7 @@ public class App extends PApplet {
     private void displayWelcome() {
         fill(255);
         text("Welcome!", 300, 300);
-        text("USYD COMP-9003 Project.", 230,350);
+        text("USYD COMP-9003 Project.", 230, 350);
         text("Press any key to start.", 250, 400);
     }
 
@@ -482,7 +483,6 @@ public class App extends PApplet {
     }
 
 
-
     public void displayDestructions() {
         for (BrickWallDestruction destruction : this.brickWallDestructions) {
             destruction.tick(this);
@@ -527,7 +527,7 @@ public class App extends PApplet {
     public void displayPowerups() {
         if (millis() - this.levelInitTimer >= this.powerUpSpawnTime * 1000) {
             for (Powerup powerup : this.powerups) {
-                    powerup.tick(this);
+                powerup.tick(this);
             }
         }
     }
@@ -542,7 +542,6 @@ public class App extends PApplet {
         this.transportDoors.clear();
         this.loadMap();
     }
-
 
 
     public void displayWinOrLose() {
