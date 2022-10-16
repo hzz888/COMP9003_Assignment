@@ -193,11 +193,12 @@ public class Wizard extends AbstractObject {
     public void wizardGetPowerUp(App app) {
         if (app.millis() - app.levelInitTimer >= app.powerUpSpawnTime * 1000) {
             for (Powerup powerup : app.powerups) {
-                if (this.collide(powerup) != null) {
+                if (this.collide(powerup) != null && !powerup.powerUpCooling) {
                     this.poweredUp = true;
                     this.powerUpStartTimer = app.millis();
                     powerup.powerUpCooling = true;
                     powerup.powerUpCoolingStartTimer = app.millis();
+                    powerup.powerUpCoolingTime = App.RANDOM_GENERATOR.nextInt(20);
                     break;
                 }
             }
@@ -209,6 +210,7 @@ public class Wizard extends AbstractObject {
             if (app.millis() - this.powerUpStartTimer >= Powerup.POWERUP_PERIOD * 1000) {
                 this.poweredUp = false;
             } else {
+                app.fill(255, 255, 255);
                 app.text("SPEED UP!,", 350, 690);
                 app.text("Time Left: " + (Powerup.POWERUP_PERIOD - (app.millis() - this.powerUpStartTimer) / 1000) + " s", 350, 710);
             }

@@ -507,13 +507,10 @@ public class App extends PApplet {
     public void displayPowerups() {
         if (millis() - this.levelInitTimer >= this.powerUpSpawnTime * 1000) {
             for (Powerup powerup : this.powerups) {
-                if (!powerup.powerUpCooling) {
                     powerup.tick(this);
-                }
             }
         }
     }
-
 
 
     public void resetLevel() {

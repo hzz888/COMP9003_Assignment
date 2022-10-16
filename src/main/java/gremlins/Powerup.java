@@ -19,11 +19,12 @@ public class Powerup extends AbstractObject {
     @Override
     public void tick(App app) {
         this.respawnPowerUps(app);
-        this.drawObject(app);
+        if (!this.powerUpCooling) {
+            this.drawObject(app);
+        }
     }
 
     public void respawnPowerUps(App app) {
-        this.powerUpCoolingTime = App.RANDOM_GENERATOR.nextInt(30);
         if (this.powerUpCooling && app.millis() - this.powerUpCoolingStartTimer >= this.powerUpCoolingTime * 1000) {
             this.powerUpCooling = false;
             this.powerUpCoolingStartTimer = 0;
