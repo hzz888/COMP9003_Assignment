@@ -267,6 +267,7 @@ public class App extends PApplet {
         fill(255);
         text("Welcome!", 300, 300);
         text("USYD COMP-9003 Project.", 230, 350);
+        fill(95, 255, 91);
         text("Press any key to start.", 250, 400);
     }
 
