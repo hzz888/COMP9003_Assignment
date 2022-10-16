@@ -238,10 +238,6 @@ public class App extends PApplet {
 
         this.displaySlimes();
 
-        if (this.wizardCooling) {
-            this.wizardCoolDown();
-        }
-
         this.displayExit();
 
         this.displayTransportDoors();
@@ -249,12 +245,6 @@ public class App extends PApplet {
         this.displayDestructions();
 
         this.displayPowerups();
-
-        this.respawnPowerUps();
-
-        this.getTransportDoor();
-
-        this.getExit();
 
         this.displayWinOrLose();
     }
@@ -471,21 +461,7 @@ public class App extends PApplet {
         text(this.totalLevels, 280, 700);
     }
 
-    public void wizardCoolDown() {
-        this.wizardCoolDownTimer = millis();
-        if (this.wizardCoolDownTimer - this.wizardAttackTimer <= this.wizardCooldown * 1000) {
-            stroke(0);
-            strokeWeight(1.5f);
-            fill(255, 255, 255);
-            rect(550, 685, 100, 10);
-            fill(0, 0, 0);
-            float coolDownBarWidth = (float) ((this.wizardCoolDownTimer - this.wizardAttackTimer) / 1000.0 / this.wizardCooldown * 100);
-            rect(551, 686, coolDownBarWidth, 8);
-        } else {
-            this.wizardCooling = false;
-            this.wizardAttackTimer = 0;
-        }
-    }
+
 
     public void displayDestructions() {
         for (BrickWallDestruction destruction : this.brickWallDestructions) {
@@ -538,15 +514,7 @@ public class App extends PApplet {
         }
     }
 
-    public void respawnPowerUps() {
-        for (Powerup powerup : this.powerups) {
-            powerup.powerUpCoolingTime = App.RANDOM_GENERATOR.nextInt(20);
-            if (powerup.powerUpCooling && millis() - powerup.powerUpCoolingStartTimer >= powerup.powerUpCoolingTime * 1000) {
-                powerup.powerUpCooling = false;
-                powerup.powerUpCoolingStartTimer = 0;
-            }
-        }
-    }
+
 
     public void resetLevel() {
         this.gremlins.clear();
@@ -558,65 +526,6 @@ public class App extends PApplet {
         this.loadMap();
     }
 
-
-    public void getExit() {
-        if (this.player.collide(this.exit) != null) {
-            if (this.level < this.totalLevels) {
-                this.level++;
-                this.resetLevel();
-            } else {
-                this.player.wizardWin(this);
-                this.exit = new Exit(this, 40, 20);
-            }
-        }
-    }
-
-    public void getTransportDoor() {
-        for (TransportDoor transportDoor : this.transportDoors) {
-
-            if (this.player.collide(transportDoor) != null) {
-                int randomIndex = App.RANDOM_GENERATOR.nextInt(this.emptyTiles.size());
-                int[] randomTile = this.emptyTiles.get(randomIndex);
-                int newX = randomTile[0];
-                int newY = randomTile[1];
-                this.player.setX(newX);
-                this.player.setY(newY);
-            }
-
-            for (Fireball fireball : this.fireballs) {
-                if (fireball.collide(transportDoor) != null) {
-                    int randomIndex = App.RANDOM_GENERATOR.nextInt(this.emptyTiles.size());
-                    int[] randomTile = this.emptyTiles.get(randomIndex);
-                    int newX = randomTile[0];
-                    int newY = randomTile[1];
-                    fireball.setX(newX);
-                    fireball.setY(newY);
-                }
-            }
-
-            for (Gremlin gremlin : this.gremlins) {
-                if (gremlin.collide(transportDoor) != null) {
-                    int randomIndex = App.RANDOM_GENERATOR.nextInt(this.emptyTiles.size());
-                    int[] randomTile = this.emptyTiles.get(randomIndex);
-                    int newX = randomTile[0];
-                    int newY = randomTile[1];
-                    gremlin.setX(newX);
-                    gremlin.setY(newY);
-                }
-            }
-
-            for (Slime slime : this.slimes) {
-                if (slime.collide(transportDoor) != null) {
-                    int randomIndex = App.RANDOM_GENERATOR.nextInt(this.emptyTiles.size());
-                    int[] randomTile = this.emptyTiles.get(randomIndex);
-                    int newX = randomTile[0];
-                    int newY = randomTile[1];
-                    slime.setX(newX);
-                    slime.setY(newY);
-                }
-            }
-        }
-    }
 
 
     public void displayWinOrLose() {

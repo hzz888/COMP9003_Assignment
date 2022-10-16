@@ -63,6 +63,9 @@ public class Wizard extends AbstractObject {
             default:
                 break;
         }
+        if (app.wizardCooling) {
+            this.wizardCoolDown(app);
+        }
         this.wizardWallCollision(app);
         this.wizardGetPowerUp(app);
         this.wizardPoweredUp(app);
@@ -147,6 +150,22 @@ public class Wizard extends AbstractObject {
         }
     }
 
+    public void wizardCoolDown(App app) {
+        app.wizardCoolDownTimer = app.millis();
+        if (app.wizardCoolDownTimer - app.wizardAttackTimer <= app.wizardCooldown * 1000) {
+            app.stroke(0);
+            app.strokeWeight(1.5f);
+            app.fill(255, 255, 255);
+            app.rect(550, 685, 100, 10);
+            app.fill(0, 0, 0);
+            float coolDownBarWidth = (float) ((app.wizardCoolDownTimer - app.wizardAttackTimer) / 1000.0 / app.wizardCooldown * 100);
+            app.rect(551, 686, coolDownBarWidth, 8);
+        } else {
+            app.wizardCooling = false;
+            app.wizardAttackTimer = 0;
+        }
+    }
+
     public void wizardAttacked(App app) {
         for (Gremlin gremlin : app.gremlins) {
             if (this.collide(gremlin) != null) {
@@ -207,7 +226,7 @@ public class Wizard extends AbstractObject {
         app.gameStopTimer = app.millis();
     }
 
-    public void wizardWin(App app){
+    public void wizardWin(App app) {
         app.gameWon = true;
         app.gremlins.clear();
         app.fireballs.clear();

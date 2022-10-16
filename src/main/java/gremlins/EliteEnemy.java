@@ -33,5 +33,25 @@ public class EliteEnemy extends Gremlin {
         }
     }
 
+    @Override
+    public void gremlinRespawn(App app) {
+        app.gremlins.remove(this);
+
+        int index = App.RANDOM_GENERATOR.nextInt(app.emptyTiles.size());
+        int[] coordinates = app.emptyTiles.get(index);
+        int newX = coordinates[0];
+        int newY = coordinates[1];
+        double radiusDistance = Math.sqrt(Math.pow(newX - app.player.getX(), 2) + Math.pow(newY - app.player.getY(), 2));
+        while (radiusDistance < 10 * App.SPRITESIZE) {
+            index = App.RANDOM_GENERATOR.nextInt(app.emptyTiles.size());
+            coordinates = app.emptyTiles.get(index);
+            newX = coordinates[0];
+            newY = coordinates[1];
+            radiusDistance = Math.sqrt(Math.pow(newX - app.player.getX(), 2) + Math.pow(newY - app.player.getY(), 2));
+        }
+        EliteEnemy newElite = new EliteEnemy(app, newX, newY);
+        app.gremlins.add(newElite);
+    }
+
 
 }
