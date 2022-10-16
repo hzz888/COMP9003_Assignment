@@ -1,15 +1,13 @@
 package gremlins;
 
 import java.util.*;
+import java.io.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.data.JSONObject;
 import processing.event.KeyEvent;
-
-
-import java.io.*;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 
 /**
