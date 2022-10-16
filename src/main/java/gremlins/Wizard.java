@@ -16,6 +16,7 @@ public class Wizard extends AbstractObject {
         super(app, app.wizardRightImage, x, y);
         this.wizardMoveSpeed = 0;
         this.wizardDirection = "right";
+        this.poweredUp = false;
     }
 
     public String getWizardDirection() {
