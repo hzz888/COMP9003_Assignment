@@ -4,10 +4,19 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import processing.core.PImage;
-import org.junit.jupiter.api.Test;
-
 import processing.core.PApplet;
 import static org.junit.jupiter.api.Assertions.*;
+
+
+class TestObject extends AbstractObject{
+    public TestObject(App app, PImage image, int x, int y){
+        super(app,image,x,y);
+    }
+    @Override
+    public void tick(App app){
+        app.image(this.objectSprite,x,y);
+    }
+}
 
 class AbstractObjectTest {
     App app;
@@ -70,13 +79,3 @@ class AbstractObjectTest {
     }
 }
 
-class TestObject extends AbstractObject{
-    public TestObject(App app, PImage image, int x, int y){
-        super(app,image,x,y);
-    }
-
-    @Override
-    public void tick(App app){
-        app.image(this.objectSprite,x,y);
-    }
-}
