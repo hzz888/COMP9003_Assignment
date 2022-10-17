@@ -20,7 +20,7 @@ public class Wizard extends AbstractObject {
 <span class="fc" id="L20">    }</span>
 
     public String getWizardDirection() {
-<span class="fc" id="L23">        return this.wizardDirection;</span>
+<span class="nc" id="L23">        return this.wizardDirection;</span>
     }
 
     public void setWizardDirection(App app, String direction) {
@@ -104,14 +104,14 @@ public class Wizard extends AbstractObject {
 
 
     public void wizardWallObstruct(App app, AbstractObject tile) {
-<span class="fc" id="L107">        AbstractObject obstruction = this.collide(tile);</span>
-<span class="pc bpc" id="L108" title="2 of 4 branches missed.">        if (obstruction instanceof StoneWall || obstruction instanceof BrickWall) {</span>
+<span class="nc" id="L107">        AbstractObject obstruction = this.collide(tile);</span>
+<span class="nc bnc" id="L108" title="All 4 branches missed.">        if (obstruction instanceof StoneWall || obstruction instanceof BrickWall) {</span>
             int overlap;
-<span class="pc bpc" id="L110" title="4 of 5 branches missed.">            switch (this.getWizardDirection()) {</span>
+<span class="nc bnc" id="L110" title="All 5 branches missed.">            switch (this.getWizardDirection()) {</span>
                 case &quot;right&quot;:
-<span class="fc" id="L112">                    overlap = this.getX() + App.SPRITESIZE - obstruction.getX();</span>
-<span class="fc" id="L113">                    this.setX(this.getX() - overlap);</span>
-<span class="fc" id="L114">                    break;</span>
+<span class="nc" id="L112">                    overlap = this.getX() + App.SPRITESIZE - obstruction.getX();</span>
+<span class="nc" id="L113">                    this.setX(this.getX() - overlap);</span>
+<span class="nc" id="L114">                    break;</span>
                 case &quot;left&quot;:
 <span class="nc" id="L116">                    overlap = obstruction.getX() + App.SPRITESIZE - this.getX();</span>
 <span class="nc" id="L117">                    this.setX(this.getX() + overlap);</span>
@@ -129,14 +129,14 @@ public class Wizard extends AbstractObject {
             }
 
         }
-<span class="fc" id="L132">    }</span>
+<span class="nc" id="L132">    }</span>
 
 
     public void wizardWallCollision(App app) {
 <span class="fc bfc" id="L136" title="All 2 branches covered.">        for (AbstractObject[] tiles : app.map) {</span>
 <span class="fc bfc" id="L137" title="All 2 branches covered.">            for (AbstractObject tile : tiles) {</span>
-<span class="fc bfc" id="L138" title="All 4 branches covered.">                if (tile != null &amp;&amp; this.collide(tile) != null) {</span>
-<span class="fc" id="L139">                    this.wizardWallObstruct(app, tile);</span>
+<span class="pc bpc" id="L138" title="1 of 4 branches missed.">                if (tile != null &amp;&amp; this.collide(tile) != null) {</span>
+<span class="nc" id="L139">                    this.wizardWallObstruct(app, tile);</span>
                 }
             }
         }

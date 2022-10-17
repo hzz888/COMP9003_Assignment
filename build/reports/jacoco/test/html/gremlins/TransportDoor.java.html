@@ -49,13 +49,13 @@ public class TransportDoor extends AbstractObject {
 <span class="fc" id="L49">            }</span>
 
 <span class="fc bfc" id="L51" title="All 2 branches covered.">            for (Slime slime : app.slimes) {</span>
-<span class="fc bfc" id="L52" title="All 2 branches covered.">                if (slime.collide(this) != null) {</span>
-<span class="fc" id="L53">                    int randomIndex = App.RANDOM_GENERATOR.nextInt(app.emptyTiles.size());</span>
-<span class="fc" id="L54">                    int[] randomTile = app.emptyTiles.get(randomIndex);</span>
-<span class="fc" id="L55">                    int newX = randomTile[0];</span>
-<span class="fc" id="L56">                    int newY = randomTile[1];</span>
-<span class="fc" id="L57">                    slime.setX(newX);</span>
-<span class="fc" id="L58">                    slime.setY(newY);</span>
+<span class="pc bpc" id="L52" title="1 of 2 branches missed.">                if (slime.collide(this) != null) {</span>
+<span class="nc" id="L53">                    int randomIndex = App.RANDOM_GENERATOR.nextInt(app.emptyTiles.size());</span>
+<span class="nc" id="L54">                    int[] randomTile = app.emptyTiles.get(randomIndex);</span>
+<span class="nc" id="L55">                    int newX = randomTile[0];</span>
+<span class="nc" id="L56">                    int newY = randomTile[1];</span>
+<span class="nc" id="L57">                    slime.setX(newX);</span>
+<span class="nc" id="L58">                    slime.setY(newY);</span>
                 }
 <span class="fc" id="L60">            }</span>
 <span class="fc" id="L61">        }</span>

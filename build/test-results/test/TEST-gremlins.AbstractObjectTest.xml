@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="gremlins.AbstractObjectTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2022-10-17T13:36:18" hostname="hzzmbp.local" time="5.639">
+<testsuite name="gremlins.AbstractObjectTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-10-17T16:04:38" hostname="hzzmbp.local" time="0.089">
   <properties/>
-  <testcase name="drawObject()" classname="gremlins.AbstractObjectTest" time="2.048"/>
-  <testcase name="getX()" classname="gremlins.AbstractObjectTest" time="0.101"/>
-  <testcase name="getY()" classname="gremlins.AbstractObjectTest" time="0.153"/>
-  <testcase name="setX()" classname="gremlins.AbstractObjectTest" time="0.359"/>
-  <testcase name="setY()" classname="gremlins.AbstractObjectTest" time="0.425"/>
-  <testcase name="tick()" classname="gremlins.AbstractObjectTest" time="1.002"/>
-  <testcase name="collide()" classname="gremlins.AbstractObjectTest" time="1.543"/>
+  <testcase name="getX()" classname="gremlins.AbstractObjectTest" time="0.073"/>
+  <testcase name="getY()" classname="gremlins.AbstractObjectTest" time="0.002"/>
+  <testcase name="setX()" classname="gremlins.AbstractObjectTest" time="0.001"/>
+  <testcase name="setY()" classname="gremlins.AbstractObjectTest" time="0.001"/>
+  <testcase name="tick()" classname="gremlins.AbstractObjectTest" time="0.001"/>
+  <testcase name="collide()" classname="gremlins.AbstractObjectTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

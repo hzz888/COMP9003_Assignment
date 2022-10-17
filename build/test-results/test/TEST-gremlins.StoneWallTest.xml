@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="gremlins.StoneWallTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-10-17T13:36:23" hostname="hzzmbp.local" time="0.001">
+<testsuite name="gremlins.StoneWallTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-10-17T16:04:39" hostname="hzzmbp.local" time="0.0">
   <properties/>
-  <testcase name="tick()" classname="gremlins.StoneWallTest" time="0.001"/>
+  <testcase name="tick()" classname="gremlins.StoneWallTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
