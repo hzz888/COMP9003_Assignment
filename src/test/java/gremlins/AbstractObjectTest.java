@@ -29,31 +29,44 @@ class AbstractObjectTest {
 
     @Test
     void drawObject() {
-
+        testObject.drawObject(app);
+        assertNotNull(testObject.objectSprite);
     }
 
     @Test
     void getX() {
+        assertEquals(0,testObject.getX());
     }
 
     @Test
     void getY() {
+        assertEquals(0,testObject.getY());
     }
 
     @Test
     void setX() {
+        testObject.setX(1);
+        assertEquals(1,testObject.getX());
     }
 
     @Test
     void setY() {
+        testObject.setX(1);
+        assertEquals(1,testObject.getX());
     }
 
     @Test
     void tick() {
+        testObject.tick(app);
+        assertNotNull(testObject.objectSprite);
     }
 
     @Test
     void collide() {
+        TestObject testObject2 = new TestObject(app,app.stoneWallImage,0,0);
+        assertNotNull(testObject.collide(testObject2));
+        TestObject testObject3 = new TestObject(app,app.stoneWallImage,2,2);
+        assertNotNull(testObject.collide(testObject3));
     }
 }
 
