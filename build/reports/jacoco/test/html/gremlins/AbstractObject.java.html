@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AbstractObject.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gremlins</a> &gt; <a href="index.source.html" class="el_package">gremlins</a> &gt; <span class="el_source">AbstractObject.java</span></div><h1>AbstractObject.java</h1><pre class="source lang-java linenums">package gremlins;
+
+
+import processing.core.PImage;
+
+
+/**
+ * @author hzz
+ */
+abstract public class AbstractObject {
+<span class="fc" id="L11">    public final int WIDTH = 20;</span>
+<span class="fc" id="L12">    public final int HEIGHT = 20;</span>
+    protected PImage objectSprite;
+    public int x;
+    public int y;
+
+<span class="fc" id="L17">    public AbstractObject(App app, PImage objectSprite, int x, int y) {</span>
+<span class="fc" id="L18">        this.objectSprite = objectSprite;</span>
+<span class="fc" id="L19">        this.x = x;</span>
+<span class="fc" id="L20">        this.y = y;</span>
+<span class="fc" id="L21">    }</span>
+
+    public void drawObject(App app) {
+<span class="fc" id="L24">        app.image(this.objectSprite, this.x, this.y);</span>
+<span class="fc" id="L25">    }</span>
+
+    public int getX() {
+<span class="fc" id="L28">        return this.x;</span>
+    }
+
+    public int getY() {
+<span class="fc" id="L32">        return this.y;</span>
+    }
+
+    public void setX(int x) {
+<span class="fc" id="L36">        this.x = x;</span>
+<span class="fc" id="L37">    }</span>
+
+    public void setY(int y) {
+<span class="fc" id="L40">        this.y = y;</span>
+<span class="fc" id="L41">    }</span>
+
+    /**
+     * Defines objects behaviors.
+     * @param app The main app.
+     */
+    protected abstract void tick(App app);
+
+    /**
+     * Detect whether this object collides with another object.
+     *
+     * @return object if it collides with this instance
+     */
+    public AbstractObject collide(AbstractObject object) {
+<span class="fc bfc" id="L55" title="All 8 branches covered.">        boolean collision = (this.getX() &lt; object.getX() + App.SPRITESIZE &amp;&amp; this.getX() + App.SPRITESIZE &gt; object.getX() &amp;&amp; this.getY() &lt; object.getY() + App.SPRITESIZE &amp;&amp; this.getY() + App.SPRITESIZE &gt; object.getY());</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">        if (collision) {</span>
+<span class="fc" id="L57">            return object;</span>
+        } else {
+<span class="fc" id="L59">            return null;</span>
+        }
+    }
+
+
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

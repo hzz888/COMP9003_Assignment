@@ -1,8 +1,6 @@
 package gremlins;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import processing.core.PImage;
 import processing.core.PApplet;
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,64 +16,67 @@ class TestObject extends AbstractObject{
     }
 }
 
-class AbstractObjectTest {
+public class AbstractObjectTest {
     App app;
     TestObject testObject;
+
     @BeforeEach
     void setUp() {
-        app = new App();
-        PApplet.runSketch(new String[]{"App"}, app);
-        app.setup();
-        app.gameStarted = true;
-        app.loop();
-        testObject = new TestObject(app,app.stoneWallImage,0,0);
+        this.app = new App();
+        this.app.loop();
+        PApplet.runSketch(new String[]{"App"}, this.app);
+        this.app.setup();
+        // this.app.delay(1000);
+        this.app.gameStarted = true;
+        this.testObject = new TestObject(app,app.stoneWallImage,0,0);
     }
 
     @AfterEach
     void tearDown() {
-        app = null;
+        this.app = null;
+        this.testObject = null;
     }
 
     @Test
     void drawObject() {
-        testObject.drawObject(app);
-        assertNotNull(testObject.objectSprite);
+        this.testObject.drawObject(this.app);
+        assertNotNull(this.testObject.objectSprite);
     }
 
     @Test
     void getX() {
-        assertEquals(0,testObject.getX());
+        assertEquals(0,this.testObject.getX());
     }
 
     @Test
     void getY() {
-        assertEquals(0,testObject.getY());
+        assertEquals(0,this.testObject.getY());
     }
 
     @Test
     void setX() {
-        testObject.setX(1);
-        assertEquals(1,testObject.getX());
+        this.testObject.setX(1);
+        assertEquals(1,this.testObject.getX());
     }
 
     @Test
     void setY() {
-        testObject.setX(1);
-        assertEquals(1,testObject.getX());
+        this.testObject.setX(1);
+        assertEquals(1,this.testObject.getX());
     }
 
     @Test
     void tick() {
-        testObject.tick(app);
-        assertNotNull(testObject.objectSprite);
+        this.testObject.tick(app);
+        assertNotNull(this.testObject.objectSprite);
     }
 
     @Test
     void collide() {
-        TestObject testObject2 = new TestObject(app,app.stoneWallImage,0,0);
-        assertNotNull(testObject.collide(testObject2));
-        TestObject testObject3 = new TestObject(app,app.stoneWallImage,2,2);
-        assertNotNull(testObject.collide(testObject3));
+        TestObject testObject2 = new TestObject(this.app,this.app.stoneWallImage,0,0);
+        assertNotNull(this.testObject.collide(testObject2));
+        TestObject testObject3 = new TestObject(this.app,this.app.stoneWallImage,2,2);
+        assertNotNull(this.testObject.collide(testObject3));
     }
 }
 

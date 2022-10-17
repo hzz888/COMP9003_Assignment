@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="gremlins.WizardTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2022-10-17T10:20:40" hostname="hzzmbp.local" time="0.03">
+<testsuite name="gremlins.WizardTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2022-10-17T13:36:23" hostname="hzzmbp.local" time="0.026">
   <properties/>
-  <testcase name="wizardAttack()" classname="gremlins.WizardTest" time="0.002"/>
-  <testcase name="wizardMove()" classname="gremlins.WizardTest" time="0.003"/>
+  <testcase name="wizardAttack()" classname="gremlins.WizardTest" time="0.001"/>
+  <testcase name="wizardMove()" classname="gremlins.WizardTest" time="0.001"/>
   <testcase name="wizardStop()" classname="gremlins.WizardTest" time="0.001"/>
-  <testcase name="wizardAttacked()" classname="gremlins.WizardTest" time="0.001"/>
+  <testcase name="wizardAttacked()" classname="gremlins.WizardTest" time="0.0"/>
   <testcase name="getWizardDirection()" classname="gremlins.WizardTest" time="0.001"/>
   <testcase name="wizardGetPowerUp()" classname="gremlins.WizardTest" time="0.001"/>
-  <testcase name="tick()" classname="gremlins.WizardTest" time="0.001"/>
-  <testcase name="setWizardDirection()" classname="gremlins.WizardTest" time="0.0"/>
+  <testcase name="tick()" classname="gremlins.WizardTest" time="0.0"/>
+  <testcase name="setWizardDirection()" classname="gremlins.WizardTest" time="0.003"/>
   <testcase name="wizardWallCollision()" classname="gremlins.WizardTest" time="0.001"/>
-  <testcase name="wizardPoweredUp()" classname="gremlins.WizardTest" time="0.0"/>
+  <testcase name="wizardPoweredUp()" classname="gremlins.WizardTest" time="0.001"/>
   <testcase name="wizardDie()" classname="gremlins.WizardTest" time="0.001"/>
-  <testcase name="wizardWin()" classname="gremlins.WizardTest" time="0.001"/>
-  <testcase name="wizardCoolDown()" classname="gremlins.WizardTest" time="0.0"/>
+  <testcase name="wizardWin()" classname="gremlins.WizardTest" time="0.0"/>
+  <testcase name="wizardCoolDown()" classname="gremlins.WizardTest" time="0.002"/>
   <testcase name="wizardWallObstruct()" classname="gremlins.WizardTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
