@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="gremlins.AppTest" tests="26" skipped="0" failures="0" errors="0" timestamp="2022-10-17T10:20:40" hostname="hzzmbp.local" time="0.051">
+  <properties/>
+  <testcase name="displayLevels()" classname="gremlins.AppTest" time="0.001"/>
+  <testcase name="displayPlayer()" classname="gremlins.AppTest" time="0.001"/>
+  <testcase name="displaySlimes()" classname="gremlins.AppTest" time="0.0"/>
+  <testcase name="keyReleased()" classname="gremlins.AppTest" time="0.001"/>
+  <testcase name="resetLevel()" classname="gremlins.AppTest" time="0.001"/>
+  <testcase name="validMap()" classname="gremlins.AppTest" time="0.001"/>
+  <testcase name="displayGremlins()" classname="gremlins.AppTest" time="0.002"/>
+  <testcase name="displayPowerups()" classname="gremlins.AppTest" time="0.001"/>
+  <testcase name="displayDestructions()" classname="gremlins.AppTest" time="0.001"/>
+  <testcase name="getMapX()" classname="gremlins.AppTest" time="0.001"/>
+  <testcase name="getMapY()" classname="gremlins.AppTest" time="0.001"/>
+  <testcase name="draw()" classname="gremlins.AppTest" time="0.002"/>
+  <testcase name="main()" classname="gremlins.AppTest" time="0.003"/>
+  <testcase name="keyPressed()" classname="gremlins.AppTest" time="0.002"/>
+  <testcase name="setup()" classname="gremlins.AppTest" time="0.001"/>
+  <testcase name="loadMap()" classname="gremlins.AppTest" time="0.002"/>
+  <testcase name="getImageX()" classname="gremlins.AppTest" time="0.0"/>
+  <testcase name="getImageY()" classname="gremlins.AppTest" time="0.001"/>
+  <testcase name="displayWinOrLose()" classname="gremlins.AppTest" time="0.0"/>
+  <testcase name="displayFireBalls()" classname="gremlins.AppTest" time="0.001"/>
+  <testcase name="settings()" classname="gremlins.AppTest" time="0.0"/>
+  <testcase name="displayExit()" classname="gremlins.AppTest" time="0.001"/>
+  <testcase name="displayLife()" classname="gremlins.AppTest" time="0.0"/>
+  <testcase name="updateEmptyTiles()" classname="gremlins.AppTest" time="0.001"/>
+  <testcase name="initMap()" classname="gremlins.AppTest" time="0.001"/>
+  <testcase name="displayTransportDoors()" classname="gremlins.AppTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

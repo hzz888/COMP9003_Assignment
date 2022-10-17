@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="gremlins.PowerupTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-10-17T10:20:40" hostname="hzzmbp.local" time="0.002">
+  <properties/>
+  <testcase name="respawnPowerUps()" classname="gremlins.PowerupTest" time="0.001"/>
+  <testcase name="tick()" classname="gremlins.PowerupTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
