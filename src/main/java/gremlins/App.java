@@ -352,6 +352,7 @@ public class App extends PApplet {
 
     /**
      * Initiate map from config file.
+     * @exception RuntimeException if the map layout is invalid.
      */
     public void initMap() {
         // Load map from config file
