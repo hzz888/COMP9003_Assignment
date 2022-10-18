@@ -3,6 +3,7 @@ package gremlins;
 import java.util.Objects;
 
 /**
+ * Wizard is the role a player controls in the game.
  * @author hzz
  */
 public class Wizard extends AbstractObject {
@@ -11,7 +12,13 @@ public class Wizard extends AbstractObject {
     public boolean poweredUp;
     public int powerUpStartTimer;
 
-
+    /**
+     * Constructor for Wizard.
+     * Initial speed is 0, not powered up and direction facing is right.
+     * @param app the main app
+     * @param x the x coordinate
+     * @param y the y coordinate
+     */
     public Wizard(App app, int x, int y) {
         super(app, app.wizardRightImage, x, y);
         this.wizardMoveSpeed = 0;
@@ -19,10 +26,19 @@ public class Wizard extends AbstractObject {
         this.poweredUp = false;
     }
 
+    /**
+     * Get wizard's current direction.
+     * @return current direction
+     */
     public String getWizardDirection() {
         return this.wizardDirection;
     }
 
+    /**
+     * Set wizard's current direction and change sprite according to the direction.
+     * @param app the main app
+     * @param direction the direction to set
+     */
     public void setWizardDirection(App app, String direction) {
         switch (direction) {
             case "up":
@@ -46,6 +62,10 @@ public class Wizard extends AbstractObject {
         }
     }
 
+    /**
+     * Wizard behaviour each frame
+     * @param app The main app.
+     */
     @Override
     public void tick(App app) {
         switch (this.wizardDirection) {
@@ -74,6 +94,11 @@ public class Wizard extends AbstractObject {
         this.drawObject(app);
     }
 
+    /**
+     * Control wizard's moving.
+     * @param app the main app
+     * @param direction the moving direction of wizard
+     */
     public void wizardMove(App app, String direction) {
         this.setWizardDirection(app, direction);
         if (this.poweredUp) {
@@ -83,6 +108,9 @@ public class Wizard extends AbstractObject {
         }
     }
 
+    /**
+     * Stop the wizard and adjust the location to ensure always in a whole tile.
+     */
     public void wizardStop() {
         this.wizardMoveSpeed = 0;
 
@@ -103,6 +131,11 @@ public class Wizard extends AbstractObject {
     }
 
 
+    /**
+     * Define behaviour when wizard collides with wall.
+     * @param app the main app
+     * @param tile the tile that wizard collides with
+     */
     public void wizardWallObstruct(App app, AbstractObject tile) {
         AbstractObject obstruction = this.collide(tile);
         if (obstruction instanceof StoneWall || obstruction instanceof BrickWall) {
@@ -131,7 +164,10 @@ public class Wizard extends AbstractObject {
         }
     }
 
-
+    /**
+     * Detect collision between wizard and wall.
+     * @param app the main app
+     */
     public void wizardWallCollision(App app) {
         for (AbstractObject[] tiles : app.map) {
             for (AbstractObject tile : tiles) {
@@ -142,6 +178,10 @@ public class Wizard extends AbstractObject {
         }
     }
 
+    /**
+     * Define wizard's attack behaviour.
+     * @param app the main app
+     */
     public void wizardAttack(App app) {
         if (!app.wizardCooling) {
             Fireball fireball = new Fireball(app, this.getX(), this.getY(), this.getWizardDirection());
@@ -151,6 +191,10 @@ public class Wizard extends AbstractObject {
         }
     }
 
+    /**
+     * Define wizard's cooldown behaviour after attacking.
+     * @param app the main app
+     */
     public void wizardCoolDown(App app) {
         app.wizardCoolDownTimer = app.millis();
         if (app.wizardCoolDownTimer - app.wizardAttackTimer <= app.wizardCooldown * 1000) {
@@ -167,6 +211,10 @@ public class Wizard extends AbstractObject {
         }
     }
 
+    /**
+     * Define wizard's behaviour when getting hit by gremlin or slimes.
+     * @param app the main app
+     */
     public void wizardAttacked(App app) {
         for (Gremlin gremlin : app.gremlins) {
             if (this.collide(gremlin) != null) {
@@ -191,6 +239,10 @@ public class Wizard extends AbstractObject {
         }
     }
 
+    /**
+     * Define wizard and powerups behaviour when the wizard getting powerups.
+     * @param app the main app
+     */
     public void wizardGetPowerUp(App app) {
         if (app.millis() - app.levelInitTimer >= app.powerUpSpawnTime * 1000) {
             for (Powerup powerup : app.powerups) {
@@ -206,6 +258,10 @@ public class Wizard extends AbstractObject {
         }
     }
 
+    /**
+     * Define wizard's behaviour when being powered up.
+     * @param app the main app
+     */
     public void wizardPoweredUp(App app) {
         if (this.poweredUp) {
             if (app.millis() - this.powerUpStartTimer >= Powerup.POWERUP_PERIOD * 1000) {
@@ -218,6 +274,10 @@ public class Wizard extends AbstractObject {
         }
     }
 
+    /**
+     * Define program behaviour when wizard is dead.
+     * @param app the main app
+     */
     public void wizardDie(App app) {
         app.gameOver = true;
         app.gremlins.clear();
@@ -229,6 +289,10 @@ public class Wizard extends AbstractObject {
         app.gameStopTimer = app.millis();
     }
 
+    /**
+     * Define program behaviour when player win.
+     * @param app the main app
+     */
     public void wizardWin(App app) {
         app.gameWon = true;
         app.gremlins.clear();

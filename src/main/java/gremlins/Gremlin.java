@@ -2,6 +2,7 @@ package gremlins;
 
 
 /**
+ * Gremlins are enemies of the player.
  * @author hzz
  */
 public class Gremlin extends AbstractObject {
@@ -15,6 +16,12 @@ public class Gremlin extends AbstractObject {
 
     public int gremlinAttackTimer;
 
+    /**
+     * Constructor for the Gremlin class.
+     * @param app the main app
+     * @param x the x coordinate
+     * @param y the y coordinate
+     */
     public Gremlin(App app, int x, int y) {
         super(app, app.gremlinImage, x, y);
         this.gremlinMoveSpeed = 1;
@@ -26,6 +33,10 @@ public class Gremlin extends AbstractObject {
     }
 
 
+    /**
+     * Gremlins behaviour each frame.
+     * @param app The main app.
+     */
     @Override
     public void tick(App app) {
         switch (this.gremlinDirection) {
@@ -49,6 +60,10 @@ public class Gremlin extends AbstractObject {
         this.drawObject(app);
     }
 
+    /**
+     * Gremlins behaviour when hitting the wall.
+     * @param app the main app
+     */
     private void gremlinWallCollision(App app) {
         for (AbstractObject[] line : app.map) {
             for (AbstractObject object : line) {
@@ -61,6 +76,11 @@ public class Gremlin extends AbstractObject {
     }
 
 
+    /**
+     * Gremlins adjust position when hitting the wall.
+     * @param app the main app
+     * @param obstacle the obstacle that the gremlin hits
+     */
     public void gremlinWallObstruct(App app, AbstractObject obstacle) {
         this.gremlinMoveSpeed = 0;
         int overlap;
@@ -89,6 +109,9 @@ public class Gremlin extends AbstractObject {
         }
     }
 
+    /**
+     * Gremlins change direction when hitting the wall, but won't continue go along current direction.
+     */
     public void gremlinChangeDirection() {
         String newDirection = this.gremlinDirection;
         while (newDirection.equals(this.gremlinDirection)) {
@@ -98,6 +121,10 @@ public class Gremlin extends AbstractObject {
         this.gremlinMoveSpeed = 1;
     }
 
+    /**
+     * Gremlins attack the player.
+     * @param app the main app
+     */
     public void gremlinAttack(App app) {
         if (!this.gremlinCooling) {
             Slime newSlime = new Slime(app, this.x, this.y, this.gremlinDirection);
@@ -112,6 +139,10 @@ public class Gremlin extends AbstractObject {
         }
     }
 
+    /**
+     * Gremlins die and respawn when hit by the player.
+     * @param app the main app
+     */
     public void gremlinRespawn(App app) {
         app.gremlins.remove(this);
 

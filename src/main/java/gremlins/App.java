@@ -86,6 +86,7 @@ public class App extends PApplet {
 
     /**
      * The constructor of the App class.
+     * Initiate basic variables.
      */
     public App() {
         //construct objects here
