@@ -11,6 +11,7 @@ import processing.event.KeyEvent;
 
 
 /**
+ * The main class for the Gremlins game.
  * @author hzz
  */
 public class App extends PApplet {
@@ -83,6 +84,9 @@ public class App extends PApplet {
     public int gameStopTimer;
     public int restartTimer;
 
+    /**
+     * The constructor of the App class.
+     */
     public App() {
         //construct objects here
         this.x = 0;
@@ -119,8 +123,8 @@ public class App extends PApplet {
     }
 
     /**
-     * Load all resources such as images. Initialise the elements such as the player, enemies and map
-     * elements.
+     * Load all resources such as images.
+     * Initialise the elements such as the player, enemies and map elements.
      */
     @Override
     public void setup() {
@@ -217,9 +221,8 @@ public class App extends PApplet {
 
 
     /**
-     * Draw all elements in the game by current frame.
+     * Draw all elements in the game each frame.
      */
-
     @Override
     public void draw() {
         //Main loop here, execute per frame.
@@ -235,18 +238,14 @@ public class App extends PApplet {
 
             this.updateEmptyTiles();
 
-            //Display lives
             this.displayLife();
 
-            //Display level information
             this.displayLevels();
 
-            // Display wizard each frame
             this.displayPlayer();
 
             this.displayFireBalls();
 
-            //Display gremlins each frame
             this.displayGremlins();
 
             this.displaySlimes();
@@ -263,6 +262,9 @@ public class App extends PApplet {
         }
     }
 
+    /**
+     * Display the welcome screen.
+     */
     private void displayWelcome() {
         fill(255);
         text("Welcome!", 300, 300);
@@ -271,7 +273,10 @@ public class App extends PApplet {
         text("Press any key to start.", 250, 400);
     }
 
-
+    /**
+     * Check if the map layout is valid.
+     * @return true if the map layout is valid, false otherwise.
+     */
     public boolean validMap() {
         // Load map from config file
         this.layOutName = this.conf.getJSONArray("levels").getJSONObject(this.level - 1).getString("layout");
@@ -344,6 +349,9 @@ public class App extends PApplet {
     }
 
 
+    /**
+     * Initiate map from config file.
+     */
     public void initMap() {
         // Load map from config file
         this.wizardCooldown = this.conf.getJSONArray("levels").getJSONObject(this.level - 1).getFloat("wizard_cooldown");
@@ -419,6 +427,10 @@ public class App extends PApplet {
     }
 
 
+    /**
+     * Load the map if it is valid.
+     * Otherwise, stop program and display error message.
+     */
     public void loadMap() {
         if (validMap()) {
             //Load map
@@ -430,6 +442,9 @@ public class App extends PApplet {
         }
     }
 
+    /**
+     * Display the map each frame.
+     */
     private void displayMap() {
         for (int i = 0; i < App.MAP_WIDTH_TILES; i++) {
             for (int j = 0; j < App.MAP_HEIGHT_TILES; j++) {
@@ -441,6 +456,9 @@ public class App extends PApplet {
     }
 
 
+    /**
+     * Display current player lifes each frame.
+     */
     public void displayLife() {
         fill(255, 255, 255);
         text("Lives:", 10, 700);
@@ -449,32 +467,50 @@ public class App extends PApplet {
         }
     }
 
+    /**
+     * Display all fireballs currently in the game each frame.
+     */
     public void displayFireBalls() {
         for (Fireball fireBall : this.fireballs) {
             fireBall.tick(this);
         }
     }
 
+    /**
+     * Display all gremlins currently in the game each frame.
+     */
     public void displayGremlins() {
         for (Gremlin gremlin : this.gremlins) {
             gremlin.tick(this);
         }
     }
 
+    /**
+     * Display all slimes currently in the game each frame.
+     */
     public void displaySlimes() {
         for (Slime slime : this.slimes) {
             slime.tick(this);
         }
     }
 
+    /**
+     * Display the wizard each frame.
+     */
     public void displayPlayer() {
         this.player.tick(this);
     }
 
+    /**
+     * Display the exit each frame.
+     */
     public void displayExit() {
         this.exit.tick(this);
     }
 
+    /**
+     * Display level information each frame.
+     */
     public void displayLevels() {
         fill(255, 255, 255);
         text("Level", 200, 700);
@@ -484,12 +520,18 @@ public class App extends PApplet {
     }
 
 
+    /**
+     * Display brickwall destruction animations.
+     */
     public void displayDestructions() {
         for (BrickWallDestruction destruction : this.brickWallDestructions) {
             destruction.tick(this);
         }
     }
 
+    /**
+     * Display all transport doors.
+     */
     public void displayTransportDoors() {
         for (TransportDoor transportDoor : this.transportDoors) {
             transportDoor.tick(this);
@@ -497,22 +539,45 @@ public class App extends PApplet {
     }
 
 
+    /**
+     * Get the first index in the map array of an object.
+     * @param object The object to get the index of.
+     * @return The first index of the object in the map array.
+     */
     public int getMapX(AbstractObject object) {
         return object.getY() / App.SPRITESIZE;
     }
 
+    /**
+     * Get the second index in the map array of an object.
+     * @param object The object to get the index of.
+     * @return The second index of the object in the map array.
+     */
     public int getMapY(AbstractObject object) {
         return object.getX() / App.SPRITESIZE;
     }
 
+    /**
+     * Get the actual x coordinate in the gui of an object by the second index of the map array.
+     * @param y The second index of the map array.
+     * @return The actual x coordinate in the gui of an object.
+     */
     public int getImageX(int y) {
         return y * App.SPRITESIZE;
     }
 
+    /**
+     * Get the actual y coordinate in the gui of an object by the first index of the map array.
+     * @param x The first index of the map array.
+     * @return The actual y coordinate in the gui of an object.
+     */
     public int getImageY(int x) {
         return x * App.SPRITESIZE;
     }
 
+    /**
+     * Update the empty tiles list each frame.
+     */
     public void updateEmptyTiles() {
         this.emptyTiles.clear();
         for (int i = 0; i < App.MAP_WIDTH_TILES; i++) {
@@ -525,6 +590,9 @@ public class App extends PApplet {
     }
 
 
+    /**
+     * Display all powerups after a certain delay since level loading.
+     */
     public void displayPowerups() {
         if (millis() - this.levelInitTimer >= this.powerUpSpawnTime * 1000) {
             for (Powerup powerup : this.powerups) {
@@ -534,6 +602,9 @@ public class App extends PApplet {
     }
 
 
+    /**
+     * Reset current level to original state.
+     */
     public void resetLevel() {
         this.gremlins.clear();
         this.slimes.clear();
@@ -545,6 +616,9 @@ public class App extends PApplet {
     }
 
 
+    /**
+     * Display game over screen or winning screen.
+     */
     public void displayWinOrLose() {
         if (this.gameOver) {
             background(197, 151, 113);
@@ -559,6 +633,9 @@ public class App extends PApplet {
         }
     }
 
+    /**
+     * Restart the game.
+     */
     private void restart() {
         this.level = 1;
         this.wizardLife = this.conf.getInt("lives");
@@ -574,6 +651,9 @@ public class App extends PApplet {
     }
 
 
+    /**
+     * Main method.
+     */
     public static void main(String[] args) {
         PApplet.main("gremlins.App");
     }

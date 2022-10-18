@@ -39,6 +39,7 @@ abstract public class AbstractObject {
 
     /**
      * Get the x coordinate of the object.
+     * @return The x coordinate of the object.
      */
     public int getX() {
         return this.x;
@@ -46,6 +47,7 @@ abstract public class AbstractObject {
 
     /**
      * Get the y coordinate of the object.
+     * @return The y coordinate of the object.
      */
     public int getY() {
         return this.y;
@@ -76,7 +78,7 @@ abstract public class AbstractObject {
     /**
      * Detect whether this object collides with another object.
      * @param object Another object.
-     * @return object if it collides with this instance
+     * @return The object if it collides with this instance.
      */
     public AbstractObject collide(AbstractObject object) {
         boolean collision = (this.getX() < object.getX() + App.SPRITESIZE && this.getX() + App.SPRITESIZE > object.getX() && this.getY() < object.getY() + App.SPRITESIZE && this.getY() + App.SPRITESIZE > object.getY());
