@@ -1,18 +1,30 @@
 package gremlins;
 
 /**
+ * The fireballs cast by wizard.
  * @author hzz
  */
 public class Fireball extends AbstractObject {
     public String direction;
     public int fireBallSpeed;
 
+    /**
+     * Constructor of fireball.
+     * @param app the main app
+     * @param x the x coordinate
+     * @param y the y coordinate
+     * @param direction the move directin of fireballs
+     */
     public Fireball(App app, int x, int y, String direction) {
         super(app, app.fireballImage, x, y);
         this.direction = direction;
         this.fireBallSpeed = 4;
     }
 
+    /**
+     * Fireball behaviour.
+     * @param app the main app
+     */
     @Override
     public void tick(App app) {
         switch (this.direction) {
@@ -37,6 +49,10 @@ public class Fireball extends AbstractObject {
         this.drawObject(app);
     }
 
+    /**
+     * Fireball behaviour when hitting walls.
+     * @param app the main app
+     */
     public void fireballWallCollision(App app) {
         for (AbstractObject[] line : app.map) {
             for (AbstractObject tile : line) {
@@ -52,6 +68,10 @@ public class Fireball extends AbstractObject {
     }
 
 
+    /**
+     * Fireball behaviour when hitting slimes.
+     * @param app the main app
+     */
     public void fireballCollideSlime(App app) {
         for (Fireball fireball : app.fireballs) {
             for (Slime slime : app.slimes) {
@@ -63,6 +83,10 @@ public class Fireball extends AbstractObject {
         }
     }
 
+    /**
+     * Fireball behaviour when hitting gremlins.
+     * @param app the main app
+     */
     public void fireballAttackGremlin(App app) {
         for (Gremlin gremlin : app.gremlins) {
             if (this.collide(gremlin) != null) {
@@ -72,6 +96,10 @@ public class Fireball extends AbstractObject {
         }
     }
 
+    /**
+     * Make fireballs disappear.
+     * @param app the main app
+     */
     public void fireballAbsorbed(App app) {
         app.fireballs.remove(this);
     }

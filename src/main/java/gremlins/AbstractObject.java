@@ -5,7 +5,7 @@ import processing.core.PImage;
 
 
 /**
- * AbstractObject is the base class for all objects in the game.
+ * AbstractObject is the base class for all objects in the game. Every object's width and height are 20 pixels.
  * @author hzz
  */
 abstract public class AbstractObject {

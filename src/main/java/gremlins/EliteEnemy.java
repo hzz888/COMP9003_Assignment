@@ -2,9 +2,16 @@ package gremlins;
 
 
 /**
+ * EliteEnemy is a kind of Enemy that has higher speed, lower cooldown time and will attack in 4 directions at a time.
  * @author hzz
  */
 public class EliteEnemy extends Gremlin {
+    /**
+     * Constructor for EliteEnemy.
+     * @param app The main app.
+     * @param x The x coordinate.
+     * @param y The y coordinate.
+     */
     public EliteEnemy(App app, int x, int y) {
         super(app, x, y);
         this.objectSprite = app.eliteEnemyImage;
@@ -12,6 +19,10 @@ public class EliteEnemy extends Gremlin {
         this.gremlinCoolDown = app.enemyCooldown / 2;
     }
 
+    /**
+     * Attack in 4 directions at a time.
+     * @param app the main app.
+     */
     @Override
     public void gremlinAttack(App app) {
         if (!this.gremlinCooling) {
@@ -33,6 +44,10 @@ public class EliteEnemy extends Gremlin {
         }
     }
 
+    /**
+     * Respawn after being hit by fireball.
+     * @param app the main app.
+     */
     @Override
     public void gremlinRespawn(App app) {
         app.gremlins.remove(this);
