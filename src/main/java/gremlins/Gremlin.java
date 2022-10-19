@@ -1,8 +1,12 @@
 package gremlins;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Gremlins are enemies of the player.
+ *
  * @author hzz
  */
 public class Gremlin extends AbstractObject {
@@ -18,9 +22,10 @@ public class Gremlin extends AbstractObject {
 
     /**
      * Constructor for the Gremlin class.
+     *
      * @param app the main app
-     * @param x the x coordinate
-     * @param y the y coordinate
+     * @param x   the x coordinate
+     * @param y   the y coordinate
      */
     public Gremlin(App app, int x, int y) {
         super(app, app.gremlinImage, x, y);
@@ -35,6 +40,7 @@ public class Gremlin extends AbstractObject {
 
     /**
      * Gremlins behaviour each frame.
+     *
      * @param app The main app.
      */
     @Override
@@ -62,6 +68,7 @@ public class Gremlin extends AbstractObject {
 
     /**
      * Gremlins behaviour when hitting the wall.
+     *
      * @param app the main app
      */
     private void gremlinWallCollision(App app) {
@@ -78,7 +85,8 @@ public class Gremlin extends AbstractObject {
 
     /**
      * Gremlins adjust position when hitting the wall.
-     * @param app the main app
+     *
+     * @param app      the main app
      * @param obstacle the obstacle that the gremlin hits
      */
     public void gremlinWallObstruct(App app, AbstractObject obstacle) {
@@ -105,24 +113,64 @@ public class Gremlin extends AbstractObject {
                 default:
                     break;
             }
-            this.gremlinChangeDirection();
+            this.gremlinChangeDirection(app, obstacle);
         }
     }
 
     /**
      * Gremlins change direction when hitting the wall, but won't continue go along current direction.
      */
-    public void gremlinChangeDirection() {
-        String newDirection = this.gremlinDirection;
-        while (newDirection.equals(this.gremlinDirection)) {
-            newDirection = this.gremlinDirections[App.RANDOM_GENERATOR.nextInt(this.gremlinDirections.length)];
+    public void gremlinChangeDirection(App app, AbstractObject obstacle) {
+        String newDirection = "";
+        List<String> possibleDirections = new ArrayList<>();
+
+        if ("left".equals(this.gremlinDirection) || "right".equals(this.gremlinDirection)) {
+
+            if (app.map[(this.getY() - App.SPRITESIZE) / App.SPRITESIZE][this.getX() / App.SPRITESIZE] == null) {
+                possibleDirections.add("up");
+            }
+            if (app.map[(this.getY() + App.SPRITESIZE) / App.SPRITESIZE][this.getX() / App.SPRITESIZE] == null) {
+                possibleDirections.add("down");
+            }
+
+            if (possibleDirections.size() != 0) {
+                newDirection = possibleDirections.get(App.RANDOM_GENERATOR.nextInt(possibleDirections.size()));
+            } else {
+                if ("left".equals(this.gremlinDirection)) {
+                    newDirection = "right";
+                } else {
+                    newDirection = "left";
+                }
+            }
         }
+
+        if ("up".equals(this.gremlinDirection) || "down".equals(this.gremlinDirection)) {
+            if (app.map[this.getY() / App.SPRITESIZE][(this.getX() - App.SPRITESIZE) / App.SPRITESIZE] == null) {
+                possibleDirections.add("left");
+            }
+            if (app.map[this.getY() / App.SPRITESIZE][(this.getX() + App.SPRITESIZE) / App.SPRITESIZE] == null) {
+                possibleDirections.add("right");
+            }
+
+            if (possibleDirections.size() != 0) {
+                newDirection = possibleDirections.get(App.RANDOM_GENERATOR.nextInt(possibleDirections.size()));
+            } else {
+                if ("up".equals(this.gremlinDirection)) {
+                    newDirection = "down";
+                } else {
+                    newDirection = "up";
+                }
+            }
+        }
+
         this.gremlinDirection = newDirection;
         this.gremlinMoveSpeed = 1;
     }
 
+
     /**
      * Gremlins attack the player.
+     *
      * @param app the main app
      */
     public void gremlinAttack(App app) {
@@ -141,6 +189,7 @@ public class Gremlin extends AbstractObject {
 
     /**
      * Gremlins die and respawn when hit by the player.
+     *
      * @param app the main app
      */
     public void gremlinRespawn(App app) {
