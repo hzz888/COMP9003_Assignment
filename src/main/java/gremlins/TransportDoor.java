@@ -27,7 +27,7 @@ public class TransportDoor extends AbstractObject {
     }
 
     /**
-     * Teleport the wizard, fireballs, gremlins and slimes to a random empty location when getting the transport door.
+     * Teleport the wizard back to the initial position.
      * @param app the main app
      */
     public void getTransportDoor(App app) {
