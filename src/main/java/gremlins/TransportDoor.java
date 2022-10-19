@@ -31,7 +31,6 @@ public class TransportDoor extends AbstractObject {
      * @param app the main app
      */
     public void getTransportDoor(App app) {
-
             if (app.player.collide(this) != null) {
                 int randomIndex = App.RANDOM_GENERATOR.nextInt(app.emptyTiles.size());
                 int[] randomTile = app.emptyTiles.get(randomIndex);
