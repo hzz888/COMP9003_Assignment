@@ -32,12 +32,9 @@ public class TransportDoor extends AbstractObject {
      */
     public void getTransportDoor(App app) {
             if (app.player.collide(this) != null) {
-                int randomIndex = App.RANDOM_GENERATOR.nextInt(app.emptyTiles.size());
-                int[] randomTile = app.emptyTiles.get(randomIndex);
-                int newX = randomTile[0];
-                int newY = randomTile[1];
-                app.player.setX(newX);
-                app.player.setY(newY);
+                app.player.setX(app.playerStartX);
+                app.player.setY(app.playerStartY);
+                app.player.setWizardDirection(app,"right");
             }
         }
     }

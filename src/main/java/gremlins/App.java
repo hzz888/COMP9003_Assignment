@@ -29,6 +29,8 @@ public class App extends PApplet {
 
     public int x = 0;
     public int y = 0;
+    public int playerStartX;
+    public int playerStartY;
     public String configPath;
     public String layOutName = "";
 
@@ -377,6 +379,8 @@ public class App extends PApplet {
                             break;
                         case 'W':
                             this.player = new Wizard(this, this.x, this.y);
+                            this.playerStartX = this.x;
+                            this.playerStartY = this.y;
                             map[i][j] = null;
                             break;
                         case 'B':

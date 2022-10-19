@@ -14,7 +14,7 @@ X     X   B  B BBBBB      B B BBBXXX
 X BBB X  BB BBB BBXB BBSBBB    BBXXX
 X B B X BBB  B  BBB  B    P    BBXXX
 X   B X B    B BBB   B BBBB B  BBXXX
-X B   XBB  BB      B B   T    BBBXXX
+X B   XBB  BB      B B        BBBXXX
 XB B   B   PB B BBBB   BBB  B B BXXX
 XBG   B   B   B B  B B      B B   XX
 XBBBB X B B B B B  B B BBB  X B   XX

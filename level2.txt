@@ -5,7 +5,7 @@ X     X  X   X         XXXXXXG     X
 X                           XG     X
 X     X X  X              X XG     X
 X X X X          XX       X XG     X
-X X X X      T            X       XX
+X X X X                   X       XX
 X X              XXXXXXXX X       XX
 X X   X     X    X        X       XX
 X X   X    XXX   X                XX
@@ -16,7 +16,7 @@ X     X                          XXX
 X     X                          XXX
 X     X     P            T       XXX
 X                                XXX
-X        T                        XX
+X                                 XX
 X     X                     X     XX
 XXXX                        X   X XX
 X XX  X              X      X   X  X
