@@ -2,6 +2,7 @@ package gremlins;
 
 /**
  * The powerups that can be collected by the player, and increse player's move speed.
+ *
  * @author hzz
  */
 public class Powerup extends AbstractObject {
@@ -14,9 +15,10 @@ public class Powerup extends AbstractObject {
 
     /**
      * Constructor for the powerup.
+     *
      * @param app the main app
-     * @param x the x coordinate
-     * @param y the y coordinate
+     * @param x   the x coordinate
+     * @param y   the y coordinate
      */
     public Powerup(App app, int x, int y) {
         super(app, app.powerupImage, x, y);
@@ -25,6 +27,7 @@ public class Powerup extends AbstractObject {
 
     /**
      * Display and update the powerup.
+     *
      * @param app The main app.
      */
     @Override
@@ -37,6 +40,7 @@ public class Powerup extends AbstractObject {
 
     /**
      * Powerups respawn after being collected by the player.
+     *
      * @param app the main app
      */
     public void respawnPowerUps(App app) {

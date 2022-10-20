@@ -3,14 +3,16 @@ package gremlins;
 
 /**
  * EliteEnemy is a kind of Enemy that has higher speed, lower cooldown time and will attack in 4 directions at a time.
+ *
  * @author hzz
  */
 public class EliteEnemy extends Gremlin {
     /**
      * Constructor for EliteEnemy.
+     *
      * @param app The main app.
-     * @param x The x coordinate.
-     * @param y The y coordinate.
+     * @param x   The x coordinate.
+     * @param y   The y coordinate.
      */
     public EliteEnemy(App app, int x, int y) {
         super(app, x, y);
@@ -21,15 +23,16 @@ public class EliteEnemy extends Gremlin {
 
     /**
      * Attack in 4 directions at a time.
+     *
      * @param app the main app.
      */
     @Override
     public void gremlinAttack(App app) {
         if (!this.gremlinCooling) {
-            Slime newSlime1= new Slime(app,this.x,this.y,"left");
-            Slime newSlime2= new Slime(app,this.x,this.y,"right");
-            Slime newSlime3= new Slime(app,this.x,this.y,"up");
-            Slime newSlime4= new Slime(app,this.x,this.y,"down");
+            Slime newSlime1 = new Slime(app, this.x, this.y, "left");
+            Slime newSlime2 = new Slime(app, this.x, this.y, "right");
+            Slime newSlime3 = new Slime(app, this.x, this.y, "up");
+            Slime newSlime4 = new Slime(app, this.x, this.y, "down");
             app.slimes.add(newSlime1);
             app.slimes.add(newSlime2);
             app.slimes.add(newSlime3);
@@ -46,6 +49,7 @@ public class EliteEnemy extends Gremlin {
 
     /**
      * Respawn after being hit by fireball.
+     *
      * @param app the main app.
      */
     @Override

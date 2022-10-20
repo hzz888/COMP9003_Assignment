@@ -35,6 +35,7 @@ public class TransportDoor extends AbstractObject {
     /**
      * Teleport the wizard to a random empty safe position.
      * A position is safe if its radius distanance to all gremlins and slimes is greater than 100 pixels.
+     *
      * @param app the main app
      */
     public void getTransportDoor(App app) {

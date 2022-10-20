@@ -68,6 +68,7 @@ public class Gremlin extends AbstractObject {
 
     /**
      * Gremlins behaviour when hitting the wall.
+     *
      * @param app the main app
      */
     private void gremlinWallCollision(App app) {
@@ -84,6 +85,7 @@ public class Gremlin extends AbstractObject {
 
     /**
      * Gremlins adjust position when hitting the wall.
+     *
      * @param app      the main app
      * @param obstacle the obstacle that the gremlin hits
      */
@@ -119,7 +121,8 @@ public class Gremlin extends AbstractObject {
      * Gremlins change direction when hitting the wall, it won't continue go along current direction.
      * If there are more than zero new ways to go, it will choose one randomly, rather than going back.
      * If gremlin in a dead way, it will go back.
-     * @param app the main app
+     *
+     * @param app      the main app
      * @param obstacle the obstacle that gremlin hit on
      */
     public void gremlinChangeDirection(App app, AbstractObject obstacle) {
@@ -172,6 +175,7 @@ public class Gremlin extends AbstractObject {
 
     /**
      * Gremlins attack periodically.
+     *
      * @param app the main app
      */
     public void gremlinAttack(App app) {

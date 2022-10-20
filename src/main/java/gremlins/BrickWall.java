@@ -3,6 +3,7 @@ package gremlins;
 
 /**
  * A brick wall is a tile that can be broken by wizard's attack.
+ *
  * @author hzz
  */
 public class BrickWall extends AbstractObject {
@@ -11,9 +12,10 @@ public class BrickWall extends AbstractObject {
 
     /**
      * Constructor for BrickWall.
+     *
      * @param app the game application
-     * @param x the x coordinate
-     * @param y the y coordinate
+     * @param x   the x coordinate
+     * @param y   the y coordinate
      */
     public BrickWall(App app, int x, int y) {
         super(app, app.brickWallImage, x, y);
@@ -21,6 +23,7 @@ public class BrickWall extends AbstractObject {
 
     /**
      * Define the behaviour of brickwalls in each frame.
+     *
      * @param app The main app.
      */
     @Override
@@ -30,6 +33,7 @@ public class BrickWall extends AbstractObject {
 
     /**
      * Define the behaviour of brickwalls when they are attacked by fireballs.
+     *
      * @param app The main app.
      */
     public void destroyed(App app) {

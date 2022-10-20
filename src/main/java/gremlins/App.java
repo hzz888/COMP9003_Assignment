@@ -12,6 +12,7 @@ import processing.event.KeyEvent;
 
 /**
  * The main class for the Gremlins game.
+ *
  * @author hzz
  */
 public class App extends PApplet {
@@ -276,6 +277,7 @@ public class App extends PApplet {
 
     /**
      * Check if the map layout is valid.
+     *
      * @return true if the map layout is valid, false otherwise.
      */
     public boolean validMap() {
@@ -352,7 +354,8 @@ public class App extends PApplet {
 
     /**
      * Initiate map from config file.
-     * @exception RuntimeException if the map layout is invalid.
+     *
+     * @throws RuntimeException if the map layout is invalid.
      */
     public void initMap() {
         // Load map from config file
@@ -543,6 +546,7 @@ public class App extends PApplet {
 
     /**
      * Get the first index in the map array of an object.
+     *
      * @param object The object to get the index of.
      * @return The first index of the object in the map array.
      */
@@ -552,6 +556,7 @@ public class App extends PApplet {
 
     /**
      * Get the second index in the map array of an object.
+     *
      * @param object The object to get the index of.
      * @return The second index of the object in the map array.
      */
@@ -561,6 +566,7 @@ public class App extends PApplet {
 
     /**
      * Get the actual x coordinate in the gui of an object by the second index of the map array.
+     *
      * @param y The second index of the map array.
      * @return The actual x coordinate in the gui of an object.
      */
@@ -570,6 +576,7 @@ public class App extends PApplet {
 
     /**
      * Get the actual y coordinate in the gui of an object by the first index of the map array.
+     *
      * @param x The first index of the map array.
      * @return The actual y coordinate in the gui of an object.
      */
