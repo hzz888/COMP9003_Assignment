@@ -662,6 +662,8 @@ public class App extends PApplet {
 
     /**
      * Main method.
+     *
+     * @param args The command line arguments.
      */
     public static void main(String[] args) {
         PApplet.main("gremlins.App");
