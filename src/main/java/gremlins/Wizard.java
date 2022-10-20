@@ -3,7 +3,7 @@ package gremlins;
 import java.util.Objects;
 
 /**
- * Wizard is the role a player controls in the game.
+ * Wizard is a role the player controls in the game.
  * @author hzz
  */
 public class Wizard extends AbstractObject {
