@@ -115,7 +115,7 @@ public class Wizard extends AbstractObject {
     }
 
     /**
-     * Stop the wizard and adjust the location to ensure always in a whole tile.
+     * Stop the wizard and adjust the location to ensure it is always in a whole tile.
      */
     public void wizardStop() {
         this.wizardMoveSpeed = 0;
@@ -138,7 +138,7 @@ public class Wizard extends AbstractObject {
 
 
     /**
-     * Define behaviour when wizard collides with wall.
+     * Define the behaviour when wizard collides with wall.
      *
      * @param app  the main app
      * @param tile the tile that wizard collides with

@@ -2,7 +2,7 @@ package gremlins;
 
 
 /**
- * EliteEnemy is a kind of Enemy that has higher speed, lower cooldown time and will attack in 4 directions at a time.
+ * EliteEnemy is a kind of Enemy that has higher speed, lower cooldown time and will attack in all four directions at a time.
  *
  * @author hzz
  */

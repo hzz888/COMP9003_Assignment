@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * TransportDoor will teleport the wizard, fireballs, gremlins and slimes to a random empty location.
+ * TransportDoor will teleport the wizard to a random safe location.
  *
  * @author hzz
  */
@@ -22,7 +22,7 @@ public class TransportDoor extends AbstractObject {
     }
 
     /**
-     * Display and detect collision with wizard, fireballs, gremlins and slimes.
+     * Display and detect collision with wizard.
      *
      * @param app The main app.
      */

@@ -1,7 +1,7 @@
 package gremlins;
 
 /**
- * Exit is a entrance to next level or winning.
+ * Exit is the entrance to next level or winning.
  *
  * @author hzz
  */

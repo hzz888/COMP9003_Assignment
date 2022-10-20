@@ -1,7 +1,7 @@
 package gremlins;
 
 /**
- * The powerups that can be collected by the player, and increse player's move speed.
+ * The powerups that can be collected by the player to increse player's move speed.
  *
  * @author hzz
  */

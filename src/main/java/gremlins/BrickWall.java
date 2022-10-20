@@ -2,7 +2,7 @@ package gremlins;
 
 
 /**
- * A brick wall is a tile that can be broken by wizard's attack.
+ * A brick wall is a kind of tile that can be broken by wizard's attack.
  *
  * @author hzz
  */

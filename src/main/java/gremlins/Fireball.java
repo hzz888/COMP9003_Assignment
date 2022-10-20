@@ -1,7 +1,7 @@
 package gremlins;
 
 /**
- * The fireballs cast by wizard.
+ * The fireballs cast by wizard to attack.
  *
  * @author hzz
  */

@@ -1,7 +1,7 @@
 package gremlins;
 
 /**
- * This class is used to define animation of brickwall destruction.
+ * This class is used to define the animation of brickwall destruction.
  *
  * @author hzz
  */

@@ -1,7 +1,7 @@
 package gremlins;
 
 /**
- * Slime is gremlin's projectile.
+ * Slime is gremlin's projectile to attack the player.
  *
  * @author hzz
  */
