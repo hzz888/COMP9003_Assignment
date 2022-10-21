@@ -21,16 +21,27 @@ public class App extends PApplet {
     public static final int HEIGHT = 720;
     public static final int SPRITESIZE = 20;
 
-    // public static final int BOTTOMBAR_HEIGHT = 60;
-
-
     public static final int FPS = 60;
 
+    /**
+     * Used to generate random numbers.
+     */
     public static final Random RANDOM_GENERATOR = new Random();
 
+    /**
+     * x and y coordinates of objects.
+     */
     public int x = 0;
     public int y = 0;
+
+    /**
+     * Path of the config file.
+     */
     public String configPath;
+
+    /**
+     * File name of the layout file.
+     */
     public String layOutName = "";
 
     public PImage exitImage;
@@ -49,40 +60,106 @@ public class App extends PApplet {
     public PImage transportDoorImage;
     public PImage[] brickWallDestroyImages;
 
+    /**
+     * wizard's attack cool down time.
+     */
     public float wizardCooldown;
+
+    /**
+     * gremlin's attack cool down time.
+     */
     public float enemyCooldown;
     public int wizardLife;
 
+    /**
+     * Root path of the project.
+     */
     public static final String ROOT_PATH = System.getProperty("user.dir");
+
+    /**
+     * current level
+     */
     public int level;
+
+    /**
+     * total levels
+     */
     public int totalLevels;
+
+    /**
+     * the config object.
+     */
     public JSONObject conf;
 
     public static final int MAP_WIDTH_TILES = 33;
     public static final int MAP_HEIGHT_TILES = 36;
+
+    /**
+     * Indicate whether the game has started.
+     */
     public boolean gameStarted;
+
+    /**
+     * Indicate whether the game is over.
+     */
     public boolean gameOver;
+
+    /**
+     * Indicate whether the game has won.
+     */
     public boolean gameWon;
 
+    /**
+     * Store walls on the map.
+     */
     protected AbstractObject[][] map;
 
     public Wizard player;
     public CopyOnWriteArrayList<Gremlin> gremlins;
     public CopyOnWriteArrayList<Fireball> fireballs;
 
+    /**
+     * When the wizard attack.
+     */
     public int wizardAttackTimer;
+
+    /**
+     * When the level starts.
+     */
     public int levelInitTimer;
+
+    /**
+     * Used to calculate cooldown time.
+     */
     public int wizardCoolDownTimer;
+
+    /**
+     * Whether the wizard is cooling down.
+     */
     public boolean wizardCooling;
+
     public Exit exit;
+
     public List<Powerup> powerups;
 
     public List<Slime> slimes;
     public List<BrickWallDestruction> brickWallDestructions;
     public List<TransportDoor> transportDoors;
     public List<int[]> emptyTiles;
+
+    /**
+     * Calculte when the powerup should be spawned.
+     */
     public int powerUpSpawnTime;
+
+    /**
+     * Indicates when the game stops to ensure the win/lose message can always be displayed to the screen.
+     */
     public int gameStopTimer;
+
+    /**
+     * Indicates when the game restart operation be executed to ensure the win/lose message can always be displayed to the screen.
+     */
     public int restartTimer;
 
     /**

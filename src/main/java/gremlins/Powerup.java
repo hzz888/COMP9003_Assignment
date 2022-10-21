@@ -8,9 +8,25 @@ package gremlins;
 public class Powerup extends AbstractObject {
 
     public static final int SPEED_UP = 2;
+
+    /**
+     * Powerup's effect time.
+     */
     public static final int POWERUP_PERIOD = 10;
+
+    /**
+     * Whether powerup is waiting to be respawned.
+     */
     public boolean powerUpCooling;
+
+    /**
+     * When the cooling starts.
+     */
     public int powerUpCoolingStartTimer;
+
+    /**
+     * How long has it been waited.
+     */
     public int powerUpCoolingTime;
 
     /**

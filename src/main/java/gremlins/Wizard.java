@@ -10,12 +10,20 @@ import java.util.Objects;
 public class Wizard extends AbstractObject {
     private String wizardDirection;
     public int wizardMoveSpeed;
+
+    /**
+     * Whether the wizard is being powered up now.
+     */
     public boolean poweredUp;
+
+    /**
+     * When the powerup effect starts.
+     */
     public int powerUpStartTimer;
 
     /**
      * Constructor for Wizard.
-     * Initial speed is 0, not powered up and direction facing is right.
+     * Initial speed is 0, not powered up and the direction facing is right.
      *
      * @param app the main app
      * @param x   the x coordinate

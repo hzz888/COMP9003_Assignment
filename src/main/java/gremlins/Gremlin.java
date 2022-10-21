@@ -15,9 +15,19 @@ public class Gremlin extends AbstractObject {
     public String gremlinDirection;
     protected String[] gremlinDirections;
 
+    /**
+     * Whether the gremlin is cooling down.
+     */
     public boolean gremlinCooling;
+
+    /**
+     * Gremlin's cooldown time.
+     */
     public float gremlinCoolDown;
 
+    /**
+     * When the gremlin attacks.
+     */
     public int gremlinAttackTimer;
 
     /**
