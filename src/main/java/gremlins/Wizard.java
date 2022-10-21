@@ -21,6 +21,7 @@ public class Wizard extends AbstractObject {
      */
     public int powerUpStartTimer;
 
+
     /**
      * Constructor for Wizard.
      * Initial speed is 0, not powered up and the direction facing is right.
@@ -36,6 +37,7 @@ public class Wizard extends AbstractObject {
         this.poweredUp = false;
     }
 
+
     /**
      * Get wizard's current direction.
      *
@@ -44,6 +46,7 @@ public class Wizard extends AbstractObject {
     public String getWizardDirection() {
         return this.wizardDirection;
     }
+
 
     /**
      * Set wizard's current direction and change sprite according to the direction.
@@ -73,6 +76,7 @@ public class Wizard extends AbstractObject {
                 break;
         }
     }
+
 
     /**
      * Wizard behaviour each frame
@@ -107,6 +111,7 @@ public class Wizard extends AbstractObject {
         this.drawObject(app);
     }
 
+
     /**
      * Control wizard's moving.
      *
@@ -121,6 +126,7 @@ public class Wizard extends AbstractObject {
             this.wizardMoveSpeed = 2;
         }
     }
+
 
     /**
      * Stop the wizard and adjust the location to ensure it is always in a whole tile.
@@ -179,6 +185,7 @@ public class Wizard extends AbstractObject {
         }
     }
 
+
     /**
      * Detect collision between wizard and wall.
      *
@@ -194,6 +201,7 @@ public class Wizard extends AbstractObject {
         }
     }
 
+
     /**
      * Define wizard's attack behaviour.
      *
@@ -207,6 +215,7 @@ public class Wizard extends AbstractObject {
             app.wizardCooling = true;
         }
     }
+
 
     /**
      * Define wizard's cooldown behaviour after attacking.
@@ -228,6 +237,7 @@ public class Wizard extends AbstractObject {
             app.wizardAttackTimer = 0;
         }
     }
+
 
     /**
      * Define wizard's behaviour when getting hit by gremlin or slimes.
@@ -258,6 +268,7 @@ public class Wizard extends AbstractObject {
         }
     }
 
+
     /**
      * Define wizard and powerups behaviour when the wizard getting powerups.
      *
@@ -278,6 +289,7 @@ public class Wizard extends AbstractObject {
         }
     }
 
+
     /**
      * Define wizard's behaviour when being powered up.
      *
@@ -295,6 +307,7 @@ public class Wizard extends AbstractObject {
         }
     }
 
+
     /**
      * Define program behaviour when wizard is dead.
      *
@@ -310,6 +323,7 @@ public class Wizard extends AbstractObject {
         app.brickWallDestructions.clear();
         app.gameStopTimer = app.millis();
     }
+
 
     /**
      * Define program behaviour when player win.

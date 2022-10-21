@@ -338,6 +338,7 @@ public class App extends PApplet {
             this.displayPowerups();
 
             this.displayWinOrLose();
+
         }
     }
 
@@ -524,6 +525,7 @@ public class App extends PApplet {
         }
     }
 
+
     /**
      * Display the map each frame.
      */
@@ -549,6 +551,7 @@ public class App extends PApplet {
         }
     }
 
+
     /**
      * Display all fireballs currently in the game each frame.
      */
@@ -557,6 +560,7 @@ public class App extends PApplet {
             fireBall.tick(this);
         }
     }
+
 
     /**
      * Display all gremlins currently in the game each frame.
@@ -567,6 +571,7 @@ public class App extends PApplet {
         }
     }
 
+
     /**
      * Display all slimes currently in the game each frame.
      */
@@ -576,6 +581,7 @@ public class App extends PApplet {
         }
     }
 
+
     /**
      * Display the wizard each frame.
      */
@@ -583,12 +589,14 @@ public class App extends PApplet {
         this.player.tick(this);
     }
 
+
     /**
      * Display the exit each frame.
      */
     public void displayExit() {
         this.exit.tick(this);
     }
+
 
     /**
      * Display level information each frame.
@@ -611,6 +619,7 @@ public class App extends PApplet {
         }
     }
 
+
     /**
      * Display all transport doors.
      */
@@ -631,6 +640,7 @@ public class App extends PApplet {
         return object.getY() / App.SPRITESIZE;
     }
 
+
     /**
      * Get the second index in the map array of an object.
      *
@@ -640,6 +650,7 @@ public class App extends PApplet {
     public int getMapY(AbstractObject object) {
         return object.getX() / App.SPRITESIZE;
     }
+
 
     /**
      * Get the actual x coordinate in the gui of an object by the second index of the map array.
@@ -651,6 +662,7 @@ public class App extends PApplet {
         return y * App.SPRITESIZE;
     }
 
+
     /**
      * Get the actual y coordinate in the gui of an object by the first index of the map array.
      *
@@ -660,6 +672,7 @@ public class App extends PApplet {
     public int getImageY(int x) {
         return x * App.SPRITESIZE;
     }
+
 
     /**
      * Update the empty tiles list each frame.
@@ -718,6 +731,7 @@ public class App extends PApplet {
             text("Press any key to restart", 250, 400);
         }
     }
+
 
     /**
      * Restart the game.
