@@ -292,7 +292,6 @@ public class App extends PApplet {
     /**
      * Receive key released signal from the keyboard.
      */
-
     @Override
     public void keyReleased() {
         this.player.wizardStop();
@@ -352,6 +351,7 @@ public class App extends PApplet {
         fill(30, 130, 60);
         text("Press any key to start.", 250, 400);
     }
+
 
     /**
      * Check if the map layout is valid.
