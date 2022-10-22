@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="gremlins.AbstractObjectTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-10-22T09:08:31" hostname="hzzmbp.local" time="0.032">
+<testsuite name="gremlins.AbstractObjectTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-10-22T16:02:18" hostname="hzzmbp.local" time="0.101">
   <properties/>
-  <testcase name="getX()" classname="gremlins.AbstractObjectTest" time="0.017"/>
-  <testcase name="getY()" classname="gremlins.AbstractObjectTest" time="0.002"/>
-  <testcase name="setX()" classname="gremlins.AbstractObjectTest" time="0.001"/>
+  <testcase name="getX()" classname="gremlins.AbstractObjectTest" time="0.082"/>
+  <testcase name="getY()" classname="gremlins.AbstractObjectTest" time="0.004"/>
+  <testcase name="setX()" classname="gremlins.AbstractObjectTest" time="0.002"/>
   <testcase name="setY()" classname="gremlins.AbstractObjectTest" time="0.002"/>
   <testcase name="tick()" classname="gremlins.AbstractObjectTest" time="0.002"/>
   <testcase name="collide()" classname="gremlins.AbstractObjectTest" time="0.003"/>

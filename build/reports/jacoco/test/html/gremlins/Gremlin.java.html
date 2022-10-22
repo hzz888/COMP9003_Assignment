@@ -38,14 +38,14 @@ public class Gremlin extends AbstractObject {
      * @param y   the y coordinate
      */
     public Gremlin(App app, int x, int y) {
-<span class="nc" id="L41">        super(app, app.gremlinImage, x, y);</span>
-<span class="nc" id="L42">        this.gremlinMoveSpeed = 1;</span>
-<span class="nc" id="L43">        this.gremlinDirections = new String[]{&quot;up&quot;, &quot;down&quot;, &quot;left&quot;, &quot;right&quot;};</span>
-<span class="nc" id="L44">        this.gremlinDirection = this.gremlinDirections[App.RANDOM_GENERATOR.nextInt(this.gremlinDirections.length)];</span>
-<span class="nc" id="L45">        this.gremlinCooling = false;</span>
-<span class="nc" id="L46">        this.gremlinCoolDown = app.enemyCooldown;</span>
-<span class="nc" id="L47">        this.gremlinAttackTimer = 0;</span>
-<span class="nc" id="L48">    }</span>
+<span class="fc" id="L41">        super(app, app.gremlinImage, x, y);</span>
+<span class="fc" id="L42">        this.gremlinMoveSpeed = 1;</span>
+<span class="fc" id="L43">        this.gremlinDirections = new String[]{&quot;up&quot;, &quot;down&quot;, &quot;left&quot;, &quot;right&quot;};</span>
+<span class="fc" id="L44">        this.gremlinDirection = this.gremlinDirections[App.RANDOM_GENERATOR.nextInt(this.gremlinDirections.length)];</span>
+<span class="fc" id="L45">        this.gremlinCooling = false;</span>
+<span class="fc" id="L46">        this.gremlinCoolDown = app.enemyCooldown;</span>
+<span class="fc" id="L47">        this.gremlinAttackTimer = 0;</span>
+<span class="fc" id="L48">    }</span>
 
 
     /**

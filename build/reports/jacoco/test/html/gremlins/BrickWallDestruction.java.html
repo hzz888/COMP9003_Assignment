@@ -17,10 +17,10 @@ public class BrickWallDestruction extends AbstractObject {
      * @param y   The y coordinate.
      */
     public BrickWallDestruction(App app, int x, int y) {
-<span class="nc" id="L20">        super(app, app.brickWallDestroyImages[0], x, y);</span>
-<span class="nc" id="L21">        this.destroyPicIndex = 0;</span>
-<span class="nc" id="L22">        this.frames = 0;</span>
-<span class="nc" id="L23">    }</span>
+<span class="fc" id="L20">        super(app, app.brickWallDestroyImages[0], x, y);</span>
+<span class="fc" id="L21">        this.destroyPicIndex = 0;</span>
+<span class="fc" id="L22">        this.frames = 0;</span>
+<span class="fc" id="L23">    }</span>
 
     /**
      * Display the animation, totally 16 frames, each picture will be displayed for 4 frames.
@@ -28,18 +28,18 @@ public class BrickWallDestruction extends AbstractObject {
     @Override
     public void tick(App app) {
 
-<span class="nc bnc" id="L31" title="All 2 branches missed.">        if (this.frames &lt;= 16) {</span>
-<span class="nc bnc" id="L32" title="All 2 branches missed.">            if (this.destroyPicIndex &lt; app.brickWallDestroyImages.length) {</span>
-<span class="nc" id="L33">                this.objectSprite = app.brickWallDestroyImages[this.destroyPicIndex];</span>
-<span class="nc" id="L34">                this.drawObject(app);</span>
-<span class="nc" id="L35">                this.frames++;</span>
-<span class="nc bnc" id="L36" title="All 2 branches missed.">                if (this.frames % 4 == 0) {</span>
-<span class="nc" id="L37">                    this.destroyPicIndex++;</span>
+<span class="pc bpc" id="L31" title="1 of 2 branches missed.">        if (this.frames &lt;= 16) {</span>
+<span class="pc bpc" id="L32" title="1 of 2 branches missed.">            if (this.destroyPicIndex &lt; app.brickWallDestroyImages.length) {</span>
+<span class="fc" id="L33">                this.objectSprite = app.brickWallDestroyImages[this.destroyPicIndex];</span>
+<span class="fc" id="L34">                this.drawObject(app);</span>
+<span class="fc" id="L35">                this.frames++;</span>
+<span class="pc bpc" id="L36" title="1 of 2 branches missed.">                if (this.frames % 4 == 0) {</span>
+<span class="fc" id="L37">                    this.destroyPicIndex++;</span>
                 }
             }
         } else {
 <span class="nc" id="L41">            app.brickWallDestructions.remove(this);</span>
         }
-<span class="nc" id="L43">    }</span>
+<span class="fc" id="L43">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
