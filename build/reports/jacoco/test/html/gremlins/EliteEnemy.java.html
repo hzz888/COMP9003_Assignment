@@ -2,56 +2,75 @@
 
 
 /**
+ * EliteEnemy is a kind of Enemy that has higher speed, lower cooldown time and will attack in all four directions at a time.
+ *
  * @author hzz
  */
 public class EliteEnemy extends Gremlin {
+    /**
+     * Constructor for EliteEnemy.
+     *
+     * @param app The main app.
+     * @param x   The x coordinate.
+     * @param y   The y coordinate.
+     */
     public EliteEnemy(App app, int x, int y) {
-<span class="fc" id="L9">        super(app, x, y);</span>
-<span class="fc" id="L10">        this.objectSprite = app.eliteEnemyImage;</span>
-<span class="fc" id="L11">        this.gremlinMoveSpeed = 2;</span>
-<span class="fc" id="L12">        this.gremlinCoolDown = app.enemyCooldown / 2;</span>
-<span class="fc" id="L13">    }</span>
+<span class="nc" id="L18">        super(app, x, y);</span>
+<span class="nc" id="L19">        this.objectSprite = app.eliteEnemyImage;</span>
+<span class="nc" id="L20">        this.gremlinMoveSpeed = 2;</span>
+<span class="nc" id="L21">        this.gremlinCoolDown = app.enemyCooldown / 2;</span>
+<span class="nc" id="L22">    }</span>
 
+    /**
+     * Attack in 4 directions at a time.
+     *
+     * @param app the main app.
+     */
     @Override
     public void gremlinAttack(App app) {
-<span class="fc bfc" id="L17" title="All 2 branches covered.">        if (!this.gremlinCooling) {</span>
-<span class="fc" id="L18">            Slime newSlime1= new Slime(app,this.x,this.y,&quot;left&quot;);</span>
-<span class="fc" id="L19">            Slime newSlime2= new Slime(app,this.x,this.y,&quot;right&quot;);</span>
-<span class="fc" id="L20">            Slime newSlime3= new Slime(app,this.x,this.y,&quot;up&quot;);</span>
-<span class="fc" id="L21">            Slime newSlime4= new Slime(app,this.x,this.y,&quot;down&quot;);</span>
-<span class="fc" id="L22">            app.slimes.add(newSlime1);</span>
-<span class="fc" id="L23">            app.slimes.add(newSlime2);</span>
-<span class="fc" id="L24">            app.slimes.add(newSlime3);</span>
-<span class="fc" id="L25">            app.slimes.add(newSlime4);</span>
-<span class="fc" id="L26">            this.gremlinCooling = true;</span>
-<span class="fc" id="L27">            this.gremlinAttackTimer = app.millis();</span>
-<span class="fc" id="L28">        } else {</span>
-<span class="fc bfc" id="L29" title="All 2 branches covered.">            if (app.millis() - this.gremlinAttackTimer &gt; this.gremlinCoolDown * 1000) {</span>
-<span class="fc" id="L30">                this.gremlinCooling = false;</span>
-<span class="fc" id="L31">                this.gremlinAttackTimer = 0;</span>
+<span class="nc bnc" id="L31" title="All 2 branches missed.">        if (!this.gremlinCooling) {</span>
+<span class="nc" id="L32">            Slime newSlime1 = new Slime(app, this.x, this.y, &quot;left&quot;);</span>
+<span class="nc" id="L33">            Slime newSlime2 = new Slime(app, this.x, this.y, &quot;right&quot;);</span>
+<span class="nc" id="L34">            Slime newSlime3 = new Slime(app, this.x, this.y, &quot;up&quot;);</span>
+<span class="nc" id="L35">            Slime newSlime4 = new Slime(app, this.x, this.y, &quot;down&quot;);</span>
+<span class="nc" id="L36">            app.slimes.add(newSlime1);</span>
+<span class="nc" id="L37">            app.slimes.add(newSlime2);</span>
+<span class="nc" id="L38">            app.slimes.add(newSlime3);</span>
+<span class="nc" id="L39">            app.slimes.add(newSlime4);</span>
+<span class="nc" id="L40">            this.gremlinCooling = true;</span>
+<span class="nc" id="L41">            this.gremlinAttackTimer = app.millis();</span>
+<span class="nc" id="L42">        } else {</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">            if (app.millis() - this.gremlinAttackTimer &gt; this.gremlinCoolDown * 1000) {</span>
+<span class="nc" id="L44">                this.gremlinCooling = false;</span>
+<span class="nc" id="L45">                this.gremlinAttackTimer = 0;</span>
             }
         }
-<span class="fc" id="L34">    }</span>
+<span class="nc" id="L48">    }</span>
 
+    /**
+     * Respawn after being hit by fireball.
+     *
+     * @param app the main app.
+     */
     @Override
     public void gremlinRespawn(App app) {
-<span class="nc" id="L38">        app.gremlins.remove(this);</span>
+<span class="nc" id="L57">        app.gremlins.remove(this);</span>
 
-<span class="nc" id="L40">        int index = App.RANDOM_GENERATOR.nextInt(app.emptyTiles.size());</span>
-<span class="nc" id="L41">        int[] coordinates = app.emptyTiles.get(index);</span>
-<span class="nc" id="L42">        int newX = coordinates[0];</span>
-<span class="nc" id="L43">        int newY = coordinates[1];</span>
-<span class="nc" id="L44">        double radiusDistance = Math.sqrt(Math.pow(newX - app.player.getX(), 2) + Math.pow(newY - app.player.getY(), 2));</span>
-<span class="nc bnc" id="L45" title="All 2 branches missed.">        while (radiusDistance &lt; 10 * App.SPRITESIZE) {</span>
-<span class="nc" id="L46">            index = App.RANDOM_GENERATOR.nextInt(app.emptyTiles.size());</span>
-<span class="nc" id="L47">            coordinates = app.emptyTiles.get(index);</span>
-<span class="nc" id="L48">            newX = coordinates[0];</span>
-<span class="nc" id="L49">            newY = coordinates[1];</span>
-<span class="nc" id="L50">            radiusDistance = Math.sqrt(Math.pow(newX - app.player.getX(), 2) + Math.pow(newY - app.player.getY(), 2));</span>
+<span class="nc" id="L59">        int index = App.RANDOM_GENERATOR.nextInt(app.emptyTiles.size());</span>
+<span class="nc" id="L60">        int[] coordinates = app.emptyTiles.get(index);</span>
+<span class="nc" id="L61">        int newX = coordinates[0];</span>
+<span class="nc" id="L62">        int newY = coordinates[1];</span>
+<span class="nc" id="L63">        double radiusDistance = Math.sqrt(Math.pow(newX - app.player.getX(), 2) + Math.pow(newY - app.player.getY(), 2));</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">        while (radiusDistance &lt; 10 * App.SPRITESIZE) {</span>
+<span class="nc" id="L65">            index = App.RANDOM_GENERATOR.nextInt(app.emptyTiles.size());</span>
+<span class="nc" id="L66">            coordinates = app.emptyTiles.get(index);</span>
+<span class="nc" id="L67">            newX = coordinates[0];</span>
+<span class="nc" id="L68">            newY = coordinates[1];</span>
+<span class="nc" id="L69">            radiusDistance = Math.sqrt(Math.pow(newX - app.player.getX(), 2) + Math.pow(newY - app.player.getY(), 2));</span>
         }
-<span class="nc" id="L52">        EliteEnemy newElite = new EliteEnemy(app, newX, newY);</span>
-<span class="nc" id="L53">        app.gremlins.add(newElite);</span>
-<span class="nc" id="L54">    }</span>
+<span class="nc" id="L71">        EliteEnemy newElite = new EliteEnemy(app, newX, newY);</span>
+<span class="nc" id="L72">        app.gremlins.add(newElite);</span>
+<span class="nc" id="L73">    }</span>
 
 
 }

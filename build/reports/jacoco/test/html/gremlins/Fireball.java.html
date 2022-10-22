@@ -1,80 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Fireball.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gremlins</a> &gt; <a href="index.source.html" class="el_package">gremlins</a> &gt; <span class="el_source">Fireball.java</span></div><h1>Fireball.java</h1><pre class="source lang-java linenums">package gremlins;
 
 /**
+ * The fireballs cast by wizard to attack.
+ *
  * @author hzz
  */
 public class Fireball extends AbstractObject {
     public String direction;
     public int fireBallSpeed;
 
+    /**
+     * Constructor of fireball.
+     *
+     * @param app       the main app
+     * @param x         the x coordinate
+     * @param y         the y coordinate
+     * @param direction the move directin of fireballs
+     */
     public Fireball(App app, int x, int y, String direction) {
-<span class="nc" id="L11">        super(app, app.fireballImage, x, y);</span>
-<span class="nc" id="L12">        this.direction = direction;</span>
-<span class="nc" id="L13">        this.fireBallSpeed = 4;</span>
-<span class="nc" id="L14">    }</span>
+<span class="nc" id="L21">        super(app, app.fireballImage, x, y);</span>
+<span class="nc" id="L22">        this.direction = direction;</span>
+<span class="nc" id="L23">        this.fireBallSpeed = 4;</span>
+<span class="nc" id="L24">    }</span>
 
+    /**
+     * Fireball behaviour.
+     *
+     * @param app the main app
+     */
     @Override
     public void tick(App app) {
-<span class="nc bnc" id="L18" title="All 5 branches missed.">        switch (this.direction) {</span>
+<span class="nc bnc" id="L33" title="All 5 branches missed.">        switch (this.direction) {</span>
             case &quot;up&quot;:
-<span class="nc" id="L20">                this.y -= this.fireBallSpeed;</span>
-<span class="nc" id="L21">                break;</span>
+<span class="nc" id="L35">                this.y -= this.fireBallSpeed;</span>
+<span class="nc" id="L36">                break;</span>
             case &quot;down&quot;:
-<span class="nc" id="L23">                this.y += this.fireBallSpeed;</span>
-<span class="nc" id="L24">                break;</span>
+<span class="nc" id="L38">                this.y += this.fireBallSpeed;</span>
+<span class="nc" id="L39">                break;</span>
             case &quot;left&quot;:
-<span class="nc" id="L26">                this.x -= this.fireBallSpeed;</span>
-<span class="nc" id="L27">                break;</span>
+<span class="nc" id="L41">                this.x -= this.fireBallSpeed;</span>
+<span class="nc" id="L42">                break;</span>
             case &quot;right&quot;:
-<span class="nc" id="L29">                this.x += this.fireBallSpeed;</span>
-<span class="nc" id="L30">                break;</span>
+<span class="nc" id="L44">                this.x += this.fireBallSpeed;</span>
+<span class="nc" id="L45">                break;</span>
             default:
                 break;
         }
-<span class="nc" id="L34">        this.fireballWallCollision(app);</span>
-<span class="nc" id="L35">        this.fireballCollideSlime(app);</span>
-<span class="nc" id="L36">        this.fireballAttackGremlin(app);</span>
-<span class="nc" id="L37">        this.drawObject(app);</span>
-<span class="nc" id="L38">    }</span>
+<span class="nc" id="L49">        this.fireballWallCollision(app);</span>
+<span class="nc" id="L50">        this.fireballCollideSlime(app);</span>
+<span class="nc" id="L51">        this.fireballAttackGremlin(app);</span>
+<span class="nc" id="L52">        this.drawObject(app);</span>
+<span class="nc" id="L53">    }</span>
 
+    /**
+     * Fireball behaviour when hitting walls.
+     *
+     * @param app the main app
+     */
     public void fireballWallCollision(App app) {
-<span class="nc bnc" id="L41" title="All 2 branches missed.">        for (AbstractObject[] line : app.map) {</span>
-<span class="nc bnc" id="L42" title="All 2 branches missed.">            for (AbstractObject tile : line) {</span>
-<span class="nc bnc" id="L43" title="All 4 branches missed.">                if (tile != null &amp;&amp; this.collide(tile) != null) {</span>
-<span class="nc" id="L44">                    this.fireballAbsorbed(app);</span>
-<span class="nc bnc" id="L45" title="All 2 branches missed.">                    if (this.collide(tile) instanceof BrickWall) {</span>
-<span class="nc" id="L46">                        BrickWall brickWall = (BrickWall) this.collide(tile);</span>
-<span class="nc" id="L47">                        brickWall.destroyed(app);</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">        for (AbstractObject[] line : app.map) {</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">            for (AbstractObject tile : line) {</span>
+<span class="nc bnc" id="L63" title="All 4 branches missed.">                if (tile != null &amp;&amp; this.collide(tile) != null) {</span>
+<span class="nc" id="L64">                    this.fireballAbsorbed(app);</span>
+<span class="nc bnc" id="L65" title="All 2 branches missed.">                    if (this.collide(tile) instanceof BrickWall) {</span>
+<span class="nc" id="L66">                        BrickWall brickWall = (BrickWall) this.collide(tile);</span>
+<span class="nc" id="L67">                        brickWall.destroyed(app);</span>
                     }
                 }
             }
         }
-<span class="nc" id="L52">    }</span>
+<span class="nc" id="L72">    }</span>
 
 
+    /**
+     * Fireball behaviour when hitting slimes.
+     *
+     * @param app the main app
+     */
     public void fireballCollideSlime(App app) {
-<span class="nc bnc" id="L56" title="All 2 branches missed.">        for (Fireball fireball : app.fireballs) {</span>
-<span class="nc bnc" id="L57" title="All 2 branches missed.">            for (Slime slime : app.slimes) {</span>
-<span class="nc bnc" id="L58" title="All 2 branches missed.">                if (fireball.collide(slime) != null) {</span>
-<span class="nc" id="L59">                    fireball.fireballAbsorbed(app);</span>
-<span class="nc" id="L60">                    slime.slimeVaporized(app);</span>
+<span class="nc bnc" id="L81" title="All 2 branches missed.">        for (Fireball fireball : app.fireballs) {</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">            for (Slime slime : app.slimes) {</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">                if (fireball.collide(slime) != null) {</span>
+<span class="nc" id="L84">                    fireball.fireballAbsorbed(app);</span>
+<span class="nc" id="L85">                    slime.slimeVaporized(app);</span>
                 }
-<span class="nc" id="L62">            }</span>
-<span class="nc" id="L63">        }</span>
-<span class="nc" id="L64">    }</span>
+<span class="nc" id="L87">            }</span>
+<span class="nc" id="L88">        }</span>
+<span class="nc" id="L89">    }</span>
 
+    /**
+     * Fireball behaviour when hitting gremlins.
+     *
+     * @param app the main app
+     */
     public void fireballAttackGremlin(App app) {
-<span class="nc bnc" id="L67" title="All 2 branches missed.">        for (Gremlin gremlin : app.gremlins) {</span>
-<span class="nc bnc" id="L68" title="All 2 branches missed.">            if (this.collide(gremlin) != null) {</span>
-<span class="nc" id="L69">                this.fireballAbsorbed(app);</span>
-<span class="nc" id="L70">                gremlin.gremlinRespawn(app);</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">        for (Gremlin gremlin : app.gremlins) {</span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">            if (this.collide(gremlin) != null) {</span>
+<span class="nc" id="L99">                this.fireballAbsorbed(app);</span>
+<span class="nc" id="L100">                gremlin.gremlinRespawn(app);</span>
             }
-<span class="nc" id="L72">        }</span>
-<span class="nc" id="L73">    }</span>
+<span class="nc" id="L102">        }</span>
+<span class="nc" id="L103">    }</span>
 
+    /**
+     * Make fireballs disappear.
+     *
+     * @param app the main app
+     */
     public void fireballAbsorbed(App app) {
-<span class="nc" id="L76">        app.fireballs.remove(this);</span>
-<span class="nc" id="L77">    }</span>
+<span class="nc" id="L111">        app.fireballs.remove(this);</span>
+<span class="nc" id="L112">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

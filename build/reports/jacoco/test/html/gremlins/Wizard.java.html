@@ -3,242 +3,343 @@
 import java.util.Objects;
 
 /**
+ * Wizard is a role the player controls in the game.
+ *
  * @author hzz
  */
 public class Wizard extends AbstractObject {
     private String wizardDirection;
     public int wizardMoveSpeed;
+
+    /**
+     * Whether the wizard is being powered up now.
+     */
     public boolean poweredUp;
+
+    /**
+     * When the powerup effect starts.
+     */
     public int powerUpStartTimer;
 
 
+    /**
+     * Constructor for Wizard.
+     * Initial speed is 0, not powered up and the direction facing is right.
+     *
+     * @param app the main app
+     * @param x   the x coordinate
+     * @param y   the y coordinate
+     */
     public Wizard(App app, int x, int y) {
-<span class="fc" id="L16">        super(app, app.wizardRightImage, x, y);</span>
-<span class="fc" id="L17">        this.wizardMoveSpeed = 0;</span>
-<span class="fc" id="L18">        this.wizardDirection = &quot;right&quot;;</span>
-<span class="fc" id="L19">        this.poweredUp = false;</span>
-<span class="fc" id="L20">    }</span>
+<span class="nc" id="L34">        super(app, app.wizardRightImage, x, y);</span>
+<span class="nc" id="L35">        this.wizardMoveSpeed = 0;</span>
+<span class="nc" id="L36">        this.wizardDirection = &quot;right&quot;;</span>
+<span class="nc" id="L37">        this.poweredUp = false;</span>
+<span class="nc" id="L38">    }</span>
 
+
+    /**
+     * Get wizard's current direction.
+     *
+     * @return current direction
+     */
     public String getWizardDirection() {
-<span class="nc" id="L23">        return this.wizardDirection;</span>
+<span class="nc" id="L47">        return this.wizardDirection;</span>
     }
 
+
+    /**
+     * Set wizard's current direction and change sprite according to the direction.
+     *
+     * @param app       the main app
+     * @param direction the direction to set
+     */
     public void setWizardDirection(App app, String direction) {
-<span class="nc bnc" id="L27" title="All 5 branches missed.">        switch (direction) {</span>
+<span class="nc bnc" id="L58" title="All 5 branches missed.">        switch (direction) {</span>
             case &quot;up&quot;:
-<span class="nc" id="L29">                this.wizardDirection = &quot;up&quot;;</span>
-<span class="nc" id="L30">                this.objectSprite = app.wizardUpImage;</span>
-<span class="nc" id="L31">                break;</span>
+<span class="nc" id="L60">                this.wizardDirection = &quot;up&quot;;</span>
+<span class="nc" id="L61">                this.objectSprite = app.wizardUpImage;</span>
+<span class="nc" id="L62">                break;</span>
             case &quot;down&quot;:
-<span class="nc" id="L33">                this.wizardDirection = &quot;down&quot;;</span>
-<span class="nc" id="L34">                this.objectSprite = app.wizardDownImage;</span>
-<span class="nc" id="L35">                break;</span>
+<span class="nc" id="L64">                this.wizardDirection = &quot;down&quot;;</span>
+<span class="nc" id="L65">                this.objectSprite = app.wizardDownImage;</span>
+<span class="nc" id="L66">                break;</span>
             case &quot;left&quot;:
-<span class="nc" id="L37">                this.wizardDirection = &quot;left&quot;;</span>
-<span class="nc" id="L38">                this.objectSprite = app.wizardLeftImage;</span>
-<span class="nc" id="L39">                break;</span>
+<span class="nc" id="L68">                this.wizardDirection = &quot;left&quot;;</span>
+<span class="nc" id="L69">                this.objectSprite = app.wizardLeftImage;</span>
+<span class="nc" id="L70">                break;</span>
             case &quot;right&quot;:
-<span class="nc" id="L41">                this.wizardDirection = &quot;right&quot;;</span>
-<span class="nc" id="L42">                this.objectSprite = app.wizardRightImage;</span>
-<span class="nc" id="L43">                break;</span>
+<span class="nc" id="L72">                this.wizardDirection = &quot;right&quot;;</span>
+<span class="nc" id="L73">                this.objectSprite = app.wizardRightImage;</span>
+<span class="nc" id="L74">                break;</span>
             default:
                 break;
         }
-<span class="nc" id="L47">    }</span>
+<span class="nc" id="L78">    }</span>
 
+
+    /**
+     * Wizard behaviour each frame
+     *
+     * @param app The main app.
+     */
     @Override
     public void tick(App app) {
-<span class="pc bpc" id="L51" title="4 of 5 branches missed.">        switch (this.wizardDirection) {</span>
+<span class="nc bnc" id="L88" title="All 5 branches missed.">        switch (this.wizardDirection) {</span>
             case &quot;up&quot;:
-<span class="nc" id="L53">                this.y -= this.wizardMoveSpeed;</span>
-<span class="nc" id="L54">                break;</span>
+<span class="nc" id="L90">                this.y -= this.wizardMoveSpeed;</span>
+<span class="nc" id="L91">                break;</span>
             case &quot;down&quot;:
-<span class="nc" id="L56">                this.y += this.wizardMoveSpeed;</span>
-<span class="nc" id="L57">                break;</span>
+<span class="nc" id="L93">                this.y += this.wizardMoveSpeed;</span>
+<span class="nc" id="L94">                break;</span>
             case &quot;left&quot;:
-<span class="nc" id="L59">                this.x -= this.wizardMoveSpeed;</span>
-<span class="nc" id="L60">                break;</span>
+<span class="nc" id="L96">                this.x -= this.wizardMoveSpeed;</span>
+<span class="nc" id="L97">                break;</span>
             case &quot;right&quot;:
-<span class="fc" id="L62">                this.x += this.wizardMoveSpeed;</span>
-<span class="fc" id="L63">                break;</span>
+<span class="nc" id="L99">                this.x += this.wizardMoveSpeed;</span>
+<span class="nc" id="L100">                break;</span>
             default:
                 break;
         }
-<span class="pc bpc" id="L67" title="1 of 2 branches missed.">        if (app.wizardCooling) {</span>
-<span class="nc" id="L68">            this.wizardCoolDown(app);</span>
+<span class="nc bnc" id="L104" title="All 2 branches missed.">        if (app.wizardCooling) {</span>
+<span class="nc" id="L105">            this.wizardCoolDown(app);</span>
         }
-<span class="fc" id="L70">        this.wizardWallCollision(app);</span>
-<span class="fc" id="L71">        this.wizardGetPowerUp(app);</span>
-<span class="fc" id="L72">        this.wizardPoweredUp(app);</span>
-<span class="fc" id="L73">        this.wizardAttacked(app);</span>
-<span class="fc" id="L74">        this.drawObject(app);</span>
-<span class="fc" id="L75">    }</span>
+<span class="nc" id="L107">        this.wizardWallCollision(app);</span>
+<span class="nc" id="L108">        this.wizardGetPowerUp(app);</span>
+<span class="nc" id="L109">        this.wizardPoweredUp(app);</span>
+<span class="nc" id="L110">        this.wizardAttacked(app);</span>
+<span class="nc" id="L111">        this.drawObject(app);</span>
+<span class="nc" id="L112">    }</span>
 
+
+    /**
+     * Control wizard's moving.
+     *
+     * @param app       the main app
+     * @param direction the moving direction of wizard
+     */
     public void wizardMove(App app, String direction) {
-<span class="nc" id="L78">        this.setWizardDirection(app, direction);</span>
-<span class="nc bnc" id="L79" title="All 2 branches missed.">        if (this.poweredUp) {</span>
-<span class="nc" id="L80">            this.wizardMoveSpeed = 2 + Powerup.SPEED_UP;</span>
+<span class="nc" id="L122">        this.setWizardDirection(app, direction);</span>
+<span class="nc bnc" id="L123" title="All 2 branches missed.">        if (this.poweredUp) {</span>
+<span class="nc" id="L124">            this.wizardMoveSpeed = 2 + Powerup.SPEED_UP;</span>
         } else {
-<span class="nc" id="L82">            this.wizardMoveSpeed = 2;</span>
+<span class="nc" id="L126">            this.wizardMoveSpeed = 2;</span>
         }
-<span class="nc" id="L84">    }</span>
+<span class="nc" id="L128">    }</span>
 
+
+    /**
+     * Stop the wizard and adjust the location to ensure it is always in a whole tile.
+     */
     public void wizardStop() {
-<span class="nc" id="L87">        this.wizardMoveSpeed = 0;</span>
+<span class="nc" id="L135">        this.wizardMoveSpeed = 0;</span>
 
-<span class="nc bnc" id="L89" title="All 2 branches missed.">        if (this.getX() % App.SPRITESIZE != 0) {</span>
-<span class="nc bnc" id="L90" title="All 2 branches missed.">            if (Objects.equals(this.getWizardDirection(), &quot;right&quot;)) {</span>
-<span class="nc" id="L91">                this.setX(this.getX() + App.SPRITESIZE - this.getX() % App.SPRITESIZE);</span>
-<span class="nc bnc" id="L92" title="All 2 branches missed.">            } else if (Objects.equals(this.getWizardDirection(), &quot;left&quot;)) {</span>
-<span class="nc" id="L93">                this.setX(this.getX() - this.getX() % App.SPRITESIZE);</span>
+<span class="nc bnc" id="L137" title="All 2 branches missed.">        if (this.getX() % App.SPRITESIZE != 0) {</span>
+<span class="nc bnc" id="L138" title="All 2 branches missed.">            if (Objects.equals(this.getWizardDirection(), &quot;right&quot;)) {</span>
+<span class="nc" id="L139">                this.setX(this.getX() + App.SPRITESIZE - this.getX() % App.SPRITESIZE);</span>
+<span class="nc bnc" id="L140" title="All 2 branches missed.">            } else if (Objects.equals(this.getWizardDirection(), &quot;left&quot;)) {</span>
+<span class="nc" id="L141">                this.setX(this.getX() - this.getX() % App.SPRITESIZE);</span>
             }
         }
-<span class="nc bnc" id="L96" title="All 2 branches missed.">        if (this.getY() % App.SPRITESIZE != 0) {</span>
-<span class="nc bnc" id="L97" title="All 2 branches missed.">            if (Objects.equals(this.getWizardDirection(), &quot;down&quot;)) {</span>
-<span class="nc" id="L98">                this.setY(this.getY() + App.SPRITESIZE - this.getY() % App.SPRITESIZE);</span>
-<span class="nc bnc" id="L99" title="All 2 branches missed.">            } else if (Objects.equals(this.getWizardDirection(), &quot;up&quot;)) {</span>
-<span class="nc" id="L100">                this.setY(this.getY() - this.getY() % App.SPRITESIZE);</span>
+<span class="nc bnc" id="L144" title="All 2 branches missed.">        if (this.getY() % App.SPRITESIZE != 0) {</span>
+<span class="nc bnc" id="L145" title="All 2 branches missed.">            if (Objects.equals(this.getWizardDirection(), &quot;down&quot;)) {</span>
+<span class="nc" id="L146">                this.setY(this.getY() + App.SPRITESIZE - this.getY() % App.SPRITESIZE);</span>
+<span class="nc bnc" id="L147" title="All 2 branches missed.">            } else if (Objects.equals(this.getWizardDirection(), &quot;up&quot;)) {</span>
+<span class="nc" id="L148">                this.setY(this.getY() - this.getY() % App.SPRITESIZE);</span>
             }
         }
-<span class="nc" id="L103">    }</span>
+<span class="nc" id="L151">    }</span>
 
 
+    /**
+     * Define the behaviour when wizard collides with wall.
+     *
+     * @param app  the main app
+     * @param tile the tile that wizard collides with
+     */
     public void wizardWallObstruct(App app, AbstractObject tile) {
-<span class="nc" id="L107">        AbstractObject obstruction = this.collide(tile);</span>
-<span class="nc bnc" id="L108" title="All 4 branches missed.">        if (obstruction instanceof StoneWall || obstruction instanceof BrickWall) {</span>
+<span class="nc" id="L161">        AbstractObject obstruction = this.collide(tile);</span>
+<span class="nc bnc" id="L162" title="All 4 branches missed.">        if (obstruction instanceof StoneWall || obstruction instanceof BrickWall) {</span>
             int overlap;
-<span class="nc bnc" id="L110" title="All 5 branches missed.">            switch (this.getWizardDirection()) {</span>
+<span class="nc bnc" id="L164" title="All 5 branches missed.">            switch (this.getWizardDirection()) {</span>
                 case &quot;right&quot;:
-<span class="nc" id="L112">                    overlap = this.getX() + App.SPRITESIZE - obstruction.getX();</span>
-<span class="nc" id="L113">                    this.setX(this.getX() - overlap);</span>
-<span class="nc" id="L114">                    break;</span>
+<span class="nc" id="L166">                    overlap = this.getX() + App.SPRITESIZE - obstruction.getX();</span>
+<span class="nc" id="L167">                    this.setX(this.getX() - overlap);</span>
+<span class="nc" id="L168">                    break;</span>
                 case &quot;left&quot;:
-<span class="nc" id="L116">                    overlap = obstruction.getX() + App.SPRITESIZE - this.getX();</span>
-<span class="nc" id="L117">                    this.setX(this.getX() + overlap);</span>
-<span class="nc" id="L118">                    break;</span>
+<span class="nc" id="L170">                    overlap = obstruction.getX() + App.SPRITESIZE - this.getX();</span>
+<span class="nc" id="L171">                    this.setX(this.getX() + overlap);</span>
+<span class="nc" id="L172">                    break;</span>
                 case &quot;up&quot;:
-<span class="nc" id="L120">                    overlap = obstruction.getY() + App.SPRITESIZE - this.getY();</span>
-<span class="nc" id="L121">                    this.setY(this.getY() + overlap);</span>
-<span class="nc" id="L122">                    break;</span>
+<span class="nc" id="L174">                    overlap = obstruction.getY() + App.SPRITESIZE - this.getY();</span>
+<span class="nc" id="L175">                    this.setY(this.getY() + overlap);</span>
+<span class="nc" id="L176">                    break;</span>
                 case &quot;down&quot;:
-<span class="nc" id="L124">                    overlap = this.getY() + App.SPRITESIZE - obstruction.getY();</span>
-<span class="nc" id="L125">                    this.setY(this.getY() - overlap);</span>
-<span class="nc" id="L126">                    break;</span>
+<span class="nc" id="L178">                    overlap = this.getY() + App.SPRITESIZE - obstruction.getY();</span>
+<span class="nc" id="L179">                    this.setY(this.getY() - overlap);</span>
+<span class="nc" id="L180">                    break;</span>
                 default:
                     break;
             }
 
         }
-<span class="nc" id="L132">    }</span>
+<span class="nc" id="L186">    }</span>
 
 
+    /**
+     * Detect collision between wizard and wall.
+     *
+     * @param app the main app
+     */
     public void wizardWallCollision(App app) {
-<span class="fc bfc" id="L136" title="All 2 branches covered.">        for (AbstractObject[] tiles : app.map) {</span>
-<span class="fc bfc" id="L137" title="All 2 branches covered.">            for (AbstractObject tile : tiles) {</span>
-<span class="pc bpc" id="L138" title="1 of 4 branches missed.">                if (tile != null &amp;&amp; this.collide(tile) != null) {</span>
-<span class="nc" id="L139">                    this.wizardWallObstruct(app, tile);</span>
+<span class="nc bnc" id="L195" title="All 2 branches missed.">        for (AbstractObject[] tiles : app.map) {</span>
+<span class="nc bnc" id="L196" title="All 2 branches missed.">            for (AbstractObject tile : tiles) {</span>
+<span class="nc bnc" id="L197" title="All 4 branches missed.">                if (tile != null &amp;&amp; this.collide(tile) != null) {</span>
+<span class="nc" id="L198">                    this.wizardWallObstruct(app, tile);</span>
                 }
             }
         }
-<span class="fc" id="L143">    }</span>
+<span class="nc" id="L202">    }</span>
 
+
+    /**
+     * Define wizard's attack behaviour.
+     *
+     * @param app the main app
+     */
     public void wizardAttack(App app) {
-<span class="nc bnc" id="L146" title="All 2 branches missed.">        if (!app.wizardCooling) {</span>
-<span class="nc" id="L147">            Fireball fireball = new Fireball(app, this.getX(), this.getY(), this.getWizardDirection());</span>
-<span class="nc" id="L148">            app.fireballs.add(fireball);</span>
-<span class="nc" id="L149">            app.wizardAttackTimer = app.millis();</span>
-<span class="nc" id="L150">            app.wizardCooling = true;</span>
+<span class="nc bnc" id="L211" title="All 2 branches missed.">        if (!app.wizardCooling) {</span>
+<span class="nc" id="L212">            Fireball fireball = new Fireball(app, this.getX(), this.getY(), this.getWizardDirection());</span>
+<span class="nc" id="L213">            app.fireballs.add(fireball);</span>
+<span class="nc" id="L214">            app.wizardAttackTimer = app.millis();</span>
+<span class="nc" id="L215">            app.wizardCooling = true;</span>
         }
-<span class="nc" id="L152">    }</span>
+<span class="nc" id="L217">    }</span>
 
+
+    /**
+     * Define wizard's cooldown behaviour after attacking.
+     *
+     * @param app the main app
+     */
     public void wizardCoolDown(App app) {
-<span class="nc" id="L155">        app.wizardCoolDownTimer = app.millis();</span>
-<span class="nc bnc" id="L156" title="All 2 branches missed.">        if (app.wizardCoolDownTimer - app.wizardAttackTimer &lt;= app.wizardCooldown * 1000) {</span>
-<span class="nc" id="L157">            app.stroke(0);</span>
-<span class="nc" id="L158">            app.strokeWeight(1.5f);</span>
-<span class="nc" id="L159">            app.fill(255, 255, 255);</span>
-<span class="nc" id="L160">            app.rect(550, 685, 100, 10);</span>
-<span class="nc" id="L161">            app.fill(0, 0, 0);</span>
-<span class="nc" id="L162">            float coolDownBarWidth = (float) ((app.wizardCoolDownTimer - app.wizardAttackTimer) / 1000.0 / app.wizardCooldown * 100);</span>
-<span class="nc" id="L163">            app.rect(551, 686, coolDownBarWidth, 8);</span>
-<span class="nc" id="L164">        } else {</span>
-<span class="nc" id="L165">            app.wizardCooling = false;</span>
-<span class="nc" id="L166">            app.wizardAttackTimer = 0;</span>
+<span class="nc" id="L226">        app.wizardCoolDownTimer = app.millis();</span>
+<span class="nc bnc" id="L227" title="All 2 branches missed.">        if (app.wizardCoolDownTimer - app.wizardAttackTimer &lt;= app.wizardCooldown * 1000) {</span>
+<span class="nc" id="L228">            app.stroke(0);</span>
+<span class="nc" id="L229">            app.strokeWeight(1.5f);</span>
+<span class="nc" id="L230">            app.fill(255, 255, 255);</span>
+<span class="nc" id="L231">            app.rect(550, 685, 100, 10);</span>
+<span class="nc" id="L232">            app.fill(0, 0, 0);</span>
+<span class="nc" id="L233">            float coolDownBarWidth = (float) ((app.wizardCoolDownTimer - app.wizardAttackTimer) / 1000.0 / app.wizardCooldown * 100);</span>
+<span class="nc" id="L234">            app.rect(551, 686, coolDownBarWidth, 8);</span>
+<span class="nc" id="L235">        } else {</span>
+<span class="nc" id="L236">            app.wizardCooling = false;</span>
+<span class="nc" id="L237">            app.wizardAttackTimer = 0;</span>
         }
-<span class="nc" id="L168">    }</span>
+<span class="nc" id="L239">    }</span>
 
+
+    /**
+     * Define wizard's behaviour when getting hit by gremlin or slimes.
+     *
+     * @param app the main app
+     */
     public void wizardAttacked(App app) {
-<span class="fc bfc" id="L171" title="All 2 branches covered.">        for (Gremlin gremlin : app.gremlins) {</span>
-<span class="pc bpc" id="L172" title="1 of 2 branches missed.">            if (this.collide(gremlin) != null) {</span>
-<span class="nc" id="L173">                app.wizardLife--;</span>
-<span class="nc bnc" id="L174" title="All 2 branches missed.">                if (app.wizardLife &gt;= 1) {</span>
-<span class="nc" id="L175">                    app.resetLevel();</span>
+<span class="nc bnc" id="L248" title="All 2 branches missed.">        for (Gremlin gremlin : app.gremlins) {</span>
+<span class="nc bnc" id="L249" title="All 2 branches missed.">            if (this.collide(gremlin) != null) {</span>
+<span class="nc" id="L250">                app.wizardLife--;</span>
+<span class="nc bnc" id="L251" title="All 2 branches missed.">                if (app.wizardLife &gt;= 1) {</span>
+<span class="nc" id="L252">                    app.resetLevel();</span>
                 } else {
-<span class="nc" id="L177">                    this.wizardDie(app);</span>
+<span class="nc" id="L254">                    this.wizardDie(app);</span>
                 }
             }
-<span class="fc" id="L180">        }</span>
+<span class="nc" id="L257">        }</span>
 
-<span class="fc bfc" id="L182" title="All 2 branches covered.">        for (Slime slime : app.slimes) {</span>
-<span class="pc bpc" id="L183" title="1 of 2 branches missed.">            if (this.collide(slime) != null) {</span>
-<span class="nc" id="L184">                app.wizardLife--;</span>
-<span class="nc bnc" id="L185" title="All 2 branches missed.">                if (app.wizardLife &gt;= 1) {</span>
-<span class="nc" id="L186">                    app.resetLevel();</span>
+<span class="nc bnc" id="L259" title="All 2 branches missed.">        for (Slime slime : app.slimes) {</span>
+<span class="nc bnc" id="L260" title="All 2 branches missed.">            if (this.collide(slime) != null) {</span>
+<span class="nc" id="L261">                app.wizardLife--;</span>
+<span class="nc bnc" id="L262" title="All 2 branches missed.">                if (app.wizardLife &gt;= 1) {</span>
+<span class="nc" id="L263">                    app.resetLevel();</span>
                 } else {
-<span class="nc" id="L188">                    this.wizardDie(app);</span>
+<span class="nc" id="L265">                    this.wizardDie(app);</span>
                 }
             }
-<span class="fc" id="L191">        }</span>
-<span class="fc" id="L192">    }</span>
+<span class="nc" id="L268">        }</span>
+<span class="nc" id="L269">    }</span>
 
+
+    /**
+     * Define wizard and powerups behaviour when the wizard getting powerups.
+     *
+     * @param app the main app
+     */
     public void wizardGetPowerUp(App app) {
-<span class="pc bpc" id="L195" title="1 of 2 branches missed.">        if (app.millis() - app.levelInitTimer &gt;= app.powerUpSpawnTime * 1000) {</span>
-<span class="nc bnc" id="L196" title="All 2 branches missed.">            for (Powerup powerup : app.powerups) {</span>
-<span class="nc bnc" id="L197" title="All 4 branches missed.">                if (this.collide(powerup) != null &amp;&amp; !powerup.powerUpCooling) {</span>
-<span class="nc" id="L198">                    this.poweredUp = true;</span>
-<span class="nc" id="L199">                    this.powerUpStartTimer = app.millis();</span>
-<span class="nc" id="L200">                    powerup.powerUpCooling = true;</span>
-<span class="nc" id="L201">                    powerup.powerUpCoolingStartTimer = app.millis();</span>
-<span class="nc" id="L202">                    powerup.powerUpCoolingTime = App.RANDOM_GENERATOR.nextInt(20);</span>
-<span class="nc" id="L203">                    break;</span>
+<span class="nc bnc" id="L278" title="All 2 branches missed.">        if (app.millis() - app.levelInitTimer &gt;= app.powerUpSpawnTime * 1000) {</span>
+<span class="nc bnc" id="L279" title="All 2 branches missed.">            for (Powerup powerup : app.powerups) {</span>
+<span class="nc bnc" id="L280" title="All 4 branches missed.">                if (this.collide(powerup) != null &amp;&amp; !powerup.powerUpCooling) {</span>
+<span class="nc" id="L281">                    this.poweredUp = true;</span>
+<span class="nc" id="L282">                    this.powerUpStartTimer = app.millis();</span>
+<span class="nc" id="L283">                    powerup.powerUpCooling = true;</span>
+<span class="nc" id="L284">                    powerup.powerUpCoolingStartTimer = app.millis();</span>
+<span class="nc" id="L285">                    powerup.powerUpCoolingTime = App.RANDOM_GENERATOR.nextInt(20);</span>
+<span class="nc" id="L286">                    break;</span>
                 }
-<span class="nc" id="L205">            }</span>
+<span class="nc" id="L288">            }</span>
         }
-<span class="fc" id="L207">    }</span>
+<span class="nc" id="L290">    }</span>
 
+
+    /**
+     * Define wizard's behaviour when being powered up.
+     *
+     * @param app the main app
+     */
     public void wizardPoweredUp(App app) {
-<span class="pc bpc" id="L210" title="1 of 2 branches missed.">        if (this.poweredUp) {</span>
-<span class="nc bnc" id="L211" title="All 2 branches missed.">            if (app.millis() - this.powerUpStartTimer &gt;= Powerup.POWERUP_PERIOD * 1000) {</span>
-<span class="nc" id="L212">                this.poweredUp = false;</span>
+<span class="nc bnc" id="L299" title="All 2 branches missed.">        if (this.poweredUp) {</span>
+<span class="nc bnc" id="L300" title="All 2 branches missed.">            if (app.millis() - this.powerUpStartTimer &gt;= Powerup.POWERUP_PERIOD * 1000) {</span>
+<span class="nc" id="L301">                this.poweredUp = false;</span>
             } else {
-<span class="nc" id="L214">                app.fill(255, 255, 255);</span>
-<span class="nc" id="L215">                app.text(&quot;SPEED UP!,&quot;, 350, 690);</span>
-<span class="nc" id="L216">                app.text(&quot;Time Left: &quot; + (Powerup.POWERUP_PERIOD - (app.millis() - this.powerUpStartTimer) / 1000) + &quot; s&quot;, 350, 710);</span>
+<span class="nc" id="L303">                app.fill(255, 255, 255);</span>
+<span class="nc" id="L304">                app.text(&quot;SPEED UP!,&quot;, 350, 690);</span>
+<span class="nc" id="L305">                app.text(&quot;Time Left: &quot; + (Powerup.POWERUP_PERIOD - (app.millis() - this.powerUpStartTimer) / 1000) + &quot; s&quot;, 350, 710);</span>
             }
         }
-<span class="fc" id="L219">    }</span>
+<span class="nc" id="L308">    }</span>
 
+
+    /**
+     * Define program behaviour when wizard is dead.
+     *
+     * @param app the main app
+     */
     public void wizardDie(App app) {
-<span class="nc" id="L222">        app.gameOver = true;</span>
-<span class="nc" id="L223">        app.gremlins.clear();</span>
-<span class="nc" id="L224">        app.fireballs.clear();</span>
-<span class="nc" id="L225">        app.slimes.clear();</span>
-<span class="nc" id="L226">        app.powerups.clear();</span>
-<span class="nc" id="L227">        app.transportDoors.clear();</span>
-<span class="nc" id="L228">        app.brickWallDestructions.clear();</span>
-<span class="nc" id="L229">        app.gameStopTimer = app.millis();</span>
-<span class="nc" id="L230">    }</span>
+<span class="nc" id="L317">        app.gameOver = true;</span>
+<span class="nc" id="L318">        app.gremlins.clear();</span>
+<span class="nc" id="L319">        app.fireballs.clear();</span>
+<span class="nc" id="L320">        app.slimes.clear();</span>
+<span class="nc" id="L321">        app.powerups.clear();</span>
+<span class="nc" id="L322">        app.transportDoors.clear();</span>
+<span class="nc" id="L323">        app.brickWallDestructions.clear();</span>
+<span class="nc" id="L324">        app.gameStopTimer = app.millis();</span>
+<span class="nc" id="L325">    }</span>
 
+
+    /**
+     * Define program behaviour when player win.
+     *
+     * @param app the main app
+     */
     public void wizardWin(App app) {
-<span class="nc" id="L233">        app.gameWon = true;</span>
-<span class="nc" id="L234">        app.gremlins.clear();</span>
-<span class="nc" id="L235">        app.fireballs.clear();</span>
-<span class="nc" id="L236">        app.slimes.clear();</span>
-<span class="nc" id="L237">        app.powerups.clear();</span>
-<span class="nc" id="L238">        app.transportDoors.clear();</span>
-<span class="nc" id="L239">        app.brickWallDestructions.clear();</span>
-<span class="nc" id="L240">        app.gameStopTimer = app.millis();</span>
-<span class="nc" id="L241">    }</span>
+<span class="nc" id="L334">        app.gameWon = true;</span>
+<span class="nc" id="L335">        app.gremlins.clear();</span>
+<span class="nc" id="L336">        app.fireballs.clear();</span>
+<span class="nc" id="L337">        app.slimes.clear();</span>
+<span class="nc" id="L338">        app.powerups.clear();</span>
+<span class="nc" id="L339">        app.transportDoors.clear();</span>
+<span class="nc" id="L340">        app.brickWallDestructions.clear();</span>
+<span class="nc" id="L341">        app.gameStopTimer = app.millis();</span>
+<span class="nc" id="L342">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

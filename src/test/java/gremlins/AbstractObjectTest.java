@@ -22,51 +22,50 @@ class AbstractObjectTest {
 
     @BeforeEach
     void setUp() {
-        app = new App();
-        testObject = new TestObject(app, null, 0, 0);
-
+        this.app = new App();
+        this.testObject = new TestObject(this.app, null, 0, 0);
     }
 
     @AfterEach
     void tearDown() {
-        app = null;
-        testObject = null;
+        this.app = null;
+        this.testObject = null;
     }
 
 
     @Test
     void getX() {
-        assertEquals(0, testObject.getX());
+        assertEquals(0, this.testObject.getX());
     }
 
     @Test
     void getY() {
-        assertEquals(0, testObject.getY());
+        assertEquals(0, this.testObject.getY());
     }
 
     @Test
     void setX() {
-        testObject.setX(1);
-        assertEquals(1, testObject.getX());
+        this.testObject.setX(1);
+        assertEquals(1, this.testObject.getX());
     }
 
     @Test
     void setY() {
-        testObject.setY(1);
-        assertEquals(1, testObject.getY());
+        this.testObject.setY(2);
+        assertEquals(2, this.testObject.getY());
     }
 
     @Test
     void tick() {
-        testObject.tick(app);
-        assertEquals(0, testObject.getX());
-        assertEquals(0, testObject.getY());
+        this.testObject.tick(app);
+        assertEquals(0, this.testObject.getX());
+        assertEquals(0, this.testObject.getY());
     }
 
     @Test
     void collide() {
-        TestObject testObject1 = new TestObject(app, null, 0, 0);
-        assertNotNull(testObject.collide(testObject1));
+        TestObject testObject1 = new TestObject(app, null, 10, 10);
+        assertNotNull(this.testObject.collide(testObject1));
     }
 }
 

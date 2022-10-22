@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="gremlins.ExitTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-10-17T16:04:39" hostname="hzzmbp.local" time="0.004">
+<testsuite name="gremlins.ExitTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-10-22T09:08:31" hostname="hzzmbp.local" time="0.005">
   <properties/>
-  <testcase name="getExit()" classname="gremlins.ExitTest" time="0.002"/>
-  <testcase name="tick()" classname="gremlins.ExitTest" time="0.001"/>
+  <testcase name="getExit()" classname="gremlins.ExitTest" time="0.001"/>
+  <testcase name="tick()" classname="gremlins.ExitTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

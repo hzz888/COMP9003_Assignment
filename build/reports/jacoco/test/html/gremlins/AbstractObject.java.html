@@ -5,43 +5,80 @@ import processing.core.PImage;
 
 
 /**
+ * AbstractObject is the base class for all objects in the game. Every object's width and height are 20 pixels.
+ *
  * @author hzz
  */
 abstract public class AbstractObject {
-<span class="fc" id="L11">    public final int WIDTH = 20;</span>
-<span class="fc" id="L12">    public final int HEIGHT = 20;</span>
+
+<span class="fc" id="L14">    public final int WIDTH = 20;</span>
+<span class="fc" id="L15">    public final int HEIGHT = 20;</span>
     protected PImage objectSprite;
     public int x;
     public int y;
 
-<span class="fc" id="L17">    public AbstractObject(App app, PImage objectSprite, int x, int y) {</span>
-<span class="fc" id="L18">        this.objectSprite = objectSprite;</span>
-<span class="fc" id="L19">        this.x = x;</span>
-<span class="fc" id="L20">        this.y = y;</span>
-<span class="fc" id="L21">    }</span>
+    /**
+     * The AbstractObject class is the parent class for all objects in the game.
+     *
+     * @param app          The main App instance to run the game.
+     * @param objectSprite The sprite of the object.
+     * @param x            The x coordinate of the object.
+     * @param y            The y coordinate of the object.
+     */
+<span class="fc" id="L28">    public AbstractObject(App app, PImage objectSprite, int x, int y) {</span>
+<span class="fc" id="L29">        this.objectSprite = objectSprite;</span>
+<span class="fc" id="L30">        this.x = x;</span>
+<span class="fc" id="L31">        this.y = y;</span>
+<span class="fc" id="L32">    }</span>
 
+    /**
+     * The draw method draws the object.
+     *
+     * @param app The main App instance to run the game.
+     */
     public void drawObject(App app) {
-<span class="fc" id="L24">        app.image(this.objectSprite, this.x, this.y);</span>
-<span class="fc" id="L25">    }</span>
-
-    public int getX() {
-<span class="fc" id="L28">        return this.x;</span>
-    }
-
-    public int getY() {
-<span class="fc" id="L32">        return this.y;</span>
-    }
-
-    public void setX(int x) {
-<span class="fc" id="L36">        this.x = x;</span>
-<span class="fc" id="L37">    }</span>
-
-    public void setY(int y) {
-<span class="nc" id="L40">        this.y = y;</span>
+<span class="nc" id="L40">        app.image(this.objectSprite, this.x, this.y);</span>
 <span class="nc" id="L41">    }</span>
 
     /**
-     * Defines objects behaviors.
+     * Get the x coordinate of the object.
+     *
+     * @return The x coordinate of the object.
+     */
+    public int getX() {
+<span class="fc" id="L49">        return this.x;</span>
+    }
+
+    /**
+     * Get the y coordinate of the object.
+     *
+     * @return The y coordinate of the object.
+     */
+    public int getY() {
+<span class="fc" id="L58">        return this.y;</span>
+    }
+
+    /**
+     * Set the x coordinate of the object.
+     *
+     * @param x The new x coordinate of the object.
+     */
+    public void setX(int x) {
+<span class="fc" id="L67">        this.x = x;</span>
+<span class="fc" id="L68">    }</span>
+
+    /**
+     * Set the y coordinate of the object.
+     *
+     * @param y The new y coordinate of the object.
+     */
+    public void setY(int y) {
+<span class="fc" id="L76">        this.y = y;</span>
+<span class="fc" id="L77">    }</span>
+
+    /**
+     * Defines objects behaviors in each frame.
+     *
      * @param app The main app.
      */
     protected abstract void tick(App app);
@@ -49,18 +86,17 @@ abstract public class AbstractObject {
     /**
      * Detect whether this object collides with another object.
      *
-     * @return object if it collides with this instance
+     * @param object Another object.
+     * @return The object if it collides with this instance.
      */
     public AbstractObject collide(AbstractObject object) {
-<span class="fc bfc" id="L55" title="All 8 branches covered.">        boolean collision = (this.getX() &lt; object.getX() + App.SPRITESIZE &amp;&amp; this.getX() + App.SPRITESIZE &gt; object.getX() &amp;&amp; this.getY() &lt; object.getY() + App.SPRITESIZE &amp;&amp; this.getY() + App.SPRITESIZE &gt; object.getY());</span>
-<span class="fc bfc" id="L56" title="All 2 branches covered.">        if (collision) {</span>
-<span class="fc" id="L57">            return object;</span>
+<span class="pc bpc" id="L93" title="4 of 8 branches missed.">        boolean collision = (this.getX() &lt; object.getX() + App.SPRITESIZE &amp;&amp; this.getX() + App.SPRITESIZE &gt; object.getX() &amp;&amp; this.getY() &lt; object.getY() + App.SPRITESIZE &amp;&amp; this.getY() + App.SPRITESIZE &gt; object.getY());</span>
+<span class="pc bpc" id="L94" title="1 of 2 branches missed.">        if (collision) {</span>
+<span class="fc" id="L95">            return object;</span>
         } else {
-<span class="fc" id="L59">            return null;</span>
+<span class="nc" id="L97">            return null;</span>
         }
     }
-
-
 
 
 }

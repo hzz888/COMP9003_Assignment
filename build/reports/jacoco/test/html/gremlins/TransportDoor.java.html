@@ -1,65 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TransportDoor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gremlins</a> &gt; <a href="index.source.html" class="el_package">gremlins</a> &gt; <span class="el_source">TransportDoor.java</span></div><h1>TransportDoor.java</h1><pre class="source lang-java linenums">package gremlins;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
+ * TransportDoor will teleport the wizard to a random safe location.
+ *
  * @author hzz
  */
 public class TransportDoor extends AbstractObject {
 
+    /**
+     * Constructor for TransportDoor.
+     *
+     * @param app the game application
+     * @param x   the x coordinate
+     * @param y   the y coordinate
+     */
     public TransportDoor(App app, int x, int y) {
-<span class="fc" id="L9">        super(app, app.transportDoorImage, x, y);</span>
-<span class="fc" id="L10">    }</span>
+<span class="nc" id="L21">        super(app, app.transportDoorImage, x, y);</span>
+<span class="nc" id="L22">    }</span>
 
+    /**
+     * Display and detect collision with wizard.
+     *
+     * @param app The main app.
+     */
     @Override
     public void tick(App app) {
-<span class="fc" id="L14">        this.getTransportDoor(app);</span>
-<span class="fc" id="L15">        this.drawObject(app);</span>
-<span class="fc" id="L16">    }</span>
+<span class="nc" id="L31">        this.getTransportDoor(app);</span>
+<span class="nc" id="L32">        this.drawObject(app);</span>
+<span class="nc" id="L33">    }</span>
 
+    /**
+     * Teleport the wizard to a random empty safe position.
+     * A position is safe if its radius distanance to all gremlins and slimes is greater than 100 pixels.
+     *
+     * @param app the main app
+     */
     public void getTransportDoor(App app) {
+<span class="nc bnc" id="L42" title="All 2 branches missed.">        if (app.player.collide(this) != null) {</span>
 
-<span class="pc bpc" id="L20" title="1 of 2 branches missed.">            if (app.player.collide(this) != null) {</span>
-<span class="nc" id="L21">                int randomIndex = App.RANDOM_GENERATOR.nextInt(app.emptyTiles.size());</span>
-<span class="nc" id="L22">                int[] randomTile = app.emptyTiles.get(randomIndex);</span>
-<span class="nc" id="L23">                int newX = randomTile[0];</span>
-<span class="nc" id="L24">                int newY = randomTile[1];</span>
-<span class="nc" id="L25">                app.player.setX(newX);</span>
-<span class="nc" id="L26">                app.player.setY(newY);</span>
-            }
+<span class="nc" id="L44">            List&lt;int[]&gt; safeTiles = new ArrayList&lt;&gt;();</span>
 
-<span class="pc bpc" id="L29" title="1 of 2 branches missed.">            for (Fireball fireball : app.fireballs) {</span>
-<span class="nc bnc" id="L30" title="All 2 branches missed.">                if (fireball.collide(this) != null) {</span>
-<span class="nc" id="L31">                    int randomIndex = App.RANDOM_GENERATOR.nextInt(app.emptyTiles.size());</span>
-<span class="nc" id="L32">                    int[] randomTile = app.emptyTiles.get(randomIndex);</span>
-<span class="nc" id="L33">                    int newX = randomTile[0];</span>
-<span class="nc" id="L34">                    int newY = randomTile[1];</span>
-<span class="nc" id="L35">                    fireball.setX(newX);</span>
-<span class="nc" id="L36">                    fireball.setY(newY);</span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">            for (int[] coordinate : app.emptyTiles) {</span>
+
+<span class="nc" id="L48">                boolean slimeSafe = true;</span>
+<span class="nc" id="L49">                boolean gremlinSafe = true;</span>
+
+<span class="nc bnc" id="L51" title="All 2 branches missed.">                for (Slime slime : app.slimes) {</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">                    if (Math.sqrt(Math.pow(coordinate[0] - slime.getX(), 2) + Math.pow(coordinate[1] - slime.getY(), 2)) &lt; 100) {</span>
+<span class="nc" id="L53">                        slimeSafe = false;</span>
+<span class="nc" id="L54">                        break;</span>
+                    }
+<span class="nc" id="L56">                }</span>
+
+<span class="nc bnc" id="L58" title="All 2 branches missed.">                for (Gremlin gremlin : app.gremlins) {</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">                    if (Math.sqrt(Math.pow(coordinate[0] - gremlin.getX(), 2) + Math.pow(coordinate[1] - gremlin.getY(), 2)) &lt; 100) {</span>
+<span class="nc" id="L60">                        gremlinSafe = false;</span>
+<span class="nc" id="L61">                        break;</span>
+                    }
+<span class="nc" id="L63">                }</span>
+
+<span class="nc bnc" id="L65" title="All 4 branches missed.">                if (slimeSafe &amp;&amp; gremlinSafe) {</span>
+<span class="nc" id="L66">                    safeTiles.add(coordinate);</span>
                 }
-<span class="nc" id="L38">            }</span>
+<span class="nc" id="L68">            }</span>
 
-<span class="fc bfc" id="L40" title="All 2 branches covered.">            for (Gremlin gremlin : app.gremlins) {</span>
-<span class="pc bpc" id="L41" title="1 of 2 branches missed.">                if (gremlin.collide(this) != null) {</span>
-<span class="nc" id="L42">                    int randomIndex = App.RANDOM_GENERATOR.nextInt(app.emptyTiles.size());</span>
-<span class="nc" id="L43">                    int[] randomTile = app.emptyTiles.get(randomIndex);</span>
-<span class="nc" id="L44">                    int newX = randomTile[0];</span>
-<span class="nc" id="L45">                    int newY = randomTile[1];</span>
-<span class="nc" id="L46">                    gremlin.setX(newX);</span>
-<span class="nc" id="L47">                    gremlin.setY(newY);</span>
-                }
-<span class="fc" id="L49">            }</span>
+<span class="nc" id="L70">            int randomIndex = App.RANDOM_GENERATOR.nextInt(safeTiles.size());</span>
+<span class="nc" id="L71">            int newX = safeTiles.get(randomIndex)[0];</span>
+<span class="nc" id="L72">            int newY = safeTiles.get(randomIndex)[1];</span>
+<span class="nc" id="L73">            app.player.setX(newX);</span>
+<span class="nc" id="L74">            app.player.setY(newY);</span>
+        }
 
-<span class="fc bfc" id="L51" title="All 2 branches covered.">            for (Slime slime : app.slimes) {</span>
-<span class="pc bpc" id="L52" title="1 of 2 branches missed.">                if (slime.collide(this) != null) {</span>
-<span class="nc" id="L53">                    int randomIndex = App.RANDOM_GENERATOR.nextInt(app.emptyTiles.size());</span>
-<span class="nc" id="L54">                    int[] randomTile = app.emptyTiles.get(randomIndex);</span>
-<span class="nc" id="L55">                    int newX = randomTile[0];</span>
-<span class="nc" id="L56">                    int newY = randomTile[1];</span>
-<span class="nc" id="L57">                    slime.setX(newX);</span>
-<span class="nc" id="L58">                    slime.setY(newY);</span>
-                }
-<span class="fc" id="L60">            }</span>
-<span class="fc" id="L61">        }</span>
-    }
+<span class="nc" id="L77">    }</span>
+}
 
 
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
