@@ -638,7 +638,7 @@ public class App extends PApplet {
      * @return The first index of the object in the map array.
      */
     public int getMapX(AbstractObject object) {
-<span class="nc" id="L641">        return object.getY() / App.SPRITESIZE;</span>
+<span class="fc" id="L641">        return object.getY() / App.SPRITESIZE;</span>
     }
 
 
@@ -649,7 +649,7 @@ public class App extends PApplet {
      * @return The second index of the object in the map array.
      */
     public int getMapY(AbstractObject object) {
-<span class="nc" id="L652">        return object.getX() / App.SPRITESIZE;</span>
+<span class="fc" id="L652">        return object.getX() / App.SPRITESIZE;</span>
     }
 
 
@@ -660,7 +660,7 @@ public class App extends PApplet {
      * @return The actual x coordinate in the gui of an object.
      */
     public int getImageX(int y) {
-<span class="nc" id="L663">        return y * App.SPRITESIZE;</span>
+<span class="fc" id="L663">        return y * App.SPRITESIZE;</span>
     }
 
 
@@ -671,7 +671,7 @@ public class App extends PApplet {
      * @return The actual y coordinate in the gui of an object.
      */
     public int getImageY(int x) {
-<span class="nc" id="L674">        return x * App.SPRITESIZE;</span>
+<span class="fc" id="L674">        return x * App.SPRITESIZE;</span>
     }
 
 
@@ -679,15 +679,15 @@ public class App extends PApplet {
      * Update the empty tiles list each frame.
      */
     public void updateEmptyTiles() {
-<span class="nc" id="L682">        this.emptyTiles.clear();</span>
-<span class="nc bnc" id="L683" title="All 2 branches missed.">        for (int i = 0; i &lt; App.MAP_WIDTH_TILES; i++) {</span>
-<span class="nc bnc" id="L684" title="All 2 branches missed.">            for (int j = 0; j &lt; App.MAP_HEIGHT_TILES; j++) {</span>
-<span class="nc bnc" id="L685" title="All 2 branches missed.">                if (this.map[i][j] == null) {</span>
-<span class="nc" id="L686">                    this.emptyTiles.add(new int[]{this.getImageX(j), this.getImageY(i)});</span>
+<span class="fc" id="L682">        this.emptyTiles.clear();</span>
+<span class="fc bfc" id="L683" title="All 2 branches covered.">        for (int i = 0; i &lt; App.MAP_WIDTH_TILES; i++) {</span>
+<span class="fc bfc" id="L684" title="All 2 branches covered.">            for (int j = 0; j &lt; App.MAP_HEIGHT_TILES; j++) {</span>
+<span class="fc bfc" id="L685" title="All 2 branches covered.">                if (this.map[i][j] == null) {</span>
+<span class="fc" id="L686">                    this.emptyTiles.add(new int[]{this.getImageX(j), this.getImageY(i)});</span>
                 }
             }
         }
-<span class="nc" id="L690">    }</span>
+<span class="fc" id="L690">    }</span>
 
 
     /**

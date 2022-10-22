@@ -38,3 +38,4 @@ class BrickWallDestructionTest {
         assertEquals(1, this.brickWallDestruction.destroyPicIndex);
     }
 }
+

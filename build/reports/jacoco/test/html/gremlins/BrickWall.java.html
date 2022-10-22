@@ -37,9 +37,9 @@ public class BrickWall extends AbstractObject {
      * @param app The main app.
      */
     public void destroyed(App app) {
-<span class="nc" id="L40">        app.brickWallDestructions.add(new BrickWallDestruction(app, this.getX(), this.getY()));</span>
-<span class="nc" id="L41">        app.map[app.getMapX(this)][app.getMapY(this)] = null;</span>
-<span class="nc" id="L42">    }</span>
+<span class="fc" id="L40">        app.brickWallDestructions.add(new BrickWallDestruction(app, this.getX(), this.getY()));</span>
+<span class="fc" id="L41">        app.map[app.getMapX(this)][app.getMapY(this)] = null;</span>
+<span class="fc" id="L42">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
