@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Exit.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gremlins</a> &gt; <a href="index.source.html" class="el_package">gremlins</a> &gt; <span class="el_source">Exit.java</span></div><h1>Exit.java</h1><pre class="source lang-java linenums">package gremlins;
 
 /**
- * Exit is the entrance to next level or winning.
+ * Exit is the entrance to the next level or winning.
  *
  * @author hzz
  */
@@ -15,8 +15,8 @@ public class Exit extends AbstractObject {
      * @param y   the y coordinate
      */
     public Exit(App app, int x, int y) {
-<span class="fc" id="L18">        super(app, app.exitImage, x, y);</span>
-<span class="fc" id="L19">    }</span>
+<span class="nc" id="L18">        super(app, app.exitImage, x, y);</span>
+<span class="nc" id="L19">    }</span>
 
     /**
      * Define exit behaviour in each frame.
@@ -30,7 +30,7 @@ public class Exit extends AbstractObject {
 <span class="nc" id="L30">    }</span>
 
     /**
-     * Define behaviour when player get to the exit.
+     * Define behaviour when the player gets to the exit.
      *
      * @param app the main app
      */

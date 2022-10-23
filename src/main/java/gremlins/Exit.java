@@ -1,7 +1,7 @@
 package gremlins;
 
 /**
- * Exit is the entrance to next level or winning.
+ * Exit is the entrance to the next level or winning.
  *
  * @author hzz
  */
@@ -30,7 +30,7 @@ public class Exit extends AbstractObject {
     }
 
     /**
-     * Define behaviour when player get to the exit.
+     * Define behaviour when the player gets to the exit.
      *
      * @param app the main app
      */

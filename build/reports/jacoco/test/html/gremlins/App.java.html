@@ -198,8 +198,8 @@ public class App extends PApplet {
      */
     @Override
     public void settings() {
-<span class="fc" id="L201">        size(App.WIDTH, App.HEIGHT);</span>
-<span class="fc" id="L202">    }</span>
+<span class="nc" id="L201">        size(App.WIDTH, App.HEIGHT);</span>
+<span class="nc" id="L202">    }</span>
 
     /**
      * Load all resources such as images.
@@ -208,34 +208,34 @@ public class App extends PApplet {
     @Override
     public void setup() {
 
-<span class="fc" id="L211">        textSize(18);</span>
-<span class="fc" id="L212">        frameRate(App.FPS);</span>
-<span class="fc" id="L213">        smooth();</span>
-<span class="fc" id="L214">        surface.setTitle(&quot;Gremlins&quot;);</span>
-<span class="fc" id="L215">        surface.setResizable(false);</span>
+<span class="nc" id="L211">        textSize(18);</span>
+<span class="nc" id="L212">        frameRate(App.FPS);</span>
+<span class="nc" id="L213">        smooth();</span>
+<span class="nc" id="L214">        surface.setTitle(&quot;Gremlins&quot;);</span>
+<span class="nc" id="L215">        surface.setResizable(false);</span>
 
         // Load images during setup
-<span class="fc" id="L218">        this.exitImage = loadImage(Objects.requireNonNull(this.getClass().getResource(&quot;exit.png&quot;)).getPath());</span>
-<span class="fc" id="L219">        this.brickWallImage = loadImage(Objects.requireNonNull(this.getClass().getResource(&quot;brickwall.png&quot;)).getPath());</span>
-<span class="fc" id="L220">        this.stoneWallImage = loadImage(Objects.requireNonNull(this.getClass().getResource(&quot;stonewall.png&quot;)).getPath());</span>
-<span class="fc" id="L221">        this.gremlinImage = loadImage(Objects.requireNonNull(this.getClass().getResource(&quot;gremlin.png&quot;)).getPath());</span>
-<span class="fc" id="L222">        this.wizardLeftImage = loadImage(Objects.requireNonNull(this.getClass().getResource(&quot;wizard0.png&quot;)).getPath());</span>
-<span class="fc" id="L223">        this.wizardRightImage = loadImage(Objects.requireNonNull(this.getClass().getResource(&quot;wizard1.png&quot;)).getPath());</span>
-<span class="fc" id="L224">        this.wizardUpImage = loadImage(Objects.requireNonNull(this.getClass().getResource(&quot;wizard2.png&quot;)).getPath());</span>
-<span class="fc" id="L225">        this.wizardDownImage = loadImage(Objects.requireNonNull(this.getClass().getResource(&quot;wizard3.png&quot;)).getPath());</span>
-<span class="fc" id="L226">        this.slimeImage = loadImage(Objects.requireNonNull(this.getClass().getResource(&quot;slime.png&quot;)).getPath());</span>
-<span class="fc" id="L227">        this.fireballImage = loadImage(Objects.requireNonNull(this.getClass().getResource(&quot;fireball.png&quot;)).getPath());</span>
-<span class="fc" id="L228">        this.powerupImage = loadImage(Objects.requireNonNull(this.getClass().getResource(&quot;powerup.png&quot;)).getPath());</span>
-<span class="fc" id="L229">        this.brickWallDestroyImages[0] = loadImage(Objects.requireNonNull(this.getClass().getResource(&quot;brickwall_destroyed0.png&quot;)).getPath());</span>
-<span class="fc" id="L230">        this.brickWallDestroyImages[1] = loadImage(Objects.requireNonNull(this.getClass().getResource(&quot;brickwall_destroyed1.png&quot;)).getPath());</span>
-<span class="fc" id="L231">        this.brickWallDestroyImages[2] = loadImage(Objects.requireNonNull(this.getClass().getResource(&quot;brickwall_destroyed2.png&quot;)).getPath());</span>
-<span class="fc" id="L232">        this.brickWallDestroyImages[3] = loadImage(Objects.requireNonNull(this.getClass().getResource(&quot;brickwall_destroyed3.png&quot;)).getPath());</span>
-<span class="fc" id="L233">        this.eliteEnemyImage = loadImage(Objects.requireNonNull(this.getClass().getResource(&quot;eliteEnemy.png&quot;)).getPath());</span>
-<span class="fc" id="L234">        this.transportDoorImage = loadImage(Objects.requireNonNull(this.getClass().getResource(&quot;transportDoor.png&quot;)).getPath());</span>
+<span class="nc" id="L218">        this.exitImage = loadImage(Objects.requireNonNull(this.getClass().getResource(&quot;exit.png&quot;)).getPath());</span>
+<span class="nc" id="L219">        this.brickWallImage = loadImage(Objects.requireNonNull(this.getClass().getResource(&quot;brickwall.png&quot;)).getPath());</span>
+<span class="nc" id="L220">        this.stoneWallImage = loadImage(Objects.requireNonNull(this.getClass().getResource(&quot;stonewall.png&quot;)).getPath());</span>
+<span class="nc" id="L221">        this.gremlinImage = loadImage(Objects.requireNonNull(this.getClass().getResource(&quot;gremlin.png&quot;)).getPath());</span>
+<span class="nc" id="L222">        this.wizardLeftImage = loadImage(Objects.requireNonNull(this.getClass().getResource(&quot;wizard0.png&quot;)).getPath());</span>
+<span class="nc" id="L223">        this.wizardRightImage = loadImage(Objects.requireNonNull(this.getClass().getResource(&quot;wizard1.png&quot;)).getPath());</span>
+<span class="nc" id="L224">        this.wizardUpImage = loadImage(Objects.requireNonNull(this.getClass().getResource(&quot;wizard2.png&quot;)).getPath());</span>
+<span class="nc" id="L225">        this.wizardDownImage = loadImage(Objects.requireNonNull(this.getClass().getResource(&quot;wizard3.png&quot;)).getPath());</span>
+<span class="nc" id="L226">        this.slimeImage = loadImage(Objects.requireNonNull(this.getClass().getResource(&quot;slime.png&quot;)).getPath());</span>
+<span class="nc" id="L227">        this.fireballImage = loadImage(Objects.requireNonNull(this.getClass().getResource(&quot;fireball.png&quot;)).getPath());</span>
+<span class="nc" id="L228">        this.powerupImage = loadImage(Objects.requireNonNull(this.getClass().getResource(&quot;powerup.png&quot;)).getPath());</span>
+<span class="nc" id="L229">        this.brickWallDestroyImages[0] = loadImage(Objects.requireNonNull(this.getClass().getResource(&quot;brickwall_destroyed0.png&quot;)).getPath());</span>
+<span class="nc" id="L230">        this.brickWallDestroyImages[1] = loadImage(Objects.requireNonNull(this.getClass().getResource(&quot;brickwall_destroyed1.png&quot;)).getPath());</span>
+<span class="nc" id="L231">        this.brickWallDestroyImages[2] = loadImage(Objects.requireNonNull(this.getClass().getResource(&quot;brickwall_destroyed2.png&quot;)).getPath());</span>
+<span class="nc" id="L232">        this.brickWallDestroyImages[3] = loadImage(Objects.requireNonNull(this.getClass().getResource(&quot;brickwall_destroyed3.png&quot;)).getPath());</span>
+<span class="nc" id="L233">        this.eliteEnemyImage = loadImage(Objects.requireNonNull(this.getClass().getResource(&quot;eliteEnemy.png&quot;)).getPath());</span>
+<span class="nc" id="L234">        this.transportDoorImage = loadImage(Objects.requireNonNull(this.getClass().getResource(&quot;transportDoor.png&quot;)).getPath());</span>
 
-<span class="fc" id="L236">        this.loadMap();</span>
+<span class="nc" id="L236">        this.loadMap();</span>
 
-<span class="fc" id="L238">    }</span>
+<span class="nc" id="L238">    }</span>
 
     static final int LEFT = 37;
     static final int RIGHT = 39;
@@ -304,11 +304,11 @@ public class App extends PApplet {
     @Override
     public void draw() {
         //Main loop here, execute per frame.
-<span class="fc" id="L307">        background(197, 151, 113);</span>
+<span class="nc" id="L307">        background(197, 151, 113);</span>
 
-<span class="pc bpc" id="L309" title="1 of 2 branches missed.">        if (!this.gameStarted) {</span>
+<span class="nc bnc" id="L309" title="All 2 branches missed.">        if (!this.gameStarted) {</span>
 
-<span class="fc" id="L311">            this.displayWelcome();</span>
+<span class="nc" id="L311">            this.displayWelcome();</span>
 
         } else {
 
@@ -339,19 +339,19 @@ public class App extends PApplet {
 <span class="nc" id="L339">            this.displayWinOrLose();</span>
 
         }
-<span class="fc" id="L342">    }</span>
+<span class="nc" id="L342">    }</span>
 
 
     /**
      * Display the welcome screen.
      */
     private void displayWelcome() {
-<span class="fc" id="L349">        fill(255);</span>
-<span class="fc" id="L350">        text(&quot;Welcome!&quot;, 300, 300);</span>
-<span class="fc" id="L351">        text(&quot;USYD COMP-9003 Project.&quot;, 230, 350);</span>
-<span class="fc" id="L352">        fill(30, 130, 60);</span>
-<span class="fc" id="L353">        text(&quot;Press any key to start.&quot;, 250, 400);</span>
-<span class="fc" id="L354">    }</span>
+<span class="nc" id="L349">        fill(255);</span>
+<span class="nc" id="L350">        text(&quot;Welcome!&quot;, 300, 300);</span>
+<span class="nc" id="L351">        text(&quot;USYD COMP-9003 Project.&quot;, 230, 350);</span>
+<span class="nc" id="L352">        fill(30, 130, 60);</span>
+<span class="nc" id="L353">        text(&quot;Press any key to start.&quot;, 250, 400);</span>
+<span class="nc" id="L354">    }</span>
 
 
     /**
@@ -361,67 +361,67 @@ public class App extends PApplet {
      */
     public boolean validMap() {
         // Load map from config file
-<span class="fc" id="L364">        this.layOutName = this.conf.getJSONArray(&quot;levels&quot;).getJSONObject(this.level - 1).getString(&quot;layout&quot;);</span>
-<span class="fc" id="L365">        File layOutFile = new File(App.ROOT_PATH + &quot;/&quot; + this.layOutName);</span>
+<span class="nc" id="L364">        this.layOutName = this.conf.getJSONArray(&quot;levels&quot;).getJSONObject(this.level - 1).getString(&quot;layout&quot;);</span>
+<span class="nc" id="L365">        File layOutFile = new File(App.ROOT_PATH + &quot;/&quot; + this.layOutName);</span>
 
-<span class="fc" id="L367">        int exitNum = 0;</span>
-<span class="fc" id="L368">        int gremlinNum = 0;</span>
-<span class="fc" id="L369">        int startNum = 0;</span>
-<span class="fc" id="L370">        int column = 0;</span>
-<span class="fc" id="L371">        int row = 0;</span>
+<span class="nc" id="L367">        int exitNum = 0;</span>
+<span class="nc" id="L368">        int gremlinNum = 0;</span>
+<span class="nc" id="L369">        int startNum = 0;</span>
+<span class="nc" id="L370">        int column = 0;</span>
+<span class="nc" id="L371">        int row = 0;</span>
 
-<span class="fc" id="L373">        boolean numberRequire = true;</span>
-<span class="fc" id="L374">        boolean columnRequire = true;</span>
-<span class="fc" id="L375">        boolean rowRequire = true;</span>
-<span class="fc" id="L376">        boolean legalRequire = true;</span>
-<span class="fc" id="L377">        boolean warpRequire = true;</span>
+<span class="nc" id="L373">        boolean numberRequire = true;</span>
+<span class="nc" id="L374">        boolean columnRequire = true;</span>
+<span class="nc" id="L375">        boolean rowRequire = true;</span>
+<span class="nc" id="L376">        boolean legalRequire = true;</span>
+<span class="nc" id="L377">        boolean warpRequire = true;</span>
 
-<span class="fc" id="L379">        try (Scanner validScanner = new Scanner(layOutFile)) {</span>
+<span class="nc" id="L379">        try (Scanner validScanner = new Scanner(layOutFile)) {</span>
             char[] line;
 
-<span class="fc bfc" id="L382" title="All 2 branches covered.">            while (validScanner.hasNextLine()) {</span>
+<span class="nc bnc" id="L382" title="All 2 branches missed.">            while (validScanner.hasNextLine()) {</span>
 
-<span class="fc" id="L384">                line = validScanner.nextLine().toCharArray();</span>
-<span class="fc" id="L385">                row++;</span>
+<span class="nc" id="L384">                line = validScanner.nextLine().toCharArray();</span>
+<span class="nc" id="L385">                row++;</span>
 
-<span class="fc bfc" id="L387" title="All 2 branches covered.">                for (char c : line) {</span>
-<span class="fc" id="L388">                    column++;</span>
+<span class="nc bnc" id="L387" title="All 2 branches missed.">                for (char c : line) {</span>
+<span class="nc" id="L388">                    column++;</span>
 
-<span class="fc bfc" id="L390" title="All 8 branches covered.">                    if (column == 1 || column == 36 || row == 1 || row == 33) {</span>
-<span class="pc bpc" id="L391" title="1 of 2 branches missed.">                        if (c != 'X') {</span>
+<span class="nc bnc" id="L390" title="All 8 branches missed.">                    if (column == 1 || column == 36 || row == 1 || row == 33) {</span>
+<span class="nc bnc" id="L391" title="All 2 branches missed.">                        if (c != 'X') {</span>
 <span class="nc" id="L392">                            warpRequire = false;</span>
                         }
                     }
 
-<span class="pc bpc" id="L396" title="1 of 18 branches missed.">                    if (c != 'X' &amp;&amp; c != 'B' &amp;&amp; c != ' ' &amp;&amp; c != 'G' &amp;&amp; c != 'W' &amp;&amp; c != 'E' &amp;&amp; c != 'P' &amp;&amp; c != 'S' &amp;&amp; c != 'T') {</span>
+<span class="nc bnc" id="L396" title="All 18 branches missed.">                    if (c != 'X' &amp;&amp; c != 'B' &amp;&amp; c != ' ' &amp;&amp; c != 'G' &amp;&amp; c != 'W' &amp;&amp; c != 'E' &amp;&amp; c != 'P' &amp;&amp; c != 'S' &amp;&amp; c != 'T') {</span>
 <span class="nc" id="L397">                        legalRequire = false;</span>
                     }
 
-<span class="fc bfc" id="L400" title="All 2 branches covered.">                    if (c == 'E') {</span>
-<span class="fc" id="L401">                        exitNum++;</span>
-<span class="fc bfc" id="L402" title="All 2 branches covered.">                    } else if (c == 'G') {</span>
-<span class="fc" id="L403">                        gremlinNum++;</span>
-<span class="fc bfc" id="L404" title="All 2 branches covered.">                    } else if (c == 'W') {</span>
-<span class="fc" id="L405">                        startNum++;</span>
+<span class="nc bnc" id="L400" title="All 2 branches missed.">                    if (c == 'E') {</span>
+<span class="nc" id="L401">                        exitNum++;</span>
+<span class="nc bnc" id="L402" title="All 2 branches missed.">                    } else if (c == 'G') {</span>
+<span class="nc" id="L403">                        gremlinNum++;</span>
+<span class="nc bnc" id="L404" title="All 2 branches missed.">                    } else if (c == 'W') {</span>
+<span class="nc" id="L405">                        startNum++;</span>
                     }
 
                 }
 
-<span class="pc bpc" id="L410" title="1 of 2 branches missed.">                if (column != 36) {</span>
+<span class="nc bnc" id="L410" title="All 2 branches missed.">                if (column != 36) {</span>
 <span class="nc" id="L411">                    columnRequire = false;</span>
                 }
 
-<span class="fc" id="L414">                column = 0;</span>
+<span class="nc" id="L414">                column = 0;</span>
 
             }
 
-<span class="pc bpc" id="L418" title="1 of 2 branches missed.">            if (row != 33) {</span>
+<span class="nc bnc" id="L418" title="All 2 branches missed.">            if (row != 33) {</span>
 <span class="nc" id="L419">                rowRequire = false;</span>
             }
 
-<span class="pc bpc" id="L422" title="3 of 6 branches missed.">            numberRequire = exitNum &gt;= 1 &amp;&amp; gremlinNum &gt;= 1 &amp;&amp; startNum == 1;</span>
+<span class="nc bnc" id="L422" title="All 6 branches missed.">            numberRequire = exitNum &gt;= 1 &amp;&amp; gremlinNum &gt;= 1 &amp;&amp; startNum == 1;</span>
 
-<span class="pc bpc" id="L424" title="5 of 10 branches missed.">            return legalRequire &amp;&amp; numberRequire &amp;&amp; columnRequire &amp;&amp; rowRequire &amp;&amp; warpRequire;</span>
+<span class="nc bnc" id="L424" title="All 10 branches missed.">            return legalRequire &amp;&amp; numberRequire &amp;&amp; columnRequire &amp;&amp; rowRequire &amp;&amp; warpRequire;</span>
 
 
 <span class="nc" id="L427">        } catch (IOException e) {</span>
@@ -438,77 +438,77 @@ public class App extends PApplet {
      */
     public void initMap() {
         // Load map from config file
-<span class="fc" id="L441">        this.wizardCooldown = this.conf.getJSONArray(&quot;levels&quot;).getJSONObject(this.level - 1).getFloat(&quot;wizard_cooldown&quot;);</span>
-<span class="fc" id="L442">        this.enemyCooldown = this.conf.getJSONArray(&quot;levels&quot;).getJSONObject(this.level - 1).getFloat(&quot;enemy_cooldown&quot;);</span>
-<span class="fc" id="L443">        this.layOutName = this.conf.getJSONArray(&quot;levels&quot;).getJSONObject(this.level - 1).getString(&quot;layout&quot;);</span>
-<span class="fc" id="L444">        File layOutFile = new File(App.ROOT_PATH + &quot;/&quot; + this.layOutName);</span>
+<span class="nc" id="L441">        this.wizardCooldown = this.conf.getJSONArray(&quot;levels&quot;).getJSONObject(this.level - 1).getFloat(&quot;wizard_cooldown&quot;);</span>
+<span class="nc" id="L442">        this.enemyCooldown = this.conf.getJSONArray(&quot;levels&quot;).getJSONObject(this.level - 1).getFloat(&quot;enemy_cooldown&quot;);</span>
+<span class="nc" id="L443">        this.layOutName = this.conf.getJSONArray(&quot;levels&quot;).getJSONObject(this.level - 1).getString(&quot;layout&quot;);</span>
+<span class="nc" id="L444">        File layOutFile = new File(App.ROOT_PATH + &quot;/&quot; + this.layOutName);</span>
 
-<span class="fc" id="L446">        try (Scanner layOutScanner = new Scanner(layOutFile)) {</span>
-<span class="fc" id="L447">            int i = 0;</span>
-<span class="fc" id="L448">            int j = 0;</span>
+<span class="nc" id="L446">        try (Scanner layOutScanner = new Scanner(layOutFile)) {</span>
+<span class="nc" id="L447">            int i = 0;</span>
+<span class="nc" id="L448">            int j = 0;</span>
             char[] line;
 
-<span class="fc bfc" id="L451" title="All 2 branches covered.">            while (layOutScanner.hasNextLine()) {</span>
-<span class="fc" id="L452">                line = layOutScanner.nextLine().toCharArray();</span>
-<span class="fc bfc" id="L453" title="All 2 branches covered.">                for (char c : line) {</span>
+<span class="nc bnc" id="L451" title="All 2 branches missed.">            while (layOutScanner.hasNextLine()) {</span>
+<span class="nc" id="L452">                line = layOutScanner.nextLine().toCharArray();</span>
+<span class="nc bnc" id="L453" title="All 2 branches missed.">                for (char c : line) {</span>
                     AbstractObject tmp;
-<span class="fc bfc" id="L455" title="All 9 branches covered.">                    switch (c) {</span>
+<span class="nc bnc" id="L455" title="All 9 branches missed.">                    switch (c) {</span>
                         case 'X':
-<span class="fc" id="L457">                            tmp = new StoneWall(this, this.x, this.y);</span>
-<span class="fc" id="L458">                            map[i][j] = tmp;</span>
-<span class="fc" id="L459">                            break;</span>
+<span class="nc" id="L457">                            tmp = new StoneWall(this, this.x, this.y);</span>
+<span class="nc" id="L458">                            map[i][j] = tmp;</span>
+<span class="nc" id="L459">                            break;</span>
                         case 'W':
-<span class="fc" id="L461">                            this.player = new Wizard(this, this.x, this.y);</span>
-<span class="fc" id="L462">                            map[i][j] = null;</span>
-<span class="fc" id="L463">                            break;</span>
+<span class="nc" id="L461">                            this.player = new Wizard(this, this.x, this.y);</span>
+<span class="nc" id="L462">                            map[i][j] = null;</span>
+<span class="nc" id="L463">                            break;</span>
                         case 'B':
-<span class="fc" id="L465">                            tmp = new BrickWall(this, this.x, this.y);</span>
-<span class="fc" id="L466">                            map[i][j] = tmp;</span>
-<span class="fc" id="L467">                            break;</span>
+<span class="nc" id="L465">                            tmp = new BrickWall(this, this.x, this.y);</span>
+<span class="nc" id="L466">                            map[i][j] = tmp;</span>
+<span class="nc" id="L467">                            break;</span>
                         case 'E':
-<span class="fc" id="L469">                            this.exit = new Exit(this, this.x, this.y);</span>
-<span class="fc" id="L470">                            map[i][j] = null;</span>
-<span class="fc" id="L471">                            break;</span>
+<span class="nc" id="L469">                            this.exit = new Exit(this, this.x, this.y);</span>
+<span class="nc" id="L470">                            map[i][j] = null;</span>
+<span class="nc" id="L471">                            break;</span>
                         case 'G':
-<span class="fc" id="L473">                            this.gremlins.add(new Gremlin(this, this.x, this.y));</span>
-<span class="fc" id="L474">                            map[i][j] = null;</span>
-<span class="fc" id="L475">                            break;</span>
+<span class="nc" id="L473">                            this.gremlins.add(new Gremlin(this, this.x, this.y));</span>
+<span class="nc" id="L474">                            map[i][j] = null;</span>
+<span class="nc" id="L475">                            break;</span>
                         case 'P':
-<span class="fc" id="L477">                            this.powerups.add(new Powerup(this, this.x, this.y));</span>
-<span class="fc" id="L478">                            map[i][j] = null;</span>
-<span class="fc" id="L479">                            break;</span>
+<span class="nc" id="L477">                            this.powerups.add(new Powerup(this, this.x, this.y));</span>
+<span class="nc" id="L478">                            map[i][j] = null;</span>
+<span class="nc" id="L479">                            break;</span>
                         case 'S':
-<span class="fc" id="L481">                            this.gremlins.add(new EliteEnemy(this, this.x, this.y));</span>
-<span class="fc" id="L482">                            map[i][j] = null;</span>
-<span class="fc" id="L483">                            break;</span>
+<span class="nc" id="L481">                            this.gremlins.add(new EliteEnemy(this, this.x, this.y));</span>
+<span class="nc" id="L482">                            map[i][j] = null;</span>
+<span class="nc" id="L483">                            break;</span>
                         case 'T':
-<span class="fc" id="L485">                            this.transportDoors.add(new TransportDoor(this, this.x, this.y));</span>
-<span class="fc" id="L486">                            map[i][j] = null;</span>
-<span class="fc" id="L487">                            break;</span>
+<span class="nc" id="L485">                            this.transportDoors.add(new TransportDoor(this, this.x, this.y));</span>
+<span class="nc" id="L486">                            map[i][j] = null;</span>
+<span class="nc" id="L487">                            break;</span>
                         case ' ':
                         default:
-<span class="fc" id="L490">                            map[i][j] = null;</span>
+<span class="nc" id="L490">                            map[i][j] = null;</span>
                             break;
                     }
 
-<span class="fc" id="L494">                    this.x += SPRITESIZE;</span>
-<span class="fc" id="L495">                    j++;</span>
+<span class="nc" id="L494">                    this.x += SPRITESIZE;</span>
+<span class="nc" id="L495">                    j++;</span>
                 }
                 // reset x to 0 after each line
-<span class="fc" id="L498">                this.x = 0;</span>
-<span class="fc" id="L499">                this.y += SPRITESIZE;</span>
-<span class="fc" id="L500">                j = 0;</span>
-<span class="fc" id="L501">                i++;</span>
+<span class="nc" id="L498">                this.x = 0;</span>
+<span class="nc" id="L499">                this.y += SPRITESIZE;</span>
+<span class="nc" id="L500">                j = 0;</span>
+<span class="nc" id="L501">                i++;</span>
             }
             //reset x and y after map generation
-<span class="fc" id="L504">            this.x = 0;</span>
-<span class="fc" id="L505">            this.y = 0;</span>
-<span class="fc" id="L506">            this.levelInitTimer = millis();</span>
+<span class="nc" id="L504">            this.x = 0;</span>
+<span class="nc" id="L505">            this.y = 0;</span>
+<span class="nc" id="L506">            this.levelInitTimer = millis();</span>
 <span class="nc" id="L507">        } catch (IOException e) {</span>
 <span class="nc" id="L508">            System.out.println(&quot;Config file not found&quot;);</span>
 <span class="nc" id="L509">            throw new RuntimeException(e);</span>
-<span class="fc" id="L510">        }</span>
-<span class="fc" id="L511">    }</span>
+<span class="nc" id="L510">        }</span>
+<span class="nc" id="L511">    }</span>
 
 
     /**
@@ -516,15 +516,15 @@ public class App extends PApplet {
      * Otherwise, stop program and display error message.
      */
     public void loadMap() {
-<span class="pc bpc" id="L519" title="1 of 2 branches missed.">        if (validMap()) {</span>
+<span class="nc bnc" id="L519" title="All 2 branches missed.">        if (validMap()) {</span>
             //Load map
-<span class="fc" id="L521">            initMap();</span>
+<span class="nc" id="L521">            initMap();</span>
         } else {
 <span class="nc" id="L523">            fill(255, 255, 255);</span>
 <span class="nc" id="L524">            text(&quot;Invalid map&quot;, 350, 350);</span>
 <span class="nc" id="L525">            stop();</span>
         }
-<span class="fc" id="L527">    }</span>
+<span class="nc" id="L527">    }</span>
 
 
     /**
@@ -638,7 +638,7 @@ public class App extends PApplet {
      * @return The first index of the object in the map array.
      */
     public int getMapX(AbstractObject object) {
-<span class="fc" id="L641">        return object.getY() / App.SPRITESIZE;</span>
+<span class="nc" id="L641">        return object.getY() / App.SPRITESIZE;</span>
     }
 
 
@@ -649,7 +649,7 @@ public class App extends PApplet {
      * @return The second index of the object in the map array.
      */
     public int getMapY(AbstractObject object) {
-<span class="fc" id="L652">        return object.getX() / App.SPRITESIZE;</span>
+<span class="nc" id="L652">        return object.getX() / App.SPRITESIZE;</span>
     }
 
 
@@ -660,7 +660,7 @@ public class App extends PApplet {
      * @return The actual x coordinate in the gui of an object.
      */
     public int getImageX(int y) {
-<span class="fc" id="L663">        return y * App.SPRITESIZE;</span>
+<span class="nc" id="L663">        return y * App.SPRITESIZE;</span>
     }
 
 
@@ -671,7 +671,7 @@ public class App extends PApplet {
      * @return The actual y coordinate in the gui of an object.
      */
     public int getImageY(int x) {
-<span class="fc" id="L674">        return x * App.SPRITESIZE;</span>
+<span class="nc" id="L674">        return x * App.SPRITESIZE;</span>
     }
 
 
@@ -679,15 +679,15 @@ public class App extends PApplet {
      * Update the empty tiles list each frame.
      */
     public void updateEmptyTiles() {
-<span class="fc" id="L682">        this.emptyTiles.clear();</span>
-<span class="fc bfc" id="L683" title="All 2 branches covered.">        for (int i = 0; i &lt; App.MAP_WIDTH_TILES; i++) {</span>
-<span class="fc bfc" id="L684" title="All 2 branches covered.">            for (int j = 0; j &lt; App.MAP_HEIGHT_TILES; j++) {</span>
-<span class="fc bfc" id="L685" title="All 2 branches covered.">                if (this.map[i][j] == null) {</span>
-<span class="fc" id="L686">                    this.emptyTiles.add(new int[]{this.getImageX(j), this.getImageY(i)});</span>
+<span class="nc" id="L682">        this.emptyTiles.clear();</span>
+<span class="nc bnc" id="L683" title="All 2 branches missed.">        for (int i = 0; i &lt; App.MAP_WIDTH_TILES; i++) {</span>
+<span class="nc bnc" id="L684" title="All 2 branches missed.">            for (int j = 0; j &lt; App.MAP_HEIGHT_TILES; j++) {</span>
+<span class="nc bnc" id="L685" title="All 2 branches missed.">                if (this.map[i][j] == null) {</span>
+<span class="nc" id="L686">                    this.emptyTiles.add(new int[]{this.getImageX(j), this.getImageY(i)});</span>
                 }
             }
         }
-<span class="fc" id="L690">    }</span>
+<span class="nc" id="L690">    }</span>
 
 
     /**
